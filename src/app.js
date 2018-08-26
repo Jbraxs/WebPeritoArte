@@ -6,15 +6,15 @@ const express = require('express'),
       myConnection = require('express-myconnection');
 
 
-// importing routes
+// IMPORTO LAS RUTAS
 const Routes = require('./routes/routes');
 
-// settings
+// CONFIGURACION
 app.set('port', process.env.PORT || 100);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// middlewares
+// MIDDLEWARES
 app.use(morgan('dev'));
 app.use(myConnection(mysql, {
   host: 'localhost',
@@ -25,13 +25,13 @@ app.use(myConnection(mysql, {
 }, 'single'));
 app.use(express.urlencoded({extended: false}));
 
-// routes
+// RUTAS
 app.use('/', Routes);
 
-// static files
+// STATIC FILES
 app.use(express.static(path.join(__dirname, 'public')));
 
-// starting the server
+// INICIO EL SERVIDOR
 app.listen(app.get('port'), () => {
-  console.log(`server on port ${app.get('port')}`);
+  console.log(`servidor ok ${app.get('port')}`);
 });

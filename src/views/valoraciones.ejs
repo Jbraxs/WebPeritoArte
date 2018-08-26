@@ -1,0 +1,36 @@
+<% include templates/_header %>
+
+<div class="col-md-5">
+    <div class="card-body">
+      <form action="/insert_valuations" method="POST">
+        <div class="form-group">
+          <input type="text" name="nombre" placeholder="Nombre" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="tipo" placeholder="Apellido" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="tecnica" placeholder="Contraseña" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="tamanio" placeholder="Teléfono" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="estado" placeholder="Código Postal" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="firmado" placeholder="Fecha de Nacimiento" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="comentario" placeholder="Email" class="form-control" >
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            enviar
+          </button>
+      </form>
+    </div>
+  </div>
+
+
+<% include templates/_footer %>
