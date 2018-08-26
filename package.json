@@ -1,0 +1,20 @@
+{
+  "name": "alexis_navas",
+  "version": "1.0.0",
+  "description": "Web Perito Arte",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-myconnection": "^1.0.4",
+    "morgan": "^1.9.0",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.3"
+  }
+}

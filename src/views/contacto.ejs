@@ -1,0 +1,32 @@
+<% include templates/_header %>
+
+    <h1>FORMULARIO DE CONTACTO</h1>
+    <div class="col-md-5">
+        <div class="card-body">
+            <form action="/addContacto" method="POST">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" name="apellido" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="text" name="telefono" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Comentario</label>
+                    <input type="text" name="comentario" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Enviar
+                </button>
+            </form>
+        </div>
+    </div>
