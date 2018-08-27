@@ -8,41 +8,14 @@ controllerUser.selectUser = (req, res) => {
       if (err) {
         res.json(err);
       }
-      res.render('admin_user', {
+      res.render('admin/users', {
         data: clientes
       })
     })
   })
 };
 //prueba
-controllerUser.addUser = (req,res) =>{
-  const data = req.body;
-  const password = req.body.password;
-  console.log(password);
-  bcrypt.genSalt(10,function(err,salt){
-    bcrypt.hash(password,salt,null,function(err,hash){
-      password = hash;
-      console.log(hash);
-      req.getConnection((err,connection) => {
-        connection.query('INSERT INTO usuario set ?',data,(err,clientes) =>{
-          if (err){
-            console.log(err);
-            return res.send(err);
-          }
-          else {
-            let dato = {
-              id: clientes.insertId,
-              body: req.body
-            }
-          
-          console.log(clientes);
-          res.redirect('registro');          
-        }
-        })
-      })
-    })
-  })
-};
+
 //INSERTAR USUARIOS
 // ControllerUser.addUser = (req, res) => {
 //   const data = req.body;
@@ -90,7 +63,7 @@ controllerUser.addUser = (req,res) =>{
       const data = req.body;
       console.log(req.body)
       req.getConnection((err, connection) => {
-        const query = connection.query('INSERT INTO contacto set ?', data, (err, contacto) => {
+        connection.query('INSERT INTO contacto set ?', data, (err, contacto) => {
           console.log(contacto)
           res.redirect('/contacto');
         })
