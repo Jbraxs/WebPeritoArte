@@ -1,0 +1,36 @@
+<% include ../partials/_header %>
+Listado de contactos por el formulario
+<div class="row">
+        <div class="col-md-7">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Email</td>
+                <td>Télefono</td>
+                <td>Comentario</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (data) { %>
+                <% for(var i = 0; i < data.length; i++) { %>
+                  <tr>
+                    <td><%= data[i].nombre %></td>
+                    <td><%= data[i].apellido %></td>
+                    <td><%= data[i].email %></td>
+                    <td><%= data[i].telefono %></td>
+                    <td><%= data[i].comentario %></td>
+                    <td>
+                      <td>
+                        <a href="/admin/contacts/delete/<%= data[i].id %>" class="btn btn-info">Eliminar</a>
+                        <a href="/admin/contacts/view/<%= data[i].id %>" class="btn btn-danger">Ver</a>
+                      </td>
+                    </td>
+                  </tr>
+                <% } %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>

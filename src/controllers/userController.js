@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 controllerUser.registerform = (req,res) => {
     //ACA ME REDIRECCIONA A LA PLANTILLA. 
-    res.render('registro');
+    res.render('register');
 };
 //INSERTA DATOS PARA EL REGISTRO, ENCRIPTANDO LA CONTRASEÑA 
 controllerUser.register = (req,res) =>{
@@ -19,13 +19,13 @@ controllerUser.register = (req,res) =>{
               console.log(err);
               return res.send(err);
             }
-            req.session.user = {
-                'id':clientes.insertId,
-                'user': data.name,
-                'email': data.email
-            }
+            // req.session.user = {
+            //     'id':clientes.insertId,
+            //     'user': data.name,
+            //     'email': data.email
+            // }
             console.log(clientes);
-            res.redirect('registro');          
+            res.redirect('register');          
           })
         })
       })

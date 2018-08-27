@@ -1,85 +1,91 @@
-const controllerUser = {};
-var bcrypt = require('bcrypt-nodejs');
+// RUTAS Y CONTROLADORES
+// CONTROLADORES DEL ADMIN
+// USUARIOS
 
-//CONSULTA LOS USUARIOS REGISTRADOS
-controllerUser.selectUser = (req, res) => {
-  req.getConnection((err, conn) => {
-    conn.query('SELECT * FROM usuario', (err, clientes) => {
+const adminControllerUser = {};
+var bcrypt = require("bcrypt-nodejs");
+
+//MUESTRA LOS USUARIOS REGISTRADOS
+adminControllerUser.selectUser = (req, res) => {
+  req.getConnection((err, connection) => {
+    connection.query("SELECT * FROM usuario", (err, clientes) => {
       if (err) {
         res.json(err);
       }
-      res.render('admin/users', {
+      res.render("admin/users", {
         data: clientes
-      })
-    })
-  })
+      });
+    });
+  });
 };
-//prueba
 
-//INSERTAR USUARIOS
-// ControllerUser.addUser = (req, res) => {
-//   const data = req.body;
-//   console.log(req.body)
-//   req.getConnection((err, connection) => {
-//     const query = connection.query('INSERT INTO usuario set ?', data, (err, clientes) => {
-//       console.log(clientes)
-//       res.redirect('registro');
-//     })
-//   })
-// };
-    //VISTA LOS DATOS A MODIFICAR
-    controllerUser.viewsUser = (req, res) => {
-      const { id } = req.params;
-      req.getConnection((err, conn) => {
-        conn.query("SELECT * FROM usuario WHERE id = ?", [id], (err, rows) => {
-          res.render('cliente_edit', {
-            data: rows[0]
-          })
-        });
-      });
-    };
-    //MODIFICA LOS DATOS 
-    controllerUser.editUser = (req, res) => {
-      const { id } = req.params;
-      const newUsuario = req.body;
-      req.getConnection((err, conn) => {
-
-        conn.query('UPDATE usuario set ? where id = ?', [newUsuario, id], (err, rows) => {
-          res.redirect('/admin_user');
-        });
-      });
-    };
-    //ELIMINA DATOS
-    controllerUser.delUser = (req, res) => {
-      const { id } = req.params;
+//ACA ME REDIRECCIONA A LA PLANTILLA PERO DEL ADMIN.
+adminControllerUser.addUserForm = (req, res) => {
+  res.render("./admin/users_add");
+};
+//INSERTA DATOS PARA EL REGISTRO DESDE EL PANEL DEL ADMIN, ENCRIPTANDO LA CONTRASEÑA
+adminControllerUser.addUser = (req, res) => {
+  let data = req.body;
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(data.password, salt, null, function(err, hash) {
+      data.password = hash;
+      console.log(hash);
       req.getConnection((err, connection) => {
-        connection.query('DELETE FROM usuario WHERE id = ?', [id], (err, rows) => {
-          res.redirect('/admin_user');
-        });
-      });
-    };
-    // ENVIA DATOS DEL FORMULARIO DE CONTACTO
-    controllerUser.addContact = (req, res) => {
-      const data = req.body;
-      console.log(req.body)
-      req.getConnection((err, connection) => {
-        connection.query('INSERT INTO contacto set ?', data, (err, contacto) => {
-          console.log(contacto)
-          res.redirect('/contacto');
-        })
-      })
-    };
-    controllerUser.contactForm = (req, res) => {
-      req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM contacto', (err, contacto) => {
+        connection.query("INSERT INTO usuario set ?", data, (err, clientes) => {
           if (err) {
-            res.json(err);
+            console.log(err);
+            return res.send(err);
           }
-          res.render('veoFormcontacto', {
-            data: contacto
-          });
+          // req.session.user = {
+          //     'id':clientes.insertId,
+          //     'user': data.name,
+          //     'email': data.email
+          // }
+          console.log(clientes);
+          res.redirect("./admin/users_add");
         });
       });
-    }
+    });
+  });
+};
 
-  module.exports = controllerUser;
+//VISTA LOS DATOS A MODIFICAR
+adminControllerUser.viewsUser = (req, res) => {
+  const { id } = req.params;
+  req.getConnection((err, connection) => {
+    connection.query(
+      "SELECT * FROM usuario WHERE id = ?",
+      [id],
+      (err, rows) => {
+        res.render("./admin/user_edit", {
+          data: rows[0]
+        });
+      }
+    );
+  });
+};
+//MODIFICA LOS DATOS
+adminControllerUser.editUser = (req, res) => {
+  const { id } = req.params;
+  const newUsuario = req.body;
+  req.getConnection((err, connection) => {
+    connection.query(
+      "UPDATE usuario set ? where id = ?",
+      [newUsuario, id],
+      (err, rows) => {
+        res.redirect("/admin/users");
+      }
+    );
+  });
+};
+//ELIMINA DATOS
+adminControllerUser.delUser = (req, res) => {
+  const { id } = req.params;
+  req.getConnection((err, connection) => {
+    connection.query("DELETE FROM usuario WHERE id = ?", [id], (err, rows) => {
+      res.redirect("/admin/users");
+    });
+  });
+};
+
+module.exports = adminControllerUser;

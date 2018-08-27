@@ -1,30 +1,30 @@
 const router = require('express').Router();
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart({uploadDir: '/src/public/img_clientes/'})
-/*
-RUTAS Y CONTROLADORES
-CONTROLADORES DEL ADMIN
+
+// RUTAS Y CONTROLADORES
+// CONTROLADORES DEL ADMIN
 const adminControllerUser = require('../controllers/admin/userController');
 const adminControllerContact = require('../controllers/admin/contactController');
-const adminControllerValuation = require('../controllers/admin/valuationController');
-USUARIOS 
+// const adminControllerValuation = require('../controllers/admin/valuationController');
+// USUARIOS 
 router.get('/admin/users', adminControllerUser.selectUser);
-router.get('/admin/users/add', adminControllerUser.addUser);
+router.get('/admin/users/add', adminControllerUser.addUserForm);
 router.post('/admin/users/add', adminControllerUser.addUser);
 router.get('/admin/users/update/:id', adminControllerUser.viewsUser);
-router.post('/admin/users/update/:id', controadminControllerUserllerUser.editUser);
+router.post('/admin/users/update/:id', adminControllerUser.editUser);
 router.get('/admin/users/delete/:id', adminControllerUser.delUser);
 //CONTACTOS
 router.get('/admin/contacts', adminControllerContact.selecContact);
-router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);FALTA HACER
-router.get('/admin/contacts/view/:id', adminControllerContact.viewContact); FALTA POR HACER
-VALORACIONES
-router.get('/admin/valuations', adminControllerValuation.selectValuation);
-router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);
-router.get('/admin/valuations/delete/:id', adminControllerValuation.delValuation);
-router.get('/admin/valuations/assess/:id', adminControllerValuation.assessValuation); FALTAR POR HACER 
-router.get('/admin/valuations/schedule/:id', adminControllerValuation.scheduleValuation); FALTA POR HACER 
-*/
+router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);
+router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);//NO ME MUESTRA LOS DATOS AUN
+// VALORACIONES
+// router.get('/admin/valuations', adminControllerValuation.selectValuation);
+// router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);
+// router.get('/admin/valuations/delete/:id', adminControllerValuation.delValuation);
+// router.get('/admin/valuations/assess/:id', adminControllerValuation.assessValuation); FALTAR POR HACER 
+// router.get('/admin/valuations/schedule/:id', adminControllerValuation.scheduleValuation); FALTA POR HACER 
+
  
 //CONTROLADORES DEL USUARIO
 //USER 
@@ -44,9 +44,9 @@ router.post('/register',controllerUser.register);
 
 //CONTROLADORES DEL CONTACTO 
 //FORMULARIO DE CONTACTO
-// const controllerContact = require('../controller/contactController');
-// router.get('/contact', controllerContact.addContact);
-// router.post('/contact', controllerContact.addContact);
+const controllerContact = require('../controllers/contactController');
+router.get('/contact', controllerContact.addContactForm);
+router.post('/contact', controllerContact.addContact);
 
 
 
