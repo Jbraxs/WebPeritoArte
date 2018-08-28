@@ -32,6 +32,7 @@ app.use(myConnection(mysql, {
 }, 'single'));
 
 
+
 app.use(express.urlencoded({extended: false}));
 
 // RUTAS
