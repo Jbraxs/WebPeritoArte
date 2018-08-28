@@ -17,7 +17,7 @@ router.get('/admin/users/delete/:id', adminControllerUser.delUser);
 //CONTACTOS
 router.get('/admin/contacts', adminControllerContact.selecContact);
 router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);
-router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);//NO ME MUESTRA LOS DATOS AUN
+router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);
 // VALORACIONES
 // router.get('/admin/valuations', adminControllerValuation.selectValuation);
 // router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);
@@ -31,8 +31,8 @@ router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);//NO 
 const controllerUser = require('../controllers/userController');
 router.get('/register',controllerUser.registerform);
 router.post('/register',controllerUser.register);
-// router.get('/login',controllerUser.login);
-// router.post('/login',controllerUser.login);
+router.get('/login',controllerUser.loginForm);
+router.post('/login',controllerUser.login);
 // router.get('/logout',controllerUser.logout);
 //VALORACIONES
 // const controllerValuation = require('../controller/valuationController');
@@ -54,10 +54,10 @@ router.post('/contact', controllerContact.addContact);
 
 
 
-
-// router.get('/', function (req, res) {
-//     res.render('index');
-// });
+//PARTE DEL ADMIN
+router.get('/admin', function (req, res) {
+    res.render('admin/admin');
+});
 // router.get('/contacto', function (req, res) {
 //     res.render('contacto');
 // });

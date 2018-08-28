@@ -36,11 +36,11 @@ adminControllerUser.addUser = (req, res) => {
             console.log(err);
             return res.send(err);
           }
-          // req.session.user = {
-          //     'id':clientes.insertId,
-          //     'user': data.name,
-          //     'email': data.email
-          // }
+          req.session.user = {
+              'id':clientes.insertId,
+              'user': data.name,
+              'email': data.email
+          }
           console.log(clientes);
           res.redirect("./admin/users_add");
         });
