@@ -17,7 +17,7 @@ router.get('/admin/users/delete/:id', adminControllerUser.delUser);
 //CONTACTOS
 router.get('/admin/contacts', adminControllerContact.selecContact);
 router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);
-router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);//NO ME MUESTRA LOS DATOS AUN
+router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);
 // VALORACIONES
 // router.get('/admin/valuations', adminControllerValuation.selectValuation);
 // router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);

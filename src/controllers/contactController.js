@@ -6,7 +6,7 @@
 const controllerContact = {};
 
 
-//ACA ME REDIRECCIONA A LA PLANTILLA PERO DEL USUARIO
+//ACA ME REDIRECCIONA AL FORMULARIO DE CONTACTO PERO DEL USUARIO
 controllerContact.addContactForm = (req, res) => {
     res.render("../views/contact");
 };

@@ -1,3 +1,9 @@
+// RUTAS Y CONTROLADORES
+// CONTROLADORES DEL USUARIO
+// USUARIOS
+
+
+
 const controllerUser = {};
 var bcrypt = require('bcrypt-nodejs');
 
