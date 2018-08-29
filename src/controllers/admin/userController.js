@@ -31,20 +31,24 @@ adminControllerUser.addUser = (req, res) => {
       data.password = hash;
       console.log(hash);
       req.getConnection((err, connection) => {
-        connection.query("INSERT INTO usuario set ?", data, (err, clientes) => {
+        connection.query("INSERT INTO usuario set ?", data, (err, result) => {
           if (err) {
             console.log(err);
             return res.send(err);
+          }else {          
+            let user = {
+            id: result.insertId,
+            body: req.body
           }
           req.session.user = {
-              'id':clientes.insertId,
-              'user': data.name,
-              'email': data.email
+            'nombre': req.body.nombre,
+            'email': req.body.email
           }
-          console.log(clientes);
-          res.redirect("./admin/users_add");
+          console.log(user);
+          res.redirect("./index_signin");
+        }
         });
-      });
+      })
     });
   });
 };

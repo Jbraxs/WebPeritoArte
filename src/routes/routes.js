@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart({uploadDir: '/src/public/img_clientes/'})
+const auth = function (req, res, next) {
+    if (req.session.user)
+        return next();
+    else
+        return res.sendStatus(404);
+};
 
 // RUTAS Y CONTROLADORES
 // CONTROLADORES DEL ADMIN
@@ -33,7 +39,7 @@ router.get('/register',controllerUser.registerform);
 router.post('/register',controllerUser.register);
 router.get('/login',controllerUser.loginForm);
 router.post('/login',controllerUser.login);
-// router.get('/logout',controllerUser.logout);
+router.get('/logout',controllerUser.logout);
 //VALORACIONES
 // const controllerValuation = require('../controller/valuationController');
 // router.get('/zonaCliente/valuations', controllerValuation.selectValuation);
@@ -51,13 +57,18 @@ router.post('/contact', controllerContact.addContact);
 
 
 
-
-
-
-//PARTE DEL ADMIN
+// RUTAS COMUNES
 router.get('/admin', function (req, res) {
     res.render('admin/admin');
 });
+router.get('/index', function (req, res) {
+    res.render('../views/index');
+});
+router.get('/index_signin',auth, function (req, res) {
+    res.render('../views/index_login',{
+        email: req.session.user.email
+    });
+});  
 // router.get('/contacto', function (req, res) {
 //     res.render('contacto');
 // });

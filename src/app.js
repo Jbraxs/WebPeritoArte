@@ -3,7 +3,9 @@ const express = require('express'),
       path = require('path'),
       morgan = require('morgan'),
       mysql = require('mysql'),
-      myConnection = require('express-myconnection');
+      myConnection = require('express-myconnection'),
+      bodyParser = require('body-parser'),
+      session = require('express-session');
 
 
 // IMPORTO LAS RUTAS
@@ -13,27 +15,29 @@ const Routes = require('./routes/routes');
 app.set('port', process.env.PORT || 100);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-const session = require('express-session');
+
+//MIDDLEWARE EXPRESS-SESSION
 app.use(session({
-  secret:'cadena aleatoria',
+  secret:'c0dId0 al3at0ri0',
   resave:true,
   saveUninitialized:true
 }));
 
 
-// MIDDLEWARES
+// MIDDLEWARE
 app.use(morgan('dev'));
 app.use(myConnection(mysql, {
   host: 'localhost',
   user: 'root',
-  password: 'leeloo',
+  password: '',
   port: 3306,
   database: 'alexis_navas'
 }, 'single'));
 
 
-
+//BODYPARSER
 app.use(express.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // RUTAS
 app.use('/', Routes);
