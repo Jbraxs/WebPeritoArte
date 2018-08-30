@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart({uploadDir: '/src/public/img_clientes/'})
+const multipartMiddleware = multipart({ uploadDir: '/src/public/img_clientes/' })
 const auth = function (req, res, next) {
     if (req.session.user)
         return next();
@@ -31,22 +31,22 @@ router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);
 // router.get('/admin/valuations/assess/:id', adminControllerValuation.assessValuation); FALTAR POR HACER 
 // router.get('/admin/valuations/schedule/:id', adminControllerValuation.scheduleValuation); FALTA POR HACER 
 
- 
+
 //CONTROLADORES DEL USUARIO
 //USER 
 const controllerUser = require('../controllers/userController');
-router.get('/register',controllerUser.registerform);
-router.post('/register',controllerUser.register);
-router.get('/login',controllerUser.loginForm);
-router.post('/login',controllerUser.login);
-router.get('/logout',controllerUser.logout);
+router.get('/register', controllerUser.registerform);
+router.post('/register', controllerUser.register);
+router.get('/login', controllerUser.loginForm);
+router.post('/login', controllerUser.login);
+router.get('/logout', controllerUser.logout);
 //VALORACIONES
-// const controllerValuation = require('../controller/valuationController');
-// router.get('/zonaCliente/valuations', controllerValuation.selectValuation);
-// router.get('/zonaCliente/valuations/add', controllerValuation.addValuation);
-// router.post('/zonaCliente/valuations/add', controllerValuation.addValuation);
-// router.get('/zonaCliente/valuations/delete/:id', controllerValuation.delValuation);
-// router.get('/zonaCliente/valuations/assess/:id', controllerValuation.assessValuation);
+const controllerValuation = require('../controllers/valuationController');
+// router.get('/zonacliente/valuations', controllerValuation.selectValuation);
+router.get('/zonacliente/valuations', controllerValuation.addValuationForm);
+router.post('/zonacliente/valuations', controllerValuation.addValuation);
+// router.get('/zonacliente/valuations/delete/:id', controllerValuation.delValuation);
+// router.get('/zonacliente/valuations/assess/:id', controllerValuation.assessValuation);
 
 //CONTROLADORES DEL CONTACTO 
 //FORMULARIO DE CONTACTO
@@ -64,18 +64,12 @@ router.get('/admin', function (req, res) {
 router.get('/index', function (req, res) {
     res.render('../views/index');
 });
-router.get('/index_signin',auth, function (req, res) {
-    res.render('../views/index_login',{
-        email: req.session.user.email
-    });
-});  
-// router.get('/contacto', function (req, res) {
-//     res.render('contacto');
-// });
-// router.get('/valoraciones', function (req, res) {
-//     res.render('valoraciones');
-// });
 
+router.get('/index_signin', auth, function (req, res) {
+    res.render('../views/index_login', {
+        data: req.session.user
+    });
+});
 
 module.exports = router;
 

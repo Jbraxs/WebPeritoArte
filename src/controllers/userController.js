@@ -11,23 +11,20 @@ controllerUser.registerform = (req, res) => {
 };
 //INSERTA DATOS PARA EL REGISTRO, ENCRIPTANDO LA CONTRASEÑA
 controllerUser.register = (req, res) => {
-  let data = req.body;
+  let dato = req.body;
   bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(data.password, salt, null, function(err, hash) {
-      data.password = hash;
+    bcrypt.hash(dato.password, salt, null, function(err, hash) {
+      dato.password = hash;
       req.getConnection((err, connection) => {
-        connection.query("INSERT INTO usuario set ?", data, (err, result) => {
+        connection.query("INSERT INTO usuario set ?", dato, (err, result) => {
           if (err) {
             return res.send(err);
           } else {
-            let user = {
-              id: result.insertId,
-              body: req.body
-            }
-            req.session.user = {
-              'nombre': req.body.nombre,
-              'email': req.body.email
-            }
+            //ASIGNO IDUSUARIO GUARDADO 
+            dato.id = result.insertId;
+            //ASIGNO DATOS DE USUARIO A LA SESION
+            req.session.user = dato;
+            //REDIRECCIONO A LA RUTA 
             res.redirect("/index_signin");
           }
         });
@@ -42,10 +39,10 @@ controllerUser.loginForm = (req, res) => {
 };
 // LOGIN DE USUARIO
 controllerUser.login = (req, res) => {
+  const email = req.body.email;
   req.getConnection((err, connection) => {
     connection.query(
-      `SELECT * FROM usuario where email ='${req.body.email}'`,
-      function(err, result) {
+      `SELECT * FROM usuario WHERE email = ?`, email, function(err, result) {
         if (err) {
           return res.send(err);
         }
@@ -62,7 +59,7 @@ controllerUser.login = (req, res) => {
                   'nombre': result[0].nombre,
                   'email': result[0].email
                 }
-                console.log(req.session.user);
+                console.log('estas logeado correctamente');
                 res.redirect("/index_signin");
               } else {
                 return res.send("La contraseña NO es correcta");
@@ -76,11 +73,13 @@ controllerUser.login = (req, res) => {
 };
 // LOGOUT DE USUARIO
 controllerUser.logout = (req, res) => {
-  if (data) {
-    data.destroy();
-  } else {
-    return res.send("No existe un login de usuario");
+  if(req.session.user){
+    console.log(req.session.destroy);
+      req.session.destroy();
+  }else{
+      return res.send('No existe un login de usuario')
   }
 };
+
 
 module.exports = controllerUser;

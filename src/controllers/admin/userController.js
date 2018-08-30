@@ -26,8 +26,8 @@ adminControllerUser.addUserForm = (req, res) => {
 //INSERTA DATOS PARA EL REGISTRO DESDE EL PANEL DEL ADMIN, ENCRIPTANDO LA CONTRASEÑA
 adminControllerUser.addUser = (req, res) => {
   let data = req.body;
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(data.password, salt, null, function(err, hash) {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(data.password, salt, null, function (err, hash) {
       data.password = hash;
       console.log(hash);
       req.getConnection((err, connection) => {
@@ -35,18 +35,14 @@ adminControllerUser.addUser = (req, res) => {
           if (err) {
             console.log(err);
             return res.send(err);
-          }else {          
-            let user = {
-            id: result.insertId,
-            body: req.body
+          } else {
+            //ASIGNO IDUSUARIO GUARDADO 
+            dato.id = result.insertId;
+            //ASIGNO DATOS DE USUARIO A LA SESION
+            req.session.user = dato;
+            //REDIRECCIONO A LA RUTA 
+            res.redirect("./index_signin");
           }
-          req.session.user = {
-            'nombre': req.body.nombre,
-            'email': req.body.email
-          }
-          console.log(user);
-          res.redirect("./index_signin");
-        }
         });
       })
     });
