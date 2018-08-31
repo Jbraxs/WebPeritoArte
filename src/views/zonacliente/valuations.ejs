@@ -1,32 +1,41 @@
 <% include ../partials/_header %>
 
-<div class="col-md-5">
-    <div class="card-body">
-      <form action="/zonacliente/valuations" method="POST">
-        <div class="form-group">
-        <input type="text" name="nombre" placeholder="Nombre de la Obra">
-      </div>
-      <select name="idCategoria">
-        <option></option>
-        for 
-        <option value="1">Joya</option>
-        <option value="2">obra</option>
-      </select>
-      <select name="idTipoObjeto">
-        <option></option>
-        <option value="1">pintura</option>
-        <option value="2">Oleo</option>
-      </select>
-      <select name="idTecnica">
-          <option></option>
-          <option value="1">oleo</option>
-          <option value="2">dibujo</option>
-        </select>
-        <button type="submit" class="btn btn-primary">
-            enviar
-          </button>
-      </form>
-    </div>
+  Listado de Valoraciones para insertar!
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-7">
+        <a href="/zonacliente/valuations/add">Crear Valoracion</a>
+          <% if (valuations.length > 0) { %>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <td>Nº</td>
+              <td>Nombre</td>
+              <td>Categoria</td>
+              <td><a href="/" class="btn btn-info">Enviar Valoracion</a></td>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <% for(var i = 0; i < valuations.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= valuations[i].id %>
+                      </td>
+                  <!-- <select name="idCategoria">
+                    <option value="<%= valuations[i].categoria %>"> </option>
+                    <option value="1"> Joyas </option>
+                    <option value="2"> Obras </option>
+                    <option value="3"> Categoria 3 </option>
+                  </select> -->
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+            <% } else {%>
+              usted no tiene Valoracion
+              <% } %>
+          </div>
+        </div>
   </div>
-
-

@@ -42,9 +42,9 @@ router.post('/login', controllerUser.login);
 router.get('/logout', controllerUser.logout);
 //VALORACIONES
 const controllerValuation = require('../controllers/valuationController');
-// router.get('/zonacliente/valuations', controllerValuation.selectValuation);
-router.get('/zonacliente/valuations', controllerValuation.addValuationForm);
-router.post('/zonacliente/valuations', controllerValuation.addValuation);
+router.get('/zonacliente/valuations', controllerValuation.selectValuation);
+router.get('/zonacliente/valuations/add', controllerValuation.addValuationForm);
+router.post('/zonacliente/valuations/add', controllerValuation.addValuation);
 // router.get('/zonacliente/valuations/delete/:id', controllerValuation.delValuation);
 // router.get('/zonacliente/valuations/assess/:id', controllerValuation.assessValuation);
 

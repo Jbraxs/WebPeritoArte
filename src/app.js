@@ -51,17 +51,18 @@ app.listen(app.get('port'), () => {
 });
 
 
-// //prubea de mails 
+//prubea de mails 
+
 // var nodemailer = require('nodemailer')
 // var transporter = nodemailer.createTransport('smtps://pruebawebperitoarte@gmail.com:pruebawebperitoarte12345');
-// // var transporte = nodemailer.createTransport('SMTP',
-// // {
-// //   service:'Gmail',
-// //   auth:{ 
-// //     user:'pruebawebperitoarte@gmail.com',
-// //     password:'pruebawebperitoarte12345'
-// //   }
-// // });
+// var transporte = nodemailer.createTransport('SMTP',
+// {
+//   service:'Gmail',
+//   auth:{ 
+//     user:'pruebawebperitoarte@gmail.com',
+//     password:'pruebawebperitoarte12345'
+//   }
+// });
 // //lo que envio como html
 // var mivariable='<h1>Hola</h1>'
 // // quien lo envia
@@ -70,7 +71,6 @@ app.listen(app.get('port'), () => {
 //   to:'direccion de correo electronico',
 //   subject: 'el asunto va aca ',
 //   text:'mundo',
-//   html:mivariable
+//   html:mivariable 
 
 // };
-// Prueba 2

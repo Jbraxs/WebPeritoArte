@@ -1,0 +1,29 @@
+<% include ../partials/_header %>
+
+<form>
+    <label>Nombre</label>
+    <input type="text" name="nombre" placeholder="Nombre de la Obra">
+    
+    <label>Categoria</label>
+        <select name="categoria_id">
+            <% categorias.forEach(function(cat) { %>
+                <option></option>
+            <option value="<%= cat.id %>"> <%= cat.nombre %> </option>
+            <% }); %>
+        </select>
+        <label>Tecnica</label>
+        <select name="tecnica_id">
+            <% tecnicas.forEach(function(tec) { %>
+                <option></option>
+            <option value="<%= tec.id %>"> <%= tec.nombre %> </option>
+            <% }); %>
+        </select>
+        <label>Tamaño</label>
+        <select name="tamanio_id">
+            <% tamanio.forEach(function(ta) { %>
+                <option></option>
+            <option value="<%= ta.id %>"> <%= ta.nombre %> </option>
+            <% }); %>
+        </select>
+
+</form>
