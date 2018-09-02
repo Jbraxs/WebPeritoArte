@@ -3,6 +3,7 @@
 // VALORACIONES
 
 const controllerValuation = {};
+const fs = require('fs');
 
 //CONSULTA LAS VALORACIONES REALIZADAS
 controllerValuation.selectValuation = (req, res) => {
@@ -51,25 +52,22 @@ controllerValuation.addValuationForm = (req, res) => {
     });
 };
 //AÑADE VALORACIONES 
-
-// const data = req.body;
 controllerValuation.addValuation = (req, res) => {
     req.session.user = { id: 39, nombre: '2', email: '2' };
     const usuario = req.session.user;
-    // let oldPath = req.files.imagenes.path;
-    // let newPath = '/src/public/img_clientes/' + req.files.imagenes.originalFilename;
-    // fs.rename(oldPath,newPathm function (err){
-    // });
+    let oldPath = req.files.imagenes.path;
+    let newPath = './public/img_clientes/' + req.files.imagenes.originalFilename;
+    fs.rename(oldPath,newPath, function (err){
+    });
     req.getConnection((err, connection) => {
         let sql = `INSERT INTO objeto (idUsuario,nombre,idCategoria,idTipoObjeto,idTecnica,idTamanio,firmado,comentario,IdConservacion,idEstadoPeritaje,imagen) VALUES 
         ('${usuario.id}','${req.body.nombre}','${req.body.categoria_id}','${req.body.tipoObjeto_id}','${req.body.tecnica_id}','${req.body.tamanio_id}',
-        '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','"')`;
-        connection.query(sql, (err, valoraciones) => {
+        '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','${req.file.imagenes.originalFilename}')`;
+        connection.query(sql, (err, valuations) => {
             if (err) {
                 console.log(err);
                 return res.send("error al valorar");
             }
-            // console.log(valoraciones);
             res.redirect('/zonacliente/valuations');
         })
     })

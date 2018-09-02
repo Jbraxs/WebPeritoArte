@@ -84,13 +84,13 @@ controllerUser.logout = (req, res) => {
    
 };
 
-//VER LOS DATOS DE UN USUARIO
+
+//VER DATOS PERSONALES DE UN USUARIO
 controllerUser.selectUser = (req, res) => {
   req.session.user = { id: 39, nombre: '2', email: '2' };
-  let usuario = req.session.user
+  let usuario = req.session.user;
   req.getConnection((err, connection) => {
-    console.log(usuario);
-    connection.query('SELECT * FROM usuario WHERE id = ?', usuario , (err, result) => {
+    connection.query('SELECT * FROM usuario WHERE id = ? ',usuario.id, (err, result) => {
       if (err){
         res.json(err);
       }
@@ -101,4 +101,28 @@ controllerUser.selectUser = (req, res) => {
   });
 };
 
+//VISTA LOS DATOS A MODIFICAR
+controllerUser.viewsUser = (req,res) => {
+  const {id} = req.params;
+  req.getConnection((err,connection) => {
+    connection.query("SELECT * FROM usuario WHERE id = ?", [id], (err,rows) => {
+      res.render("../views/zonacliente/user_edit", {
+        data:rows[0]
+      });
+    });
+  });
+};
+
+//MODIFICA LOS DATOS
+controllerUser.editUser = (req, res) => {
+  const { id } = req.params;
+  const newUsuario = req.body;
+  req.getConnection((err, connection) => {
+    connection.query("UPDATE usuario set ? where id = ?",[newUsuario, id],(err, rows) => {
+      console.log(newUsuario);
+      res.redirect("/zonacliente");
+      }
+    );
+  });
+};
 module.exports = controllerUser;

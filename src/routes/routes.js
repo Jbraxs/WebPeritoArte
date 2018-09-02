@@ -1,6 +1,7 @@
 const router = require('express').Router();
+const fs = require('fs');
 const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart({ uploadDir: '/src/public/img_clientes/' })
+const multipartMiddleware = multipart({ uploadDir: './public/img_clientes/' })
 const auth = function (req, res, next) {
     if (req.session.user)
         return next();
@@ -40,11 +41,13 @@ router.get('/login', controllerUser.loginForm);
 router.post('/login', controllerUser.login);
 router.get('/logout', controllerUser.logout);
 router.get('/zonacliente', controllerUser.selectUser);
+router.get('/zonacliente/data/update/:id', controllerUser.viewsUser);
+router.post('/zonacliente/data/update/:id', controllerUser.editUser);
 //VALORACIONES
 const controllerValuation = require('../controllers/valuationController');
 router.get('/zonacliente/valuations', controllerValuation.selectValuation);
-router.get('/zonacliente/valuations/add', controllerValuation.addValuationForm);
-router.post('/zonacliente/valuations/add', controllerValuation.addValuation);
+router.get('/zonacliente/valuations/add',multipartMiddleware, controllerValuation.addValuationForm);
+router.post('/zonacliente/valuations/add',multipartMiddleware, controllerValuation.addValuation);
 router.get('/zonacliente/valuations/delete/:id', controllerValuation.delValuation);
 // router.get('/zonacliente/valuations/assess/:id', controllerValuation.assessValuation);
 

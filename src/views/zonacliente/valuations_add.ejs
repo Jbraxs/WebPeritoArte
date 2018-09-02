@@ -1,7 +1,7 @@
 <% include ../partials/_header %>
 <h1>Nueva Valoración</h1>
    <div class="container mt-5">
-        <form action="/zonacliente/valuations/add" method="POST">
+        <form action="/zonacliente/valuations/add" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <label>Nombre</label>
                 <input type="text" name="nombre" placeholder="Nombre de la Obra">
@@ -52,8 +52,8 @@
             <label>Comentarios</label>
             <textarea name="comentario" rows="4" cols="25">Si lo desea deje un comentario</textarea>
 
-            <!-- PARA LA IMAGEN
-            <input type='file' name="imagenes" placeholder="imagen"> -->
+           
+            <input type='file' name="imagenes" placeholder="imagen">
 
             <button type="submit" class="btn btn-primary">
                 Enviar Valoracion

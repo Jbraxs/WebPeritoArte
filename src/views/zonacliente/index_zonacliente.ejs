@@ -13,6 +13,7 @@ DATOS DE UN CLIENTE, ZONA CLIENTE
               <td>Código Postal</td>
               <td>Fecha de Nacimiento</td>
               <td>Email</td>
+              <td>Acción</td>
             </tr>
           </thead>
           <tbody>
@@ -36,12 +37,13 @@ DATOS DE UN CLIENTE, ZONA CLIENTE
                   </td>
                   <td>
                     <%= data[i].fechaNacimiento %>
+             
                   </td>
                   <td>
                     <%= data[i].email %>
                   </td>
                   <td>
-                    <a href="/<%= data[i].id %>" class="btn btn-info">Modificar</a>
+                    <a href="/zonacliente/data/update/<%= data[i].id %>" class="btn btn-info">Modificar</a>
                   </td>
                 </tr>
                 <% } %>

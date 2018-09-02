@@ -1,31 +1,34 @@
 <% include ../partials/_header %>
 
-  <div class="container mt-5">
+
+<div class="container mt-5">
     <div class="row">
       <div class="col-md-5 offset-md-3 card">
         <div class="card-body">
-            <form action="/admin/users/update/<%= data.id %>" method="POST">
+            <form action="/zonacliente/data/update/<%= data.id %>" method="POST">
             <h4>Hola
-              <%= data.nombre %> <br> recuerda que es el panel de admin</h4>
-            <!-- <div class="form-group"> -->
-            <!-- <label>Contraseña</label>
+              <%= data.nombre %> <br> esta vista es del view del mismo cliente </h4>
+            <div class="form-group">
+            <label>Contraseña</label>
             <input type="text" name="password" value="<%= data.password%>" placeholder="Contraseña" class="form-control" autofocus>
-          </div> -->
+          </div>
             <div class="form-group">
               <label>Teléfono</label>
               <input type="text" name="telefono" value="<%= data.telefono%>" placeholder="Teléfono" class="form-control">
             </div>
-            <!-- <div class="form-group">
+            <div class="form-group">
             <label>Email</label>
             <input type="text" name="email" value="<%= data.email%>" placeholder="Email" class="form-control">
-          </div> -->
+          </div>
+          <div class="form-group">
+            <label>Codigo Postal</label>
+            <input type="text" name="codigoPostal" value="<%= data.codigoPostal%>" placeholder="Codigo Postal" class="form-control">
+          </div>
             <button type="submit" class="btn btn-primary">
-              Guardar Cambios
+              Grabar Cambios
             </button>
           </form>
         </div>
       </div>
     </div>
   </div>
-
-  <% include ../partials/_footer %>

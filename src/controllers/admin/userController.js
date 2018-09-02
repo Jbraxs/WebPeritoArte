@@ -68,10 +68,7 @@ adminControllerUser.editUser = (req, res) => {
   const { id } = req.params;
   const newUsuario = req.body;
   req.getConnection((err, connection) => {
-    connection.query(
-      "UPDATE usuario set ? where id = ?",
-      [newUsuario, id],
-      (err, rows) => {
+    connection.query("UPDATE usuario set ? where id = ?", [newUsuario, id],(err, rows) => {
         res.redirect("/admin/users");
       }
     );
