@@ -9,9 +9,12 @@ var bcrypt = require("bcrypt-nodejs");
 controllerUser.registerform = (req, res) => {
   res.render("register");
 };
+
 //INSERTA DATOS PARA EL REGISTRO, ENCRIPTANDO LA CONTRASEÑA
 controllerUser.register = (req, res) => {
   let dato = req.body;
+  let fecha = dato.fechaNacimiento.split("/");
+  dato.fechaNacimiento = fecha[2] + '/' + fecha[1] + '/' + fecha[0]; 
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(dato.password, salt, null, function(err, hash) {
       dato.password = hash;
@@ -76,10 +79,26 @@ controllerUser.logout = (req, res) => {
   if(req.session.user){
     console.log(req.session.destroy);
       req.session.destroy();
-  }else{
-      return res.send('No existe un login de usuario')
   }
+    res.redirect('/login');
+   
 };
 
+//VER LOS DATOS DE UN USUARIO
+controllerUser.selectUser = (req, res) => {
+  req.session.user = { id: 39, nombre: '2', email: '2' };
+  let usuario = req.session.user
+  req.getConnection((err, connection) => {
+    console.log(usuario);
+    connection.query('SELECT * FROM usuario WHERE id = ?', usuario , (err, result) => {
+      if (err){
+        res.json(err);
+      }
+      res.render("zonacliente/index_zonacliente",{
+        data:result
+      });
+    });
+  });
+};
 
 module.exports = controllerUser;

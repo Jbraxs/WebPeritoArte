@@ -26,6 +26,8 @@ adminControllerUser.addUserForm = (req, res) => {
 //INSERTA DATOS PARA EL REGISTRO DESDE EL PANEL DEL ADMIN, ENCRIPTANDO LA CONTRASEÑA
 adminControllerUser.addUser = (req, res) => {
   let data = req.body;
+  let fecha = data.fechaNacimiento.split("/");
+  data.fechaNacimiento = fecha[2] + '/' + fecha[1] + '/' + fecha[0];
   bcrypt.genSalt(10, function (err, salt) {
     bcrypt.hash(data.password, salt, null, function (err, hash) {
       data.password = hash;
@@ -53,10 +55,7 @@ adminControllerUser.addUser = (req, res) => {
 adminControllerUser.viewsUser = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
-    connection.query(
-      "SELECT * FROM usuario WHERE id = ?",
-      [id],
-      (err, rows) => {
+    connection.query("SELECT * FROM usuario WHERE id = ?",[id],(err, rows) => {
         res.render("./admin/user_edit", {
           data: rows[0]
         });

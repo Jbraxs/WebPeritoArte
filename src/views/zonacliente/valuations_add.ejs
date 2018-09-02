@@ -1,91 +1,116 @@
 <% include ../partials/_header %>
-    <div class="container mt-5">
+<h1>Nueva Valoración</h1>
+   <div class="container mt-5">
         <form action="/zonacliente/valuations/add" method="POST">
-            <label>Nombre</label>
-            <input type="text" name="nombre" placeholder="Nombre de la Obra">
-             <label>Categoria</label>
-            <select name="categoria_id" id="categoria_id">
-                <option value=""></option>
-                <% categorias.forEach(function(cat) { %>
-                    <option value="<%= cat.id %>">
-                        <%= cat.nombre %>
-                    </option>
-                    <% }); %>
-            </select>
-            <label>Tipo de Objeto</label>
-            <select name="tipoObjeto_id" id="tipoObjeto_id">
-                <option value=""></option>
-                <% tipo_objetos.forEach(function(tipo) { %>
-                    <option value="<%= tipo.id %>">
-                        <%= tipo.nombre %>
-                    </option>
-                    <% }); %>
-            </select>
-            <label>Tecnica</label>
-            <select name="tecnica_id" id="tecnica_id">
-                <option value=""></option>
-                <% tecnicas.forEach(function(tec) { %>
-                    <option value="<%= tec.id %>">
-                        <%= tec.nombre %>
-                    </option>
-                    <% }); %>
-            </select>
-            <label>Firmado</label>
-            <select name="firmado_id">
-                <option value=""></option>
-                <option value="si">Si</option>
-                <option value="no">No</option>
-            </select>
-            <br>
-            <label>Tamaño</label>
-            <select name="tamanio_id" id="tamanio_id">
-                <option value=""></option>
-                <% tecnicas.forEach(function(tec) { %>
-                    <option value="<%= tec.id %>">
-                        <%= tec.nombre %>
-                    </option>
-                    <% }); %>
-            </select>
-            <label>Conservacion</label>
-            <select name="conservacion_id" id="conservacion_id">
-                <option value=""></option>
-                <% conservacions.forEach(function(con) { %>
-                    <option value="<%= con.id %>">
-                        <%= con.nombre %>
-                    </option>
-                    <% }); %>
-            </select>
+            <fieldset>
+                <label>Nombre</label>
+                <input type="text" name="nombre" placeholder="Nombre de la Obra">
+
+                <label>Categoria</label>
+                <select id="categoria_id" name="categoria_id">
+                    <option value=""></option>
+                    <% categorias.forEach(function(cat) { %>
+                        <option value="<%= cat.id %>">
+                            <%= cat.nombre %>
+                        </option>
+                        <% }); %>
+                </select>
+
+                <label>Tipo de Objeto</label>
+                <select name="tipoObjeto_id" id="tipoObjeto_id">
+                    <option value=""></option>
+                </select>
+
+                <label>Tecnica</label>
+                <select id="tecnica_id" name="tecnica_id">
+                    <option value=""></option>
+                </select>
+
+                <label>Tamaño</label>
+                <select id="tamanio_id" name="tamanio_id">
+                    <option value=""></option>
+                </select>
+
+                <label>Firmado</label>
+                <select name="firmado_id">
+                    <option value=""></option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                </select>
+                
+                
+                <label>Conservacion</label>
+                <select id="conservacion_id" name="conservacion_id">
+                    <option value=""></option>
+                    <% conservacions.forEach(function(con) { %>
+                        <option value="<%= con.id %>">
+                            <%= con.nombre %>
+                        </option>
+                        <% }); %>
+                </select>
+                    
             <label>Comentarios</label>
-            <textarea value="comentario" rows="4" cols="25">Si lo desea deje comentario</textarea>
-            <!-- //PARA LA IMAGEN
-        <input type='file' name="imagenes" placeholder="imagen"> -->
-        <button type="submit" class="btn btn-primary">
+            <textarea name="comentario" rows="4" cols="25">Si lo desea deje un comentario</textarea>
+
+            <!-- PARA LA IMAGEN
+            <input type='file' name="imagenes" placeholder="imagen"> -->
+
+            <button type="submit" class="btn btn-primary">
                 Enviar Valoracion
-        </button>
+            </button>
+        </fieldset>
         </form>
     </div>
-    <script>
-// var categoria = document.getElementById('categoria_id')
-// categoria.onchange = completarCampos(categoria.value);
 
-// function completarCampos(categoria_id)
-// {
-//     tamanio = document.getElementById('tamanio_id');
-//     tecnica = document.getElementById('tecnica_id');
-//     if (categoria.value != "")
-//     { console.log(tamanios);
-//         opciones ='<option value=""></option>';
-//         // tamanios.forEach(function(ta) {
-//             // opciones += '<option value="<%= ta.id %>"> <%= ta.medida %> </option>'
-//             // });
-//         tecnica.innerHtml = '<option value=""></option>';
-//         tamanio.innerHtml = opciones
-//         console.log('ogg');
-//     } else {
-//         tamanio.innerHtml='<option value=""></option>';
-//         tecnica.innerHtml='<option value=""></option>';
-//     }
-// };
+<script type="text/javascript">
+    // Pasamos las variables de EJS a Javascript
+    var tipo_objetos = <%- JSON.stringify(tipo_objetos) %> // No se si lo permite una variable con _
+    var tecnicas = <%- JSON.stringify(tecnicas) %>
+    var tamanios = <%- JSON.stringify(tamanios) %>
+
+    // Obtengo el select
+    var categoria = document.getElementById('categoria_id');
+
+    // Asigno los cambios al evento onchange de la categoría
+    categoria.onchange = function () {
+    // Obtengo los select a modificar
+    tipo_objeto = document.getElementById('tipoObjeto_id');
+    tecnica = document.getElementById('tecnica_id'); 
+    tamanio = document.getElementById('tamanio_id');
+
+    // Agrego los options en blanco    
+    tip_ops = '<option value=""></option>';    
+    tec_ops = '<option value=""></option>';
+    tam_ops = '<option value=""></option>';
+
+    // Si seleccioné una categoría poblaré los select
+    // sino los dejaré solo con la opción vacía
+    if (categoria.value != "") {
+
+        // Recorro todos las colecciones y sólo agrego las opciones
+        // que sean de la categoría seleccionada
+        tipo_objetos.forEach(function (ti) {
+            if (ti.idCategoria == categoria.value){
+                tip_ops += '<option value="' + ti.id + '">' + ti.nombre + '</option>'
+            }
+        });
+        tecnicas.forEach(function (te) {
+                if (te.idCategoria == categoria.value) {
+                    tec_ops += '<option value="' + te.id + '">' + te.nombre + '</option>'
+                }
+            });
+        tamanios.forEach(function (ta) {
+            if (ta.idCategoria == categoria.value) {
+                tam_ops += '<option value="' + ta.id + '">' + ta.medida + '</option>'
+            }
+        });
+    }
 
 
-    </script>
+    // Asigno las opciones a cada select
+    tipo_objeto.innerHTML = tip_ops;
+    tamanio.innerHTML = tam_ops;
+    tecnica.innerHTML = tec_ops;
+
+    }
+</script>

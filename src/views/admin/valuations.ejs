@@ -1,11 +1,8 @@
 <% include ../partials/_header %>
-
-  Listado de Valoraciones para ver!
-  
+  Listado de valoraciones de los clientes registrados
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <a href="/zonacliente/valuations/add">Crear Valoracion</a>
           <% if (valuations.length > 0) { %>
         <table class="table table-bordered table-hover">
           <thead>
@@ -37,7 +34,7 @@
                   <td><%= valuations[i].conservacion %></td> 
                 </tr>
                   <td>
-                    <a href="/zonacliente/valuations/delete/<%= valuations[i].id %>" class="btn btn-info">Eliminar</a>
+                    <a href="/admin/valuations/view/<%= valuations[i].id %>" class="btn btn-danger">Ver</a>
                   </td>
                 <% } %>
               </tbody>
@@ -49,5 +46,4 @@
         </div>
   </div>
      
-
   <% include ../partials/_footer %>

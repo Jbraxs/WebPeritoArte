@@ -4,10 +4,20 @@
 
 const controllerValuation = {};
 
+//CONSULTA LAS VALORACIONES REALIZADAS
 controllerValuation.selectValuation = (req, res) => {
+    let sql = 'SELECT obj.id, obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,' 
+    sql += 'tip.nombre as tipo_objeto, tam.medida as tamanio, est.nombre as estado, con.nombre as conservacion '
+    sql += 'FROM alexis_navas.objeto obj '
+    sql += 'INNER JOIN categoria cat ON obj.idCategoria = cat.id '
+    sql += 'INNER JOIN tecnica tec ON obj.idTecnica = tec.id '
+    sql += 'INNER JOIN tipo_objeto tip ON obj.idTipoObjeto = tip.id '
+    sql += 'INNER JOIN tamanio tam ON obj.idTamanio = tam.id '
+    sql += 'INNER JOIN estado_peritaje est ON obj.idEstadoPeritaje = est.id '
+    sql += 'INNER JOIN conservacion con ON obj.idConservacion = con.id WHERE idUsuario = ? '
     req.session.user = { id: 39, nombre: '2', email: '2' };
     req.getConnection((err, connection) => {
-        connection.query("SELECT * FROM objeto where idUsuario = ?", req.session.user.id, (err, valuations) => {
+        connection.query(sql, req.session.user.id, (err, valuations) => {
             if (err) {
                 res.json(err);
             } 
@@ -17,7 +27,7 @@ controllerValuation.selectValuation = (req, res) => {
         })
     })
 };
-// SELECT * FROM tecnica; SELECT * FROM tamanio
+//AÑADE VALORACIONES FORMULARIO
 controllerValuation.addValuationForm = (req, res) => {
     req.session.user = { id: 39, nombre: '2', email: '2' };
     req.getConnection((err, connection) => {
@@ -40,32 +50,39 @@ controllerValuation.addValuationForm = (req, res) => {
         });
     });
 };
+//AÑADE VALORACIONES 
 
-// const usuario = req.session.user;
-// let oldPath = req.files.imagenes.path;
-// let newPath = '/src/public/img_clientes/' + req.files.imagenes.originalFilename;
-// fs.rename(oldPath,newPathm function (err){
-// });
 // const data = req.body;
 controllerValuation.addValuation = (req, res) => {
     req.session.user = { id: 39, nombre: '2', email: '2' };
     const usuario = req.session.user;
+    // let oldPath = req.files.imagenes.path;
+    // let newPath = '/src/public/img_clientes/' + req.files.imagenes.originalFilename;
+    // fs.rename(oldPath,newPathm function (err){
+    // });
     req.getConnection((err, connection) => {
-        let sql = `INSERT INTO objeto (idUsuario,nombre,idCategoria,idTipoObjeto,idTecnica,idTamanio,firmado,comentario,conservacion) VALUES 
+        let sql = `INSERT INTO objeto (idUsuario,nombre,idCategoria,idTipoObjeto,idTecnica,idTamanio,firmado,comentario,IdConservacion,idEstadoPeritaje,imagen) VALUES 
         ('${usuario.id}','${req.body.nombre}','${req.body.categoria_id}','${req.body.tipoObjeto_id}','${req.body.tecnica_id}','${req.body.tamanio_id}',
-        '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}')`;
-        // console.log(usuario.id);
-        // console.log(req.body.nombre);
-        console.log(sql);
+        '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','"')`;
         connection.query(sql, (err, valoraciones) => {
             if (err) {
-                // console.log(err);
+                console.log(err);
                 return res.send("error al valorar");
             }
             // console.log(valoraciones);
             res.redirect('/zonacliente/valuations');
         })
     })
+};
+//ELIMINA VALORACIONES
+controllerValuation.delValuation = (req, res) => {
+    const { id } = req.params;
+    req.getConnection((err, connection) => {
+        connection.query("DELETE FROM objeto WHERE id = ?", [id], (err, rows) => {
+            res.redirect("/zonacliente/valuations")
+        });
+    });
+    
 };
 
 

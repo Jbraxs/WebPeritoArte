@@ -12,7 +12,7 @@ const auth = function (req, res, next) {
 // CONTROLADORES DEL ADMIN
 const adminControllerUser = require('../controllers/admin/userController');
 const adminControllerContact = require('../controllers/admin/contactController');
-// const adminControllerValuation = require('../controllers/admin/valuationController');
+const adminControllerValuation = require('../controllers/admin/valuationController');
 // USUARIOS 
 router.get('/admin/users', adminControllerUser.selectUser);
 router.get('/admin/users/add', adminControllerUser.addUserForm);
@@ -25,27 +25,27 @@ router.get('/admin/contacts', adminControllerContact.selecContact);
 router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);
 router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);
 // VALORACIONES
-// router.get('/admin/valuations', adminControllerValuation.selectValuation);
-// router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);
-// router.get('/admin/valuations/delete/:id', adminControllerValuation.delValuation);
+router.get('/admin/valuations', adminControllerValuation.selectValuation);
+router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);
 // router.get('/admin/valuations/assess/:id', adminControllerValuation.assessValuation); FALTAR POR HACER 
 // router.get('/admin/valuations/schedule/:id', adminControllerValuation.scheduleValuation); FALTA POR HACER 
 
 
 //CONTROLADORES DEL USUARIO
-//USER 
+//USUARIOS 
 const controllerUser = require('../controllers/userController');
 router.get('/register', controllerUser.registerform);
 router.post('/register', controllerUser.register);
 router.get('/login', controllerUser.loginForm);
 router.post('/login', controllerUser.login);
 router.get('/logout', controllerUser.logout);
+router.get('/zonacliente', controllerUser.selectUser);
 //VALORACIONES
 const controllerValuation = require('../controllers/valuationController');
 router.get('/zonacliente/valuations', controllerValuation.selectValuation);
 router.get('/zonacliente/valuations/add', controllerValuation.addValuationForm);
 router.post('/zonacliente/valuations/add', controllerValuation.addValuation);
-// router.get('/zonacliente/valuations/delete/:id', controllerValuation.delValuation);
+router.get('/zonacliente/valuations/delete/:id', controllerValuation.delValuation);
 // router.get('/zonacliente/valuations/assess/:id', controllerValuation.assessValuation);
 
 //CONTROLADORES DEL CONTACTO 
@@ -61,7 +61,7 @@ router.post('/contact', controllerContact.addContact);
 router.get('/admin', function (req, res) {
     res.render('admin/admin');
 });
-router.get('/index', function (req, res) {
+router.get('/', function (req, res) {
     res.render('../views/index');
 });
 
