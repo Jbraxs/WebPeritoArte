@@ -8,7 +8,8 @@ const fs = require('fs');
 //CONSULTA LAS VALORACIONES REALIZADAS
 controllerValuation.selectValuation = (req, res) => {
     let sql = 'SELECT obj.id, obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,' 
-    sql += 'tip.nombre as tipo_objeto, tam.medida as tamanio, est.nombre as estado, con.nombre as conservacion '
+    sql += 'tip.nombre as tipo_objeto, tam.medida as tamanio, est.nombre as estado, con.nombre as conservacion, '
+    sql += 'obj.firmado, obj.comentario, obj.imagen '
     sql += 'FROM alexis_navas.objeto obj '
     sql += 'INNER JOIN categoria cat ON obj.idCategoria = cat.id '
     sql += 'INNER JOIN tecnica tec ON obj.idTecnica = tec.id '
@@ -55,20 +56,22 @@ controllerValuation.addValuationForm = (req, res) => {
 controllerValuation.addValuation = (req, res) => {
     req.session.user = { id: 39, nombre: '2', email: '2' };
     const usuario = req.session.user;
-    let oldPath = req.files.imagenes.path;
-    let newPath = './public/img_clientes/' + req.files.imagenes.originalFilename;
+    let oldPath = req.files.imagen.path;
+    let newPath = './public/img_clientes/' + req.files.imagen.originalFilename;
     fs.rename(oldPath,newPath, function (err){
+        console.log(req.files.imagen);
     });
     req.getConnection((err, connection) => {
         let sql = `INSERT INTO objeto (idUsuario,nombre,idCategoria,idTipoObjeto,idTecnica,idTamanio,firmado,comentario,IdConservacion,idEstadoPeritaje,imagen) VALUES 
         ('${usuario.id}','${req.body.nombre}','${req.body.categoria_id}','${req.body.tipoObjeto_id}','${req.body.tecnica_id}','${req.body.tamanio_id}',
-        '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','${req.file.imagenes.originalFilename}')`;
+        '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','${req.files.imagen.path.split('//')[3]}')`;
         connection.query(sql, (err, valuations) => {
             if (err) {
                 console.log(err);
                 return res.send("error al valorar");
             }
             res.redirect('/zonacliente/valuations');
+            console.log(req.files.imagen.originalFilename);
         })
     })
 };

@@ -1,23 +1,23 @@
 const router = require('express').Router();
 const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart({ uploadDir: './public/img_clientes/' })
+const multipartMiddleware = multipart({ uploadDir: './src/public/img_clientes/' })
 
 const auth = function (req, res, next) {
     console.log(req.session,next);
     if (req.session && req.session.admin){
         return next();
     } else {
-        return res.render('../views/error401');
+        return res.render('../views/errores/error401');
     }  
 };
-
+//RECORDAR PONER LAS AUTENTIFICACIONES EN LA PARTE DE ADMIN!!
 // RUTAS Y CONTROLADORES
 // CONTROLADORES DEL ADMIN
 const adminControllerUser = require('../controllers/admin/userController');
 const adminControllerContact = require('../controllers/admin/contactController');
 const adminControllerValuation = require('../controllers/admin/valuationController');
 // USUARIOS 
-router.get('/admin/users', adminControllerUser.selectUser);
+router.get('/admin/users',auth, adminControllerUser.selectUser);
 router.get('/admin/users/add', adminControllerUser.addUserForm);
 router.post('/admin/users/add', adminControllerUser.addUser);
 router.get('/admin/users/update/:id', adminControllerUser.viewsUser);
