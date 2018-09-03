@@ -1,12 +1,14 @@
 const router = require('express').Router();
-const fs = require('fs');
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart({ uploadDir: './public/img_clientes/' })
+
 const auth = function (req, res, next) {
-    if (req.session.user)
+    console.log(req.session,next);
+    if (req.session && req.session.admin){
         return next();
-    else
-        return res.sendStatus(404);
+    } else {
+        return res.render('../views/error401');
+    }  
 };
 
 // RUTAS Y CONTROLADORES
@@ -68,7 +70,7 @@ router.get('/', function (req, res) {
     res.render('../views/index');
 });
 
-router.get('/index_signin', auth, function (req, res) {
+router.get('/index_signin', function (req, res) {
     res.render('../views/index_login', {
         data: req.session.user
     });

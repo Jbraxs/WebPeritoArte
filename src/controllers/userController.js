@@ -62,7 +62,11 @@ controllerUser.login = (req, res) => {
                   'nombre': result[0].nombre,
                   'email': result[0].email
                 }
+                if (result[0].isSuperAdmin == true){
+                  req.session.admin = true;
+                }
                 console.log('estas logeado correctamente');
+                console.log(req.session, result);
                 res.redirect("/index_signin");
               } else {
                 return res.send("La contraseña NO es correcta");

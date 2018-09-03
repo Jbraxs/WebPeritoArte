@@ -8,7 +8,7 @@ var bcrypt = require("bcrypt-nodejs");
 //MUESTRA LOS USUARIOS REGISTRADOS
 adminControllerUser.selectUser = (req, res) => {
   req.getConnection((err, connection) => {
-    connection.query("SELECT * FROM usuario", (err, clientes) => {
+    connection.query("SELECT *, DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us", (err, clientes) => {
       if (err) {
         res.json(err);
       }
