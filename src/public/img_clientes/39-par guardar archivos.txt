@@ -1,0 +1,11 @@
+esto se mete donde el file.rename (antes)
+
+if(tipo == 'image/png' || tipo == 'image/jpg' || tipo== 'image/jpeg'){
+
+}else  {
+	res.send('Tipo de archivo no compatible, solo png');
+}
+});
+
+para dar mensajes cuando funciona algo 
+res.send('<p> El Archivo se subio</p></br>)

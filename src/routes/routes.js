@@ -18,7 +18,7 @@ const adminControllerUser = require('../controllers/admin/userController');
 const adminControllerContact = require('../controllers/admin/contactController');
 const adminControllerValuation = require('../controllers/admin/valuationController');
 // USUARIOS 
-router.get('/admin/users',auth, adminControllerUser.selectUser);
+router.get('/admin/users', adminControllerUser.selectUser);
 router.get('/admin/users/add', adminControllerUser.addUserForm);
 router.post('/admin/users/add', adminControllerUser.addUser);
 router.get('/admin/users/update/:id', adminControllerUser.viewsUser);
@@ -46,6 +46,11 @@ router.get('/logout', controllerUser.logout);
 router.get('/zonacliente', controllerUser.selectUser);
 router.get('/zonacliente/data/update/:id', controllerUser.viewsUser);
 router.post('/zonacliente/data/update/:id', controllerUser.editUser);
+//RECORDAR CONTRASEÑA
+const controllerUserPass = require('../controllers/userRemPassController');
+router.get('/zonacliente/rememberpass', controllerUserPass.rememberPassForm);
+router.post('/zonacliente/rememberpass', controllerUserPass.rememberPass);
+router.post('/zonacliente/rememberpass/update/:id',controllerUserPass.editPass);
 //VALORACIONES
 const controllerValuation = require('../controllers/valuationController');
 router.get('/zonacliente/valuations', controllerValuation.selectValuation);

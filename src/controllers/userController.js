@@ -3,7 +3,8 @@
 // USUARIOS
 
 const controllerUser = {};
-var bcrypt = require("bcrypt-nodejs");
+let bcrypt = require("bcrypt-nodejs");
+let nodemailer = require("nodemailer");
 
 //CON ESTO ME REDIRECCIONA A LA PLANTILLA.
 controllerUser.registerform = (req, res) => {
@@ -27,6 +28,36 @@ controllerUser.register = (req, res) => {
             dato.id = result.insertId;
             //ASIGNO DATOS DE USUARIO A LA SESION
             req.session.user = dato;
+
+             //SERVIDOR EMAIL 
+            let smtpTransport = nodemailer.createTransport({
+              host:'smtp.gmail.com',
+              port:465,
+              secure:true,
+              auth: {
+                user: "pruebawebperitoarte@gmail.com",
+                pass: "pruebawebperitoarte12345"
+              }
+              });
+              //TEXTO Y ENVIO DE EMAIL
+              let mailOptions = {
+              from: "pruebawebperitoarte@gmail.com",
+              to: dato.email,
+              subject: "Alexis Navas - Perito | alexisnavas.com",
+              html: 'Hola &nbsp;' + dato.nombre + ', <br> <br>' + 'Recuerda que en tu zona cliente, puedes realizar la valoracion económica que necesites. <br><br>' 
+              + 'Gracias por registrarte.' 
+              };
+              //FUNCION PARA ENVIAR EL EMAIL
+              smtpTransport.sendMail(mailOptions, function(error, response) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('El correo se envio correctamente');
+              }
+              });
+              //CIERRO EL ENVIO DEL EMIAL
+              smtpTransport.close();
+
             //REDIRECCIONO A LA RUTA 
             res.redirect("/index_signin");
           }
