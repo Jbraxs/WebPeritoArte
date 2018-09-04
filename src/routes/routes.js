@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const multipart = require('connect-multiparty');
-const multipartMiddleware = multipart({ uploadDir: './src/public/img_clientes/' })
+const multipartMiddleware = multipart({ uploadDir: './src/public/img_clientes/' });
+
 
 const auth = function (req, res, next) {
     console.log(req.session,next);

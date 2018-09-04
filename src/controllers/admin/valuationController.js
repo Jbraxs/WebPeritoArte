@@ -15,7 +15,7 @@ adminControllerValuation.selectValuation = (req, res) => {
     sql += 'INNER JOIN tipo_objeto tip ON obj.idTipoObjeto = tip.id '
     sql += 'INNER JOIN tamanio tam ON obj.idTamanio = tam.id '
     sql += 'INNER JOIN estado_peritaje est ON obj.idEstadoPeritaje = est.id '
-    sql += 'INNER JOIN conservacion con ON obj.idConservacion '
+    sql += 'INNER JOIN conservacion con ON obj.idConservacion = con.id'
     req.getConnection((err, connection) => {
         connection.query(sql, (err, valuations) => {
             if (err) {

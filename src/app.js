@@ -29,7 +29,7 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql, {
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'leeloo',
   port: 3306,
   database: 'alexis_navas'
 }, 'single'));
@@ -53,24 +53,31 @@ app.listen(app.get('port'), () => {
 
 //prubea de mails 
 
-// var nodemailer = require('nodemailer')
-// var transporter = nodemailer.createTransport('smtps://pruebawebperitoarte@gmail.com:pruebawebperitoarte12345');
-// var transporte = nodemailer.createTransport('SMTP',
-// {
-//   service:'Gmail',
-//   auth:{ 
-//     user:'pruebawebperitoarte@gmail.com',
-//     password:'pruebawebperitoarte12345'
+// var smtpTransport = nodemailer.createTransport("SMTP",{
+//   service: "Gmail",
+//   auth: {
+//       user: "pruebawebperitoarte@gmail.com",
+//       pass: "pruebawebperitoarte12345"
 //   }
 // });
-// //lo que envio como html
-// var mivariable='<h1>Hola</h1>'
-// // quien lo envia
-// var mailOptions= {
-//   from:'Nombre',
-//   to:'direccion de correo electronico',
-//   subject: 'el asunto va aca ',
-//   text:'mundo',
-//   html:mivariable 
 
-// };
+// // setup e-mail data with unicode symbols
+// var mailOptions = {
+//   from: "pruebawebperitoarte@gmail.com", // sender address
+//   to: "muydespacito@hotmail.com", // list of receivers
+//   subject: "Hello ✔", // Subject line
+//   text: "Hello world ✔", // plaintext body
+//   html: "<b>Hello world ✔</b>" // html body
+// }
+
+// // send mail with defined transport object
+// smtpTransport.sendMail(mailOptions, function(error, response){
+//   if(error){
+//       console.log(error);
+//   }else{
+//       console.log("Message sent: " + response.message);
+//   }
+
+//   // if you don't want to use this transport object anymore, uncomment following line
+//   //smtpTransport.close(); // shut down the connection pool, no more messages
+// });
