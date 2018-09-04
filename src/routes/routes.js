@@ -47,10 +47,11 @@ router.get('/zonacliente', controllerUser.selectUser);
 router.get('/zonacliente/data/update/:id', controllerUser.viewsUser);
 router.post('/zonacliente/data/update/:id', controllerUser.editUser);
 //RECORDAR CONTRASEÑA
-const controllerUserPass = require('../controllers/userRemPassController');
-router.get('/zonacliente/rememberpass', controllerUserPass.rememberPassForm);
-router.post('/zonacliente/rememberpass', controllerUserPass.rememberPass);
-router.post('/zonacliente/rememberpass/update/:id',controllerUserPass.editPass);
+// userRemPassController
+const controllerUserPass = require('../controllers/userRememberPass');
+router.get('/zonacliente/rememberpass',controllerUserPass.rememberPassForm);
+router.post('/zonacliente/rememberpass',controllerUserPass.rememberPass);
+// router.post('/zonacliente/rememberpass/update/:id',controllerUserPass.editPass);
 //VALORACIONES
 const controllerValuation = require('../controllers/valuationController');
 router.get('/zonacliente/valuations', controllerValuation.selectValuation);

@@ -1,0 +1,19 @@
+<% include ../partials/_header %>
+
+RECORDAR CONTRASEÑA
+
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Ayuda de Contraseña</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Introduzca la dirección de correo electrónico para restablecer su contraseña.</h6>
+    <form action="/zonacliente/rememberpass" method="POST">
+     <input type="text" name="email" class="form-control">
+    <button type="submit" class="btn btn-primary">
+     Enviar
+    </button>
+     </form>
+    <!-- <a href="#" class="card-link">Card link</a>
+     <a href="#" class="card-link">Another link</a>-->
+  </div>
+</div>

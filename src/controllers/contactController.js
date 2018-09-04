@@ -12,11 +12,9 @@ controllerContact.addContactForm = (req, res) => {
 // ENVIA DATOS DEL FORMULARIO DE CONTACTO
 controllerContact.addContact = (req, res) => {
   const data = req.body;
-  console.log(req.body);
   req.getConnection((err, connection) => {
     connection.query("INSERT INTO contacto set ?", data, (err, contacto) => {
       if (err) {
-        console.log(err);
         return res.send("error al valorar");
       } else {
 
@@ -31,7 +29,7 @@ controllerContact.addContact = (req, res) => {
           }
 				});
 				
-        //TEXTO Y ENVIO DE EMAIL
+        //TEXTO Y ENVIO DE EMAIL PARA CLIENTE 
         let mailOptions = {
           from: "pruebawebperitoarte@gmail.com",
           to: data.email,
@@ -44,10 +42,25 @@ controllerContact.addContact = (req, res) => {
             data.comentario +
             '"</i><br><br>En la mayor brevedad posible contactaremos usted. <br><br>' +
             "Gracias por su consulta."
+        };
+        
+        //TEXTO Y ENVIO DE EMAIL PARA ADMIN
+        let mailOptions2 = {
+          from: "pruebawebperitoarte@gmail.com",
+          to: "pruebawebperitoarte@gmail.com",
+          subject: "Alexis Navas - Perito | alexisnavas.com",
+          html:"Hola &nbsp;" + "Alexis" + ",<br>" + 'tienes una consulta de &nbsp' + data.nombre + 'en el formulario de contacto. <br>' + 'http://localhost:100/admin/contacts'
 				};
 				
         //FUNCION PARA ENVIAR EL EMAIL
-        smtpTransport.sendMail(mailOptions, function(error, response) {
+        smtpTransport.sendMail(mailOptions,mailOptions2, function(error, response) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("El correo se envio correctamente");
+          }
+        });
+        smtpTransport.sendMail(mailOptions2, function(error, response) {
           if (error) {
             console.log(error);
           } else {
