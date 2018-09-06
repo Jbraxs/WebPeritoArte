@@ -6,7 +6,7 @@ const adminControllerValuation = {};
 
 //CONSULTA TODAS LAS VALORACIONES DE LOS CLIENTES
 adminControllerValuation.selectValuation = (req, res) => {
-    let sql = 'SELECT obj.id, obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,' 
+    let sql = 'SELECT obj.id, obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,'
     sql += 'tip.nombre as tipo_objeto, tam.medida as tamanio, est.nombre as estado, con.nombre as conservacion, '
     sql += 'obj.firmado, obj.comentario, obj.imagen '
     sql += 'FROM alexis_navas.objeto obj '
@@ -20,7 +20,7 @@ adminControllerValuation.selectValuation = (req, res) => {
         connection.query(sql, (err, valuations) => {
             if (err) {
                 res.json(err);
-            } 
+            }
             res.render("admin/valuations", {
                 valuations: valuations
             })
@@ -31,14 +31,56 @@ adminControllerValuation.selectValuation = (req, res) => {
 adminControllerValuation.viewValuation = (req, res) => {
     const { id } = req.params;
     req.getConnection((err, connection) => {
-        connection.query("SELECT * FROM objeto where id = ?", [id],(err, rows) => {
-            res.render("../views/admin/valuations_view",{
-                data:rows[0]
+        connection.query("SELECT * FROM objeto where id = ?", [id], (err, rows) => {
+            res.render("../views/admin/valuations_view", {
+                data: rows[0]
             });
         });
     });
 };
-;
+adminControllerValuation.addAutoRates = (req, res) => {
+    req.getConnection((err, connection) => {
+        // OBTENGO LA INFORMACIÓN DE DB
+        connection.query("SELECT * FROM categoria", (err, categorias) => {
+            connection.query("SELECT * FROM conservacion", (err, conservaciones) => {
+                connection.query("SELECT * FROM tamanio", (err, tamanios) => {
+                    connection.query("SELECT * FROM tecnica", (err, tecnicas) => {
+                        connection.query("SELECT * FROM tipo_objeto", (err, tipos) => {
+                            // RECORRO LA INFORMACIÓN
+                            categorias.forEach(function (cat) {
+                                conservaciones.forEach(function (con) {
+                                    tamanios.forEach(function (tam) {
+                                        if (tam.idCategoria == cat.id) {
+                                            tecnicas.forEach(function (tec) {
+                                                if (tec.idCategoria == cat.id) {
+                                                    tipos.forEach(function (tip) {
+                                                        if (tip.idCategoria == cat.id) {
+                                                            // INICIA LA ORQUILLA ECONOMICA
+                                                            valMin = Math.floor(Math.random() * (3000 - 100)) + 100; // VALOR MINIMO ALEATORIO
+                                                            valS = Math.floor((Math.random() * (9 - 1)) + 1) * 100; // DIFERENCIA ENTRE EL MAX Y MIN
+                                                            valMax = valMin + valS; // VALOR MAX 
+                                                            valor = valMin + ' € - ' + valMax + ' €'; // ORQUILLA ECONOMICA
+
+                                                            let sql = 'INSERT INTO tarifa(idCategoria, idConservacion, idTamanio, idTecnica, idTipoObjeto, valor) '
+                                                            sql += `VALUES(${cat.id},${con.id},${tam.id},${tec.id},${tip.id},"${valor}")`
+
+                                                            connection.query(sql);
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                        }
+                                    })
+                                })
+                            })
+                            console.log('Fin de inserción de tarifas');
+                        });
+                    });
+                });
+            });
+        });
+    });
+}
 
 
 

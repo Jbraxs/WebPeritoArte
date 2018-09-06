@@ -1,0 +1,16 @@
+<div class="alert alert-primary" role="alert">
+<% if (messages.notices) { %>
+<% messages.notices.forEach(function(notices) { %>
+    <%= notices %>
+<% }) %>
+<% } %>
+</div>
+
+
+<div class="alert alert-danger" role="alert">
+<% if (messages.errors) { %>
+<% messages.errors.forEach(function(errors) { %>
+    <%= errors %>
+<% }) %>
+<% } %>
+</div>

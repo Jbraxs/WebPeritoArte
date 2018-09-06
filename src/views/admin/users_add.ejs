@@ -1,35 +1,37 @@
-<% include ../partials/_header %>
+<% include ../partials/_headeradmin %>
 
-<h1>REGISTRO DE CLIENTE DESDE EL ADMIN</h1>
-<div class="col-md-5">
-    <div class="card-body">
-      <form action="/register" method="POST">
-        <div class="form-group">
-          <input type="text" name="nombre" placeholder="Nombre" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="apellido" placeholder="Apellido" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="password" placeholder="Contraseña" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="telefono" placeholder="Teléfono" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="codigoPostal" placeholder="Código Postal" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="email" placeholder="Email" class="form-control" >
-        </div>
-
-        <button type="submit" class="btn btn-primary">
-          Registrarme
-        </button>
-      </form>
-    </div>
+<div class="container users_add mt-3">
+  <div class="page-header">
+    <h2>Registro de Clientes desde el panel de administrador</h2>
   </div>
+  <form action="/register" method="POST">
+    <div class="form-group">
+      <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+    </div>
+    <div class="form-group">
+      <input type="text" name="apellido" placeholder="Apellido" class="form-control">
+    </div>
+    <div class="form-group">
+      <input type="text" name="password" placeholder="Contraseña" class="form-control">
+    </div>
+    <div class="form-group">
+      <input type="text" name="telefono" placeholder="Teléfono" class="form-control">
+    </div>
+    <div class="form-group">
+      <input type="text" name="codigoPostal" placeholder="Código Postal" class="form-control">
+    </div>
+    <div class="form-group">
+      <input type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento" class="form-control">
+    </div>
+    <div class="form-group">
+      <input type="text" name="email" placeholder="Email" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary ">
+      Registrarme
+    </button>
+    <a href="/admin/users" class="btn btn-primary ">Volver</a>
+  </form>
+  </div>
+</div>
+
   <% include ../partials/_footer %>

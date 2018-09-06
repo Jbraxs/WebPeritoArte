@@ -39,14 +39,12 @@ adminControllerUser.addUser = (req, res) => {
       req.getConnection((err, connection) => {
         connection.query("INSERT INTO usuario set ?", data, (err, result) => {
           if (err) {
-            console.log(err);
-            return res.send(err);
+            res.render('../views/errores/error409');
           } else {
             //ASIGNO IDUSUARIO GUARDADO
             dato.id = result.insertId;
             //ASIGNO DATOS DE USUARIO A LA SESION
             req.session.user = dato;
-
             //SERVIDOR EMAIL
             let smtpTransport = nodemailer.createTransport({
               host: "smtp.gmail.com",

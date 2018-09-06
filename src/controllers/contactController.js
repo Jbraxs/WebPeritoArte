@@ -15,7 +15,7 @@ controllerContact.addContact = (req, res) => {
   req.getConnection((err, connection) => {
     connection.query("INSERT INTO contacto set ?", data, (err, contacto) => {
       if (err) {
-        return res.send("error al valorar");
+        res.render('../views/errores/error409');
       } else {
 
         //SERVIDOR EMAIL

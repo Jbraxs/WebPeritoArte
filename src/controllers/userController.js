@@ -22,7 +22,7 @@ controllerUser.register = (req, res) => {
       req.getConnection((err, connection) => {
         connection.query("INSERT INTO usuario set ?", dato, (err, result) => {
           if (err) {
-            return res.send(err);
+            res.render('../views/errores/error409');
           } else {
             //ASIGNO IDUSUARIO GUARDADO 
             dato.id = result.insertId;
@@ -78,14 +78,14 @@ controllerUser.login = (req, res) => {
     connection.query(
       `SELECT * FROM usuario WHERE email = ?`, email, function(err, result) {
         if (err) {
-          return res.send(err);
+          res.render('../views/errores/errorlogin');
         }
         if (result == "") {
-          return res.send("Email introducido no válido");
+           res.render('../views/errores/errorlogin');
         } else {
           bcrypt.compare(req.body.password, result[0].password, function(err,iguales) {            
             if (err) {
-            return res.send(err);
+              res.render('../views/errores/errorlogin');
             } else {
               if (iguales) {
                 req.session.user = {
@@ -96,11 +96,9 @@ controllerUser.login = (req, res) => {
                 if (result[0].isSuperAdmin == true){
                   req.session.admin = true;
                 }
-                console.log('estas logeado correctamente');
-                console.log(req.session, result);
                 res.redirect("/index_signin");
               } else {
-                return res.send("La contraseña NO es correcta");
+                res.render('../views/errores/errorlogin');
               }
             }
           });

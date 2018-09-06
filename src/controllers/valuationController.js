@@ -56,7 +56,6 @@ controllerValuation.addValuationForm = (req, res) => {
 controllerValuation.addValuation = (req, res) => {
     req.session.user = { id: 39, nombre: '2', email: '2' };
     const usuario = req.session.user;
-
     let oldPath = req.files.imagen.path;
     let newPath = __dirname + '/../public/img_clientes/' + usuario.id + '-' + req.files.imagen.originalFilename;
     fs.rename(oldPath, newPath, function (err) {
@@ -67,7 +66,7 @@ controllerValuation.addValuation = (req, res) => {
             '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','${req.files.imagen.originalFilename}')`;
         connection.query(sql, (err, valuations) => {
             if (err) {
-                return res.send("error al valorar");
+            res.render('../views/errores/error409');
             }
             res.redirect('/zonacliente/valuations');
         })

@@ -4,7 +4,6 @@ const multipartMiddleware = multipart({ uploadDir: './src/public/img_clientes/' 
 
 
 const auth = function (req, res, next) {
-    console.log(req.session,next);
     if (req.session && req.session.admin){
         return next();
     } else {
@@ -28,9 +27,12 @@ router.get('/admin/users/delete/:id', adminControllerUser.delUser);
 router.get('/admin/contacts', adminControllerContact.selecContact);
 router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);
 router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);
-// VALORACIONES
+router.get('/admin/contacts/view/:id',adminControllerContact.answerContactForm);
+router.post('/admin/contacts/view/:id',adminControllerContact.answerContact);
+//VALORACIONES
 router.get('/admin/valuations', adminControllerValuation.selectValuation);
 router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);
+router.get('/admin/valuations/rates/add_auto', adminControllerValuation.addAutoRates);
 // router.get('/admin/valuations/assess/:id', adminControllerValuation.assessValuation); FALTAR POR HACER 
 // router.get('/admin/valuations/schedule/:id', adminControllerValuation.scheduleValuation); FALTA POR HACER 
 
@@ -47,11 +49,11 @@ router.get('/zonacliente', controllerUser.selectUser);
 router.get('/zonacliente/data/update/:id', controllerUser.viewsUser);
 router.post('/zonacliente/data/update/:id', controllerUser.editUser);
 //RECORDAR CONTRASEÑA
-// userRemPassController
 const controllerUserPass = require('../controllers/userRememberPass');
 router.get('/zonacliente/rememberpass',controllerUserPass.rememberPassForm);
 router.post('/zonacliente/rememberpass',controllerUserPass.rememberPass);
-// router.post('/zonacliente/rememberpass/update/:id',controllerUserPass.editPass);
+router.get('/zonacliente/rememberpass/update/:id', controllerUserPass.viewsUserPass);
+router.post('/zonacliente/rememberpass/update/:id',controllerUserPass.editPass);
 //VALORACIONES
 const controllerValuation = require('../controllers/valuationController');
 router.get('/zonacliente/valuations', controllerValuation.selectValuation);
@@ -69,11 +71,12 @@ router.post('/contact', controllerContact.addContact);
 
 
 
+
 // RUTAS COMUNES
 router.get('/admin', function (req, res) {
     res.render('admin/admin');
 });
-router.get('/', function (req, res) {
+router.get('/index', function (req, res) {
     res.render('../views/index');
 });
 
