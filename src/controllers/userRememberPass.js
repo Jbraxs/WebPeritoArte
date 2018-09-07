@@ -27,10 +27,7 @@ controllerUserPass.rememberPass = (req, res) => {
         res.redirect('/');
       } else {
         if (usuario = result[0]) {
-          console.log(result[0])
-
           req.session.notices = ['El email se ha enviado para reiniciar su contraseña. Por favor compruebe su carpeta de Spam']
-
 
           // //SERVIDOR EMAIL
           let smtpTransport = nodemailer.createTransport({

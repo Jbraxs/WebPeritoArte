@@ -35,12 +35,12 @@
     <div class="card-body">
         <form action="/admin/contacts/view/<%= data.id %>" method="POST">
         <div class="form-group">
-            <label>Nombre:</label>
-            <p class="form-control-static"><%= data.nombre%></p>
+            <label>Nombre:</label> <%= data.nombre%>
+            <input style="visibility:hidden" name="nombre" value="<%= data.nombre%>">
         </div>
         <div class="form-group">
-            <label>Email:</label>
-            <%= data.email %>
+            <label>Email:</label> <%= data.email %>
+            <input style="visibility:hidden" name="email" value="<%= data.email %>">
         </div>
         <div class="form-group">
             <label>Mensaje de Respuesta</label>

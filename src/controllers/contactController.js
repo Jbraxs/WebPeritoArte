@@ -49,7 +49,7 @@ controllerContact.addContact = (req, res) => {
           from: "pruebawebperitoarte@gmail.com",
           to: "pruebawebperitoarte@gmail.com",
           subject: "Alexis Navas - Perito | alexisnavas.com",
-          html:"Hola &nbsp;" + "Alexis" + ",<br>" + 'tienes una consulta de &nbsp' + data.nombre + 'en el formulario de contacto. <br>' + 'http://localhost:100/admin/contacts'
+          html:"Hola &nbsp;" + "Alexis" + ",<br>" + 'tienes una consulta de &nbsp;' + data.nombre + '&nbsp; en el formulario de contacto. <br>' + 'http://localhost:100/admin/contacts'
 				};
 				
         //FUNCION PARA ENVIAR EL EMAIL

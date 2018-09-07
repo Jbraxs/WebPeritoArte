@@ -1,16 +1,20 @@
-<div class="alert alert-primary" role="alert">
+<!-- MENSAJE DE ERRORES-->
+
+<!-- RECUPERAR CONTRASEÑA ERRORES-->
+
 <% if (messages.notices) { %>
 <% messages.notices.forEach(function(notices) { %>
+<div class="alert alert-primary" role="alert">
     <%= notices %>
 <% }) %>
-<% } %>
 </div>
+<% } %>
 
-
-<div class="alert alert-danger" role="alert">
 <% if (messages.errors) { %>
 <% messages.errors.forEach(function(errors) { %>
+<div class="alert alert-danger" role="alert">
     <%= errors %>
 <% }) %>
-<% } %>
 </div>
+<% } %>
+

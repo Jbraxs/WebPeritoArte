@@ -58,7 +58,7 @@ adminControllerContact.answerContact = (req,res)=>{
       }else {
         console.log(answer);
         data = answer
-        console.log(data);
+        
         
         
         //SERVIDOR EMAIL
@@ -74,11 +74,11 @@ adminControllerContact.answerContact = (req,res)=>{
 				//TEXTO Y ENVIO DE EMAIL PARA CLIENTE 
         let mailOptions = {
           from: "pruebawebperitoarte@gmail.com",
-          to: 'muydespacito@hotmail.com',
+          to: req.body.email,
           subject: "Alexis Navas - Perito | alexisnavas.com",
-          html:"Hola &nbsp;" + data.nombre +", <br> <br>" + data.respuesta
+          html:"Hola &nbsp;" + req.body.nombre +", <br> <br>" + req.body.respuesta
         };
-        console.log(data.email)
+        console.log(req.body.email);
         //FUNCION PARA ENVIAR EL EMAIL
         smtpTransport.sendMail(mailOptions, function(error, response) {
           if (error) {

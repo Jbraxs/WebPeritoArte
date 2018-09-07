@@ -69,7 +69,13 @@ controllerUser.register = (req, res) => {
 
 //CON ESTO ME REDIRECCIONA A LA PLANTILLA.
 controllerUser.loginForm = (req, res) => {
-  res.render("login");
+  let messagesLogin = {
+    email: req.session.email,
+    email2: req.session.email2,
+    pass: req.session.pass
+  };
+
+  res.render("login", {messagesLogin:messagesLogin});
 };
 // LOGIN DE USUARIO
 controllerUser.login = (req, res) => {
@@ -78,14 +84,19 @@ controllerUser.login = (req, res) => {
     connection.query(
       `SELECT * FROM usuario WHERE email = ?`, email, function(err, result) {
         if (err) {
-          res.render('../views/errores/errorlogin');
+          req.session.email = ['El email no coincide']
+          res.render('../views/errores/error409');
         }
         if (result == "") {
-           res.render('../views/errores/errorlogin');
+          req.session.email2 = ['Debe Completar el campo']
+          // res.render('../views/errores/error409');
+           
         } else {
           bcrypt.compare(req.body.password, result[0].password, function(err,iguales) {            
             if (err) {
-              res.render('../views/errores/errorlogin');
+              req.session.pass = ['La contraseña no coincide']
+              res.render('../views/errores/error409');
+     
             } else {
               if (iguales) {
                 req.session.user = {
@@ -98,7 +109,9 @@ controllerUser.login = (req, res) => {
                 }
                 res.redirect("/index_signin");
               } else {
-                res.render('../views/errores/errorlogin');
+                res.render('../views/errores/error409');
+                
+                //  res.render('../views/errores/error409');
               }
             }
           });
@@ -116,14 +129,14 @@ controllerUser.logout = (req, res) => {
     res.redirect('/login');
    
 };
-
-
+// 'SELECT * FROM usuario WHERE id = ? '
+// , DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us"
 //VER DATOS PERSONALES DE UN USUARIO
 controllerUser.selectUser = (req, res) => {
   req.session.user = { id: 39, nombre: '2', email: '2' };
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
-    connection.query('SELECT * FROM usuario WHERE id = ? ',usuario.id, (err, result) => {
+    connection.query("SELECT *, DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us WHERE id = ?",usuario.id, (err, result) => {
       if (err){
         res.json(err);
       }
