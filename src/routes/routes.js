@@ -31,10 +31,8 @@ router.get('/admin/contacts/view/:id',adminControllerContact.answerContactForm);
 router.post('/admin/contacts/view/:id',adminControllerContact.answerContact);
 //VALORACIONES
 router.get('/admin/valuations', adminControllerValuation.selectValuation);
-router.get('/admin/valuations/view/:id', adminControllerValuation.viewValuation);
 router.get('/admin/valuations/rates/add_auto', adminControllerValuation.addAutoRates);
-// router.get('/admin/valuations/assess/:id', adminControllerValuation.assessValuation); FALTAR POR HACER 
-// router.get('/admin/valuations/schedule/:id', adminControllerValuation.scheduleValuation); FALTA POR HACER 
+
 
 
 //CONTROLADORES DEL USUARIO
@@ -60,7 +58,8 @@ router.get('/zonacliente/valuations', controllerValuation.selectValuation);
 router.get('/zonacliente/valuations/add',multipartMiddleware, controllerValuation.addValuationForm);
 router.post('/zonacliente/valuations/add',multipartMiddleware, controllerValuation.addValuation);
 router.get('/zonacliente/valuations/delete/:id', controllerValuation.delValuation);
-// router.get('/zonacliente/valuations/assess/:id', controllerValuation.assessValuation);
+router.get('/zonacliente/valuations/estimate/:id', controllerValuation.estimateValuation);
+
 
 //CONTROLADORES DEL CONTACTO 
 //FORMULARIO DE CONTACTO

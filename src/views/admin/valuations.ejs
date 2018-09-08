@@ -20,7 +20,6 @@
                     <th scope="col">Comentario</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Conservación</th>
-                    <th scope="col">Acción</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -48,7 +47,7 @@
                             <%= valuations[i].tamanio %>
                         </td>
                         <td>
-                            <%= valuations[i].firmado %>
+                           <%= (valuations[i].firmado) ? 'Si' : 'No' %>
                         </td>
                         <td>
                             <%= valuations[i].comentario %>
@@ -58,9 +57,6 @@
                         </td>
                         <td>
                             <%= valuations[i].conservacion %>
-                        </td>
-                        <td>
-                            <a href="/admin/valuations/view/<%= valuations[i].id %>" class="btn btn-danger">Ver</a>
                         </td>
                       </tr>
                       <% } %>

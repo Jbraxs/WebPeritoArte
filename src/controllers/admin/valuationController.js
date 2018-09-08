@@ -27,58 +27,52 @@ adminControllerValuation.selectValuation = (req, res) => {
         })
     })
 };
-//VISTA DE UNA VALORACION 
-adminControllerValuation.viewValuation = (req, res) => {
-    const { id } = req.params;
-    req.getConnection((err, connection) => {
-        connection.query("SELECT * FROM objeto where id = ?", [id], (err, rows) => {
-            res.render("../views/admin/valuations_view", {
-                data: rows[0]
-            });
-        });
-    });
-};
+
 adminControllerValuation.addAutoRates = (req, res) => {
     req.getConnection((err, connection) => {
-        // OBTENGO LA INFORMACIÓN DE DB
-        connection.query("SELECT * FROM categoria", (err, categorias) => {
-            connection.query("SELECT * FROM conservacion", (err, conservaciones) => {
-                connection.query("SELECT * FROM tamanio", (err, tamanios) => {
-                    connection.query("SELECT * FROM tecnica", (err, tecnicas) => {
-                        connection.query("SELECT * FROM tipo_objeto", (err, tipos) => {
-                            // RECORRO LA INFORMACIÓN
-                            categorias.forEach(function (cat) {
-                                conservaciones.forEach(function (con) {
-                                    tamanios.forEach(function (tam) {
-                                        if (tam.idCategoria == cat.id) {
-                                            tecnicas.forEach(function (tec) {
-                                                if (tec.idCategoria == cat.id) {
-                                                    tipos.forEach(function (tip) {
-                                                        if (tip.idCategoria == cat.id) {
-                                                            // INICIA LA ORQUILLA ECONOMICA
-                                                            valMin = Math.floor(Math.random() * (3000 - 100)) + 100; // VALOR MINIMO ALEATORIO
-                                                            valS = Math.floor((Math.random() * (9 - 1)) + 1) * 100; // DIFERENCIA ENTRE EL MAX Y MIN
-                                                            valMax = valMin + valS; // VALOR MAX 
-                                                            valor = valMin + ' € - ' + valMax + ' €'; // ORQUILLA ECONOMICA
+        if (false) {
+            // OBTENGO LA INFORMACIÓN DE DB
+            connection.query("SELECT * FROM categoria", (err, categorias) => {
+                connection.query("SELECT * FROM conservacion", (err, conservaciones) => {
+                    connection.query("SELECT * FROM tamanio", (err, tamanios) => {
+                        connection.query("SELECT * FROM tecnica", (err, tecnicas) => {
+                            connection.query("SELECT * FROM tipo_objeto", (err, tipos) => {
+                                // RECORRO LA INFORMACIÓN
+                                categorias.forEach(function (cat) {
+                                    console.log('recorriendo categoria ' + cat.id);
+                                    conservaciones.forEach(function (con) {
+                                    console.log('recorriendo conservacion ' + con.id);
+                                        tamanios.forEach(function (tam) {
+                                            if (tam.idCategoria == cat.id) {
+                                                tecnicas.forEach(function (tec) {
+                                                    if (tec.idCategoria == cat.id) {
+                                                        tipos.forEach(function (tip) {
+                                                            if (tip.idCategoria == cat.id) {
+                                                                // INICIA LA ORQUILLA ECONOMICA
+                                                                valMin = Math.floor(Math.random() * (3000 - 100)) + 100; // VALOR MINIMO ALEATORIO
+                                                                valS = Math.floor((Math.random() * (9 - 1)) + 1) * 100; // DIFERENCIA ENTRE EL MAX Y MIN
+                                                                valMax = valMin + valS; // VALOR MAX 
+                                                                valor = valMin + ' € - ' + valMax + ' €'; // ORQUILLA ECONOMICA
 
-                                                            let sql = 'INSERT INTO tarifa(idCategoria, idConservacion, idTamanio, idTecnica, idTipoObjeto, valor) '
-                                                            sql += `VALUES(${cat.id},${con.id},${tam.id},${tec.id},${tip.id},"${valor}")`
+                                                                let sql = 'INSERT INTO tarifa(idCategoria, idConservacion, idTamanio, idTecnica, idTipoObjeto, valor) '
+                                                                sql += `VALUES(${cat.id},${con.id},${tam.id},${tec.id},${tip.id},"${valor}")`
 
-                                                            connection.query(sql);
-                                                        }
-                                                    })
-                                                }
-                                            })
-                                        }
+                                                                connection.query(sql);
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                            }
+                                        })
                                     })
                                 })
-                            })
-                            console.log('Fin de inserción de tarifas');
+                                console.log('Fin de inserción de tarifas');
+                            });
                         });
                     });
                 });
             });
-        });
+        }
     });
 }
 

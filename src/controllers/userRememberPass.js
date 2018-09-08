@@ -13,6 +13,9 @@ controllerUserPass.rememberPassForm = (req, res) => {
     errors: req.session.errors
   };
 
+//  req.session.notices = {}
+//  req.session.errors = {}
+
   res.render("zonacliente/remember_pass", { messages: messages });
 };
 

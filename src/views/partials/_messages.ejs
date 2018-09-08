@@ -3,12 +3,13 @@
 <!-- RECUPERAR CONTRASEÑA ERRORES-->
 
 <% if (messages.notices) { %>
-<% messages.notices.forEach(function(notices) { %>
 <div class="alert alert-primary" role="alert">
+<% messages.notices.forEach(function(notices) { %>
     <%= notices %>
 <% }) %>
 </div>
 <% } %>
+
 
 <% if (messages.errors) { %>
 <% messages.errors.forEach(function(errors) { %>
@@ -17,4 +18,5 @@
 <% }) %>
 </div>
 <% } %>
+
 

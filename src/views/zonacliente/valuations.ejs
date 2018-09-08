@@ -20,6 +20,8 @@
               <td>Comentario</td>
               <td>Imagen</td>
               <td>Conservación</td>
+              <td>Valor estimado</td>
+              <td>Acciones</td>
             </tr>
           </thead>
           <tbody>
@@ -31,14 +33,18 @@
                   <td><%= valuations[i].tipo_objeto %></td>
                   <td><%= valuations[i].tecnica %></td>
                   <td><%= valuations[i].tamanio %></td>
-                  <td><%= valuations[i].firmado %></td>
+                  <td><%= (valuations[i].firmado) ? 'Si' : 'No' %></td>
                   <td><%= valuations[i].comentario %></td>
                   <td><%= valuations[i].imagen %></td>
                   <td><%= valuations[i].conservacion %></td> 
-                </tr>
+                  <td><%= valuations[i].valor_estimativo %></td> 
                   <td>
+                    <% if (valuations[i].valor_estimativo == null) { %>
+                    <a href="/zonacliente/valuations/estimate/<%= valuations[i].id %>" class="btn btn-info">Estimar</a>
+                    <% } %>
                     <a href="/zonacliente/valuations/delete/<%= valuations[i].id %>" class="btn btn-info">Eliminar</a>
                   </td>
+                </tr>
                 <% } %>
               </tbody>
             </table>

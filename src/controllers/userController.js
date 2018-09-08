@@ -69,13 +69,12 @@ controllerUser.register = (req, res) => {
 
 //CON ESTO ME REDIRECCIONA A LA PLANTILLA.
 controllerUser.loginForm = (req, res) => {
-  let messagesLogin = {
-    email: req.session.email,
-    email2: req.session.email2,
-    pass: req.session.pass
-  };
-
-  res.render("login", {messagesLogin:messagesLogin});
+  let messages2 = {
+    emailNotValid: req.session.emailNotValid,
+    emptyField: req.session.emptyField,
+    passError: req.session.passError
+  }
+  res.render("login", {messages2 : messages2});
 };
 // LOGIN DE USUARIO
 controllerUser.login = (req, res) => {
@@ -84,18 +83,18 @@ controllerUser.login = (req, res) => {
     connection.query(
       `SELECT * FROM usuario WHERE email = ?`, email, function(err, result) {
         if (err) {
-          req.session.email = ['El email no coincide']
-          res.render('../views/errores/error409');
+          req.session.emailNotValid = ['El email introducido no es valido']
+          res.render('../views/errores/errorlogin');
         }
         if (result == "") {
-          req.session.email2 = ['Debe Completar el campo']
-          // res.render('../views/errores/error409');
+          req.session.emptyField = ['Por favor complete el campo']
+          res.render('../views/errores/errorlogin');
            
         } else {
           bcrypt.compare(req.body.password, result[0].password, function(err,iguales) {            
             if (err) {
-              req.session.pass = ['La contraseña no coincide']
-              res.render('../views/errores/error409');
+              req.session.passError = ['Contraseña Incorrecta']
+              res.render('../views/errores/errorlogin');
      
             } else {
               if (iguales) {
@@ -110,8 +109,6 @@ controllerUser.login = (req, res) => {
                 res.redirect("/index_signin");
               } else {
                 res.render('../views/errores/error409');
-                
-                //  res.render('../views/errores/error409');
               }
             }
           });

@@ -6,7 +6,6 @@ DATOS DE UN CLIENTE, ZONA CLIENTE
         <table class="table table-bordered table-hover">
           <thead>
             <tr>
-              <td>id</td>
               <td>Nombre</td>
               <td>Apellido</td>
               <td>Télefono</td>
@@ -21,9 +20,6 @@ DATOS DE UN CLIENTE, ZONA CLIENTE
               <% for(var i = 0; i < data.length; i++) { %>
                 <tr>
                   <td>
-                    <%= data[i].id %>
-                  </td>
-                  <td>
                     <%= data[i].nombre %>
                   </td>
                   <td>
@@ -36,7 +32,7 @@ DATOS DE UN CLIENTE, ZONA CLIENTE
                     <%= data[i].codigoPostal %>
                   </td>
                   <td>
-                    <%= data[i].fechaNacimiento %>
+                    <%= data[i].fechaNac %>
              
                   </td>
                   <td>

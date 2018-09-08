@@ -7,7 +7,7 @@ const fs = require('fs');
 
 //CONSULTA LAS VALORACIONES REALIZADAS
 controllerValuation.selectValuation = (req, res) => {
-    let sql = 'SELECT obj.id, obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,'
+    let sql = 'SELECT obj.id, obj.valor_estimativo, obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,'
     sql += 'tip.nombre as tipo_objeto, tam.medida as tamanio, est.nombre as estado, con.nombre as conservacion, '
     sql += 'obj.firmado, obj.comentario, obj.imagen '
     sql += 'FROM alexis_navas.objeto obj '
@@ -59,14 +59,14 @@ controllerValuation.addValuation = (req, res) => {
     let oldPath = req.files.imagen.path;
     let newPath = __dirname + '/../public/img_clientes/' + usuario.id + '-' + req.files.imagen.originalFilename;
     fs.rename(oldPath, newPath, function (err) {
-     });
+    });
     req.getConnection((err, connection) => {
         let sql = `INSERT INTO objeto (idUsuario,nombre,idCategoria,idTipoObjeto,idTecnica,idTamanio,firmado,comentario,IdConservacion,idEstadoPeritaje,imagen) VALUES 
             ('${usuario.id}','${req.body.nombre}','${req.body.categoria_id}','${req.body.tipoObjeto_id}','${req.body.tecnica_id}','${req.body.tamanio_id}',
             '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','${req.files.imagen.originalFilename}')`;
         connection.query(sql, (err, valuations) => {
             if (err) {
-            res.render('../views/errores/error409');
+                res.render('../views/errores/error409');
             }
             res.redirect('/zonacliente/valuations');
         })
@@ -82,6 +82,58 @@ controllerValuation.delValuation = (req, res) => {
     });
 
 };
+// ESTIMAR VALORACION
+controllerValuation.estimateValuation = (req, res) => {
+    let usuario = req.session.user;
+    const { id } = req.params;
+    req.getConnection((err, connection) => {
+        connection.query(`SELECT * FROM objeto WHERE id = ?`, [id], (err, result) => {
+            objeto = result[0]
+            sql = `SELECT * FROM tarifa WHERE idCategoria = ${objeto.idCategoria} AND idConservacion = ${objeto.idConservacion} AND idTamanio = ${objeto.idTamanio} AND idTecnica = ${objeto.idTecnica} AND idTipoObjeto = ${objeto.idTipoObjeto}`
+            connection.query(sql, (err, result2) => {
+                tarifa = result2[0]
+                console.log(sql, tarifa);
+                connection.query(`UPDATE objeto set valor_estimativo = '${tarifa.valor}' where id = ?`, [id], (err, result3) => {
+                    if (err) {
+                        res.render('../views/errores/error409');
+                    }
+            //                      //SERVIDOR EMAIL 
+            // let smtpTransport = nodemailer.createTransport({
+            //     host:'smtp.gmail.com',
+            //     port:465,
+            //     secure:true,
+            //     auth: {
+            //       user: "pruebawebperitoarte@gmail.com",
+            //       pass: "pruebawebperitoarte12345"
+            //     }
+            //     });
+            //     //TEXTO Y ENVIO DE EMAIL
+            //     let mailOptions = {
+            //     from: "pruebawebperitoarte@gmail.com",
+            //     to: dato.email,
+            //     subject: "Alexis Navas - Perito | alexisnavas.com",
+            //     html: 'Hola &nbsp;' + dato.nombre + ', <br> <br>' + 'Recuerda que en tu zona cliente, puedes realizar la valoracion económica que necesites. <br><br>' 
+            //     + 'Gracias por registrarte.' 
+            //     };
+            //     //FUNCION PARA ENVIAR EL EMAIL
+            //     smtpTransport.sendMail(mailOptions, function(error, response) {
+            //     if (error) {
+            //       console.log(error);
+            //     } else {
+            //       console.log('El correo se envio correctamente');
+            //     }
+            //     });
+            //     //CIERRO EL ENVIO DEL EMIAL
+            //     smtpTransport.close();
+  
+                    console.log(result3);
+                    res.redirect("/zonacliente/valuations");
+                })
+            })
+        })
+    })
+}
+
 
 
 
