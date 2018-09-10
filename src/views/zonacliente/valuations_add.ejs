@@ -67,26 +67,21 @@
     var tipo_objetos = <%- JSON.stringify(tipo_objetos) %> // No se si lo permite una variable con _
     var tecnicas = <%- JSON.stringify(tecnicas) %>
     var tamanios = <%- JSON.stringify(tamanios) %>
-
     // Obtengo el select
     var categoria = document.getElementById('categoria_id');
-
     // Asigno los cambios al evento onchange de la categoría
     categoria.onchange = function () {
     // Obtengo los select a modificar
     tipo_objeto = document.getElementById('tipoObjeto_id');
     tecnica = document.getElementById('tecnica_id'); 
     tamanio = document.getElementById('tamanio_id');
-
     // Agrego los options en blanco    
     tip_ops = '<option value=""></option>';    
     tec_ops = '<option value=""></option>';
     tam_ops = '<option value=""></option>';
-
     // Si seleccioné una categoría poblaré los select
     // sino los dejaré solo con la opción vacía
     if (categoria.value != "") {
-
         // Recorro todos las colecciones y sólo agrego las opciones
         // que sean de la categoría seleccionada
         tipo_objetos.forEach(function (ti) {
@@ -105,12 +100,9 @@
             }
         });
     }
-
-
     // Asigno las opciones a cada select
     tipo_objeto.innerHTML = tip_ops;
     tamanio.innerHTML = tam_ops;
     tecnica.innerHTML = tec_ops;
-
     }
 </script>

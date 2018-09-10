@@ -23,8 +23,11 @@ controllerValuation.selectValuation = (req, res) => {
             if (err) {
                 res.json(err);
             }
+        
+            // agregar usuario con campo isSuperAdmin para que tome el menu
             res.render("zonacliente/valuations", {
-                valuations: valuations
+                valuations: valuations,
+                usuario: req.session.user
             })
         })
     })
@@ -66,8 +69,10 @@ controllerValuation.addValuation = (req, res) => {
             '${req.body.firmado_id}','${req.body.comentario}','${req.body.conservacion_id}','1','${req.files.imagen.originalFilename}')`;
         connection.query(sql, (err, valuations) => {
             if (err) {
+             console.log(err);
                 res.render('../views/errores/error409');
             }
+            console.log(valuations);
             res.redirect('/zonacliente/valuations');
         })
     })

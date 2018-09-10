@@ -1,0 +1,55 @@
+<% include ../partials/_header %>
+<% include ../partials/_bar %>
+<% include ../partials/_nav %>
+
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row">
+            <div class="register-box">
+                <div class="register-box-body">
+                    <p class="login-box-msg">Rellene el Formulario de Contacto</p>
+                    <form action="/zonacliente/contact" method="POST">
+                        <div class="form-group has-feedback">
+                            <label>Nombre</label>
+                            <input type="text" name="nombre" class="form-control">
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label>Apellido</label>
+                            <input type="text" name="apellido" class="form-control">
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label>Email</label>
+                            <input type="text" name="email" class="form-control">
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label>Teléfono</label>
+                            <input type="text" name="telefono" class="form-control">
+                        </div>
+                        <div class="form-group has-feedback">
+                            <label>Comentario</label>
+                            <textarea name="comentario" rows="4" cols="25" class="form-control">Deje su mensaje</textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="checkbox"> He leído y acepto los<a href="#"> términos y
+                                            condiciones de uso</a>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<% include ../partials/_footer %>

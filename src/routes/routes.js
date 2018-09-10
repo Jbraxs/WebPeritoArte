@@ -43,9 +43,11 @@ router.post('/register', controllerUser.register);
 router.get('/login', controllerUser.loginForm);
 router.post('/login', controllerUser.login);
 router.get('/logout', controllerUser.logout);
-router.get('/zonacliente', controllerUser.selectUser);
+router.get('/zonacliente/user', controllerUser.selectUser);
 router.get('/zonacliente/data/update/:id', controllerUser.viewsUser);
 router.post('/zonacliente/data/update/:id', controllerUser.editUser);
+router.get('/zonacliente/contact', controllerUser.addContactForm);
+router.post('/zonacliente/contact', controllerUser.addContact);
 //RECORDAR CONTRASEÑA
 const controllerUserPass = require('../controllers/userRememberPass');
 router.get('/zonacliente/rememberpass',controllerUserPass.rememberPassForm);
@@ -74,6 +76,12 @@ router.post('/contact', controllerContact.addContact);
 // RUTAS COMUNES
 router.get('/admin', function (req, res) {
     res.render('admin/admin');
+});
+router.get('/prueba', function (req, res) {
+    res.render('zonacliente/prueba');
+});
+router.get('/zonacliente', function (req, res) {
+    res.render('zonacliente/zonacliente');
 });
 router.get('/index', function (req, res) {
     res.render('../views/index');

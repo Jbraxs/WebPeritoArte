@@ -1,62 +1,73 @@
-<% include ../partials/_headeradmin %>
+<% include ../partials/_header %>
+<% include ../partials/_bar %>
+<% include ../partials/_nav %>
 
- <div class="container mt-5">
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <h4>Usuarios Registrados</h4>
+  </section>
+  <section class="content">
     <div class="row">
-      <div class="col-md-12">
-        <div class="clearfix mb-3">
-          <div class="table-responsive-md">
-            <table class="table table-hover table-responsive-sm">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+          </div>
+          <div class="box-body">
+            <table id="usuarios" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Apellido</th>
-                  <th scope="col">Teléfono</th>
-                  <th scope="col">Código Postal</th>
-                  <th scope="col">Fecha de Nacimiento</th>
-                  <th scope="col">Email</th>
-                  <th scope="col"><a href="./users/add" class="btn btn-info buttons">Resistrar Usuario</a></th>
+                  <th>ID <i class="fas fa-arrows-alt-v"></i></th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Teléfono</th>
+                  <th>Código Postal</th>
+                  <th>Fecha de Nacimiento</th>
+                  <th>Email</th>
+                  <th>Acción</th>
                 </tr>
               </thead>
               <tbody>
                 <% if (data) { %>
-                  <% for(var i = 0; i < data.length; i++) { %>
-                    <tr class="table-secondary">
-                      <td>
-                        <%= data[i].id %>
-                      </td>
-                      <td>
-                        <%= data[i].nombre %>
-                      </td>
-                      <td>
-                        <%= data[i].apellido %>
-                      </td>
-                      <td>
-                        <%= data[i].telefono %>
-                      </td>
-                      <td>
-                        <%= data[i].codigoPostal %>
-                      </td>
-                      <td>
-                        <%= data[i].fechaNac %>
-                      </td>
-                      <td>
-                        <%= data[i].email %>
-                      </td>
-                      <td>
-                        <a href="/admin/users/update/<%= data[i].id %>" class="btn btn-info btn-sm">Modificar</a>
-                        <a href="/admin/users/delete/<%= data[i].id %>" class="btn btn-danger btn-sm">Eliminar</a>
-
-                      </td>
-                    </tr>
-                    <% } %>
-                      <% } %>
+                <% for(var i = 0; i < data.length; i++) { %>
+                <tr>
+                  <td>
+                    <%= data[i].id %>
+                  </td>
+                  <td>
+                    <%= data[i].nombre %>
+                  </td>
+                  <td>
+                    <%= data[i].apellido %>
+                  </td>
+                  <td>
+                    <%= data[i].telefono %>
+                  </td>
+                  <td>
+                    <%= data[i].codigoPostal %>
+                  </td>
+                  <td>
+                    <%= data[i].fechaNac %>
+                  </td>
+                  <td>
+                    <%= data[i].email %>
+                  </td>
+                  <td>
+                    <a href="/admin/users/update/<%= data[i].id %>" class="btn btn-info btn-sm">Modificar</a>
+                    <a href="/admin/users/delete/<%= data[i].id %>" class="btn btn-danger btn-sm">Eliminar</a>
+                  </td>
+                </tr>
+                <% } %>
+                <% } %>
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+</div>
 
-  <% include ../partials/_footer %>
+
+
+<% include ../partials/_footer %>

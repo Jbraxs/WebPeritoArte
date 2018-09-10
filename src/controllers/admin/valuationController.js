@@ -6,7 +6,7 @@ const adminControllerValuation = {};
 
 //CONSULTA TODAS LAS VALORACIONES DE LOS CLIENTES
 adminControllerValuation.selectValuation = (req, res) => {
-    let sql = 'SELECT obj.id, obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,'
+    let sql = 'SELECT obj.id, valor_estimativo,obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,'
     sql += 'tip.nombre as tipo_objeto, tam.medida as tamanio, est.nombre as estado, con.nombre as conservacion, '
     sql += 'obj.firmado, obj.comentario, obj.imagen '
     sql += 'FROM alexis_navas.objeto obj '

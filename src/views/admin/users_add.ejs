@@ -1,37 +1,54 @@
-<% include ../partials/_headeradmin %>
+<% include ../partials/_header %>
+<% include ../partials/_bar %>
+<% include ../partials/_nav %>
 
-<div class="container users_add mt-3">
-  <div class="page-header">
-    <h2>Registro de Clientes desde el panel de administrador</h2>
-  </div>
-  <form action="/register" method="POST">
-    <div class="form-group">
-      <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+<div class="content-wrapper">
+  <section class="content-header">
+    <h4>Registro de Usuarios</h4>
+  </section>
+  <div class="row">
+    <div class="col-md-6">
+      <section class="content">
+        <div class="box">
+          <div class="box-body">
+            <form action="/register" method="POST">
+              <div class="form-group">
+                <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="apellido" placeholder="Apellido" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" placeholder="Contraseña" class="form-control">
+              </div>
+              <div class="form-group">
+                  <input type="password" name="password" placeholder="Repetir Contraseña" class="form-control">
+                </div>
+              <div class="form-group">
+                <input type="text" name="telefono" placeholder="Teléfono" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="codigoPostal" placeholder="Código Postal" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="text" name="email" placeholder="Email" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary ">
+                Registrarme
+              </button>
+              <a href="/admin/users" class="btn btn-warning ">Volver</a>
+            </form>
+          </div>
+        </div>
+      </section>
     </div>
-    <div class="form-group">
-      <input type="text" name="apellido" placeholder="Apellido" class="form-control">
-    </div>
-    <div class="form-group">
-      <input type="text" name="password" placeholder="Contraseña" class="form-control">
-    </div>
-    <div class="form-group">
-      <input type="text" name="telefono" placeholder="Teléfono" class="form-control">
-    </div>
-    <div class="form-group">
-      <input type="text" name="codigoPostal" placeholder="Código Postal" class="form-control">
-    </div>
-    <div class="form-group">
-      <input type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento" class="form-control">
-    </div>
-    <div class="form-group">
-      <input type="text" name="email" placeholder="Email" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary ">
-      Registrarme
-    </button>
-    <a href="/admin/users" class="btn btn-primary ">Volver</a>
-  </form>
   </div>
 </div>
 
-  <% include ../partials/_footer %>
+
+
+
+<% include ../partials/_footer %>

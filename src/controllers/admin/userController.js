@@ -32,8 +32,8 @@ adminControllerUser.addUser = (req, res) => {
   let data = req.body;
   let fecha = data.fechaNacimiento.split("/");
   data.fechaNacimiento = fecha[2] + "/" + fecha[1] + "/" + fecha[0];
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(data.password, salt, null, function(err, hash) {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(data.password, salt, null, function (err, hash) {
       data.password = hash;
       console.log(hash);
       req.getConnection((err, connection) => {
@@ -70,7 +70,7 @@ adminControllerUser.addUser = (req, res) => {
             };
 
             //FUNCION PARA ENVIAR EL EMAIL
-            smtpTransport.sendMail(mailOptions, function(error, response) {
+            smtpTransport.sendMail(mailOptions, function (error, response) {
               if (error) {
                 console.log(error);
               } else {
@@ -109,17 +109,18 @@ adminControllerUser.viewsUser = (req, res) => {
 adminControllerUser.editUser = (req, res) => {
   const { id } = req.params;
   const newUsuario = req.body;
-  req.getConnection((err, connection) => {
-    connection.query(
-      "UPDATE usuario set ? where id = ?",
-      [newUsuario, id],
-      (err, rows) => {
-        res.redirect("/admin/users");
-      }
-    );
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(newUsuario.password, salt, null, function (err, hash) {
+      newUsuario.password = hash;
+      req.getConnection((err, connection) => {
+        connection.query("UPDATE usuario set ? where id = ?", [newUsuario, id], (err, rows) => {
+          res.redirect("/admin/users");
+        });
+      });
+    });
   });
 };
-//ELIMINA DATOS
+
 adminControllerUser.delUser = (req, res) => {
   const { id } = req.params;
   req.getConnection((err, connection) => {
@@ -128,5 +129,8 @@ adminControllerUser.delUser = (req, res) => {
     });
   });
 };
+
+
+
 
 module.exports = adminControllerUser;

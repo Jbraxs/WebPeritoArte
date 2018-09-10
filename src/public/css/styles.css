@@ -1,3 +1,8 @@
-.users_add {
-    width: 50%;
-}
+body {
+    font-family: 'Acme', sans-serif;   
+  }
+.logo-lg {
+    text-align: left; 
+    font-family: 'Acme', sans-serif;
+    color: #b8c7ce;
+  }

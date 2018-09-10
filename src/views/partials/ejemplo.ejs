@@ -1,0 +1,47 @@
+<!-- Left side column. contains the sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">Menú</li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+          </ul>
+        </li>
+        <% if (usuario.isSuperAdmin) { %>
+        <li class="treeview">
+          <a href="#">
+          <i class="fas fa-users"></i>
+          <!--AQUI VA LAS OPCIONES DE LOS USUARIO-->
+            <span>Usuarios</span>
+          </a>
+          <!-- AQUI PONGO LOS ENCALES A VER, MODUFICIAR Y TODO LO RESPECTIVO A LOS USUARIOS-->
+          <ul class="treeview-menu">
+            <li><a href="../admin/users"><i class="fas fa-eye"></i> Ver usuarios</a></li>
+            <li><a href="../layout/boxed.html"><i class="fas fa-edit"></i> Modificar</a></li>
+            <li><a href="../layout/fixed.html"><i class="fas fa-plus-circle"></i> Registrar</a></li>
+          </ul>
+        </li>
+        <% } else { %>
+        <li>
+          <a href="../widgets.html">
+            <i class="fa fa-th"></i> <span>Widgets</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">Hot</small>
+            </span>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>

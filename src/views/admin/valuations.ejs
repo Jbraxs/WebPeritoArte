@@ -1,74 +1,88 @@
-<% include ../partials/_headeradmin %>
+<% include ../partials/_header %>
+<% include ../partials/_bar %>
+<% include ../partials/_nav %>
 
-<div class="container mt-5 ml-2">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="clearfix mb-5">
-            <div class="table-responsive-md">
-                <% if (valuations.length > 0) { %>
-              <table class="table table-hover table-responsive-sm">
-                <thead>
-                  <tr>
-                    <th scope="col">Nº</th>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Categoría</th>
-                    <th scope="col">Tipo de Objeto</th>
-                    <th scope="col">Técnica</th>
-                    <th scope="col">Tamaño</th>
-                    <th scope="col">Firmado</th>
-                    <th scope="col">Comentario</th>
-                    <th scope="col">Imagen</th>
-                    <th scope="col">Conservación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <% for(var i = 0; i < valuations.length; i++) { %>
-                      <tr class="table-secondary">
-                        <td>
-                            <%= valuations[i].id %>
-                        </td>
-                        <td>
-                            <%= valuations[i].idUsuario %>
-                        </td>
-                        <td>
-                            <%= valuations[i].nombre %>
-                        </td>
-                        <td>
-                            <%= valuations[i].categoria %>
-                        </td>
-                        <td>
-                            <%= valuations[i].tipo_objeto %>
-                        </td>
-                        <td>
-                            <%= valuations[i].tecnica %>
-                        </td>
-                        <td>
-                            <%= valuations[i].tamanio %>
-                        </td>
-                        <td>
-                           <%= (valuations[i].firmado) ? 'Si' : 'No' %>
-                        </td>
-                        <td>
-                            <%= valuations[i].comentario %>
-                        </td>
-                        <td>
-                            <%= valuations[i].imagen %>
-                        </td>
-                        <td>
-                            <%= valuations[i].conservacion %>
-                        </td>
-                      </tr>
-                      <% } %>
-                </tbody>
-              </table>
-              <% } else {%>
-                usted no tiene Valoracion
-                <% } %>
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h4>Valoraciones realizadas y estimadas</h4>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                         </div>
+                    <div class="box-body">
+                        <% if (valuations.length > 0) { %>
+                        <table id="usuarios" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nº <i class="fas fa-arrows-alt-v"></i></th>
+                                    <th>Nombre</th>
+                                    <th>Categoría</th>
+                                    <th>Tipo de Objeto</th>
+                                    <th>Técnica</th>
+                                    <th>Tamaño</th>
+                                    <th>Firmado</th>
+                                    <th>Comentario</th>
+                                    <th>Imagen</th>
+                                    <th>Conservación</th>
+                                    <th>Valor estimado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < valuations.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= valuations[i].id %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].nombre %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].categoria %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].tipo_objeto %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].tecnica %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].tamanio %>
+                                    </td>
+                                    <td>
+                                        <%= (valuations[i].firmado) ? 'Si' : 'No' %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].comentario %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].imagen %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].conservacion %>
+                                    </td>
+                                    <td>
+                                        <%= valuations[i].valor_estimativo %>                                    
+                                    <% if (valuations[i].valor_estimativo == null) { %><% } %>
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <% } else {%>
+                           Aun no existen Valoraciones Insertadas
+                        <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
 
-  <% include ../partials/_footer %>
+
+<% include ../partials/_footer %>
