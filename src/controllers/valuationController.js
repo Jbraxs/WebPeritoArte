@@ -4,6 +4,7 @@
 
 const controllerValuation = {};
 const fs = require('fs');
+let nodemailer = require("nodemailer");
 
 //CONSULTA LAS VALORACIONES REALIZADAS
 controllerValuation.selectValuation = (req, res) => {
@@ -97,41 +98,39 @@ controllerValuation.estimateValuation = (req, res) => {
             sql = `SELECT * FROM tarifa WHERE idCategoria = ${objeto.idCategoria} AND idConservacion = ${objeto.idConservacion} AND idTamanio = ${objeto.idTamanio} AND idTecnica = ${objeto.idTecnica} AND idTipoObjeto = ${objeto.idTipoObjeto}`
             connection.query(sql, (err, result2) => {
                 tarifa = result2[0]
-                console.log(sql, tarifa);
                 connection.query(`UPDATE objeto set valor_estimativo = '${tarifa.valor}' where id = ?`, [id], (err, result3) => {
                     if (err) {
                         res.render('../views/errores/error409');
                     }
-            //                      //SERVIDOR EMAIL 
-            // let smtpTransport = nodemailer.createTransport({
-            //     host:'smtp.gmail.com',
-            //     port:465,
-            //     secure:true,
-            //     auth: {
-            //       user: "pruebawebperitoarte@gmail.com",
-            //       pass: "pruebawebperitoarte12345"
-            //     }
-            //     });
-            //     //TEXTO Y ENVIO DE EMAIL
-            //     let mailOptions = {
-            //     from: "pruebawebperitoarte@gmail.com",
-            //     to: dato.email,
-            //     subject: "Alexis Navas - Perito | alexisnavas.com",
-            //     html: 'Hola &nbsp;' + dato.nombre + ', <br> <br>' + 'Recuerda que en tu zona cliente, puedes realizar la valoracion económica que necesites. <br><br>' 
-            //     + 'Gracias por registrarte.' 
-            //     };
-            //     //FUNCION PARA ENVIAR EL EMAIL
-            //     smtpTransport.sendMail(mailOptions, function(error, response) {
-            //     if (error) {
-            //       console.log(error);
-            //     } else {
-            //       console.log('El correo se envio correctamente');
-            //     }
-            //     });
-            //     //CIERRO EL ENVIO DEL EMIAL
-            //     smtpTransport.close();
-  
-                    console.log(result3);
+
+                    //SERVIDOR EMAIL 
+                let smtpTransport = nodemailer.createTransport({
+                host:'smtp.gmail.com',
+                port:465,
+                secure:true,
+                auth: {
+                  user: "pruebawebperitoarte@gmail.com",
+                  pass: "pruebawebperitoarte12345"
+                }
+                });
+                //TEXTO Y ENVIO DE EMAIL
+                let mailOptions = {
+                from: "pruebawebperitoarte@gmail.com",
+                to: 'jonatanbraxs@gmail.com',
+                subject: "Alexis Navas - Perito | alexisnavas.com",
+                html: 'Hola &nbsp;' + usuario.nombre + ', <br> <br>' + 'Tu estimación económica se ha realizado correctamente, el valor estimado es de &nbsp;' + tarifa.valor + '.<br><br>' + 'Si usted desea realizar el peritaje del artículo, puede respondernos al correo y en la mayor brevedad posible, el Dc. Alexis Navas contactara con usted.<br><br>' + 'Gracias realizar su estimación económica con nosotros.' 
+                };
+                //FUNCION PARA ENVIAR EL EMAIL
+                smtpTransport.sendMail(mailOptions, function(error, response) {
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('El correo se envio correctamente');
+                }
+                });
+                //CIERRO EL ENVIO DEL EMIAL
+                smtpTransport.close();
+                    console.log(usuario);
                     res.redirect("/zonacliente/valuations");
                 })
             })

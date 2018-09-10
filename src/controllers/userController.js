@@ -127,7 +127,6 @@ controllerUser.logout = (req, res) => {
    
 };
 // 'SELECT * FROM usuario WHERE id = ? '
-// , DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us"
 //VER DATOS PERSONALES DE UN USUARIO
 controllerUser.selectUser = (req, res) => {
   req.session.user = { id: 39, nombre: '2', email: '2' };
@@ -162,8 +161,6 @@ controllerUser.editUser = (req, res) => {
   const newUsuario = req.body;
   req.getConnection((err, connection) => {
     connection.query("UPDATE usuario set ? where id = ?",[newUsuario, id],(err, rows) => {
-      console.log(newUsuario);
-      console.log(err);
       res.redirect("/zonacliente/user");
       }
     );

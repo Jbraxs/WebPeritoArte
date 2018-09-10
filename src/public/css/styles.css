@@ -1,8 +1,29 @@
 body {
-    font-family: 'Acme', sans-serif;   
-  }
+  font-family: 'Acme', sans-serif;   
+}
 .logo-lg {
-    text-align: left; 
-    font-family: 'Acme', sans-serif;
-    color: #b8c7ce;
-  }
+  text-align: left; 
+  font-family: 'Acme', sans-serif;
+  color: #b8c7ce;
+}
+.valadd select{
+  width: 25%;    
+}
+.inputname{
+  width: 25%;    
+}
+.valadd label{
+  width: 25%;    
+}
+.valadd textarea{
+  width: 25%;
+}
+.v-a {
+  vertical-align: top;
+}
+.chelet{
+  font-size: 63%;
+}
+.btclass {
+  margin-right: 0%;
+}

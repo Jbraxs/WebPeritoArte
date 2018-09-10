@@ -17,7 +17,7 @@ const adminControllerUser = require('../controllers/admin/userController');
 const adminControllerContact = require('../controllers/admin/contactController');
 const adminControllerValuation = require('../controllers/admin/valuationController');
 // USUARIOS 
-router.get('/admin/users', adminControllerUser.selectUser);
+router.get('/admin/users',auth, adminControllerUser.selectUser);
 router.get('/admin/users/add', adminControllerUser.addUserForm);
 router.post('/admin/users/add', adminControllerUser.addUser);
 router.get('/admin/users/update/:id', adminControllerUser.viewsUser);
