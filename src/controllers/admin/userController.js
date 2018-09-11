@@ -8,7 +8,7 @@ let nodemailer = require("nodemailer");
 
 //MUESTRA LOS USUARIOS REGISTRADOS
 adminControllerUser.selectUser = (req, res) => {
-  // req.session.user = { id: 39, nombre: '2', email: '2' };
+  req.session.user = { id: 39, nombre: '2', email: '2' };
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query(
@@ -19,7 +19,8 @@ adminControllerUser.selectUser = (req, res) => {
         }
         res.render("admin/users", {
           data: clientes,
-          usuario: req.session.user
+          //borrar
+          // usuario: req.session.user
 
         });
       }
@@ -43,48 +44,16 @@ adminControllerUser.addUser = (req, res) => {
       req.getConnection((err, connection) => {
         connection.query("INSERT INTO usuario set ?", data, (err, result) => {
           if (err) {
+            
+            console.log(data);
+            console.log(req.session.user);
             res.render('../views/errores/error409');
           } else {
             //ASIGNO IDUSUARIO GUARDADO
             data.id = result.insertId;
             //ASIGNO DATOS DE USUARIO A LA SESION
             req.session.user = data;
-            //SERVIDOR EMAIL
-            let smtpTransport = nodemailer.createTransport({
-              host: "smtp.gmail.com",
-              port: 465,
-              secure: true,
-              auth: {
-                user: "pruebawebperitoarte@gmail.com",
-                pass: "pruebawebperitoarte12345"
-              }
-            });
-
-            //TEXTO Y ENVIO DE EMAIL
-            let mailOptions = {
-              from: "pruebawebperitoarte@gmail.com",
-              to: data.email,
-              subject: "Alexis Navas - Perito | alexisnavas.com",
-              html:
-                "Hola &nbsp;" +
-                data.nombre +
-                ", <br> <br>" +
-                "Recuerda que en tu zona cliente, puedes realizar la valoracion económica que necesites. <br><br>" +
-                "Gracias por registrarte."
-            };
-
-            //FUNCION PARA ENVIAR EL EMAIL
-            smtpTransport.sendMail(mailOptions, function(error, response) {
-              if (error) {
-                console.log(error);
-              } else {
-                console.log("El correo se envio correctamente");
-              }
-            });
-
-            //CIERRO EL ENVIO DEL EMIAL
-            smtpTransport.close();
-
+            
             //REDIRECCIONO A LA RUTA
             res.redirect("./index_signin");
           }
@@ -97,7 +66,7 @@ adminControllerUser.addUser = (req, res) => {
 //VISTA LOS DATOS A MODIFICAR
 adminControllerUser.viewsUser = (req, res) => {
   req.session.user = { id: 85, nombre: '3', email: '3' }// Borrar
-          const { id } = req.params;
+  const { id } = req.params;
   req.getConnection((err, connection) => {
     connection.query(
       "SELECT * FROM usuario WHERE id = ?",
@@ -105,34 +74,67 @@ adminControllerUser.viewsUser = (req, res) => {
       (err, rows) => {
         res.render("./admin/user_edit", {
           data: rows[0],
-          usuario: req.session.user
+          //borrar
+          // usuario: req.session.user
         });
       }
-    );
-  });
-};
-//MODIFICA LOS DATOS
-adminControllerUser.editUser = (req, res) => {
-  const { id } = req.params;
-  const newUsuario = req.body;
-  req.getConnection((err, connection) => {
-    connection.query(
-      "UPDATE usuario set ? where id = ?",
-      [newUsuario, id],
-      (err, rows) => {
-        res.redirect("/admin/users");
-      }
-    );
-  });
-};
-//ELIMINA DATOS
-adminControllerUser.delUser = (req, res) => {
-  const { id } = req.params;
-  req.getConnection((err, connection) => {
-    connection.query("DELETE FROM usuario WHERE id = ?", [id], (err, rows) => {
-      res.redirect("/admin/users");
+      );
     });
-  });
-};
-
-module.exports = adminControllerUser;
+  };
+  //MODIFICA LOS DATOS
+  adminControllerUser.editUser = (req, res) => {
+    const { id } = req.params;
+    const newUsuario = req.body;
+    req.getConnection((err, connection) => {
+      connection.query("UPDATE usuario set ? where id = ?",[newUsuario, id],   (err, rows) => {
+          res.redirect("/admin/users");
+        }
+        );
+      });
+    };
+    //ELIMINA DATOS
+    adminControllerUser.delUser = (req, res) => {
+      const { id } = req.params;
+      req.getConnection((err, connection) => {
+        connection.query("DELETE FROM usuario WHERE id = ?", [id], (err, rows) => {
+          res.redirect("/admin/users");
+        });
+      });
+    };
+    
+    module.exports = adminControllerUser;
+    
+    // //SERVIDOR EMAIL
+    // let smtpTransport = nodemailer.createTransport({
+      //   host: "smtp.gmail.com",
+      //   port: 465,
+      //   secure: true,
+      //   auth: {
+        //     user: "pruebawebperitoarte@gmail.com",
+        //     pass: "pruebawebperitoarte12345"
+        //   }
+        // });
+        
+        // //TEXTO Y ENVIO DE EMAIL
+        // let mailOptions = {
+          //   from: "pruebawebperitoarte@gmail.com",
+          //   to: usuario.email,
+          //   subject: "Alexis Navas - Perito | alexisnavas.com",
+          //   html:
+          //     "Hola &nbsp;" +
+          //     data.nombre +
+          //     ", <br> <br>" +
+    //     'Por su seguridad, haga click en el siguiente enlace para modificar su contraseña<br><br>' + 
+    //     'http://localhost:100/zonacliente/rememberpass/update/' + usuario.id + '<br><br> Gracias y un saludo.'
+    // };
+    
+    // //FUNCION PARA ENVIAR EL EMAIL
+    // smtpTransport.sendMail(mailOptions, function(error, response) {
+      //   if (error) {
+        //     console.log(error);
+        //   } else {
+          //     console.log("El correo se envio correctamente");
+          //   }
+          // });
+          //CIERRO EL ENVIO DEL EMIAL
+          // smtpTransport.close();

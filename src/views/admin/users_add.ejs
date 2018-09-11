@@ -11,30 +11,36 @@
                     <p class="login-box-msg">Registro de Usuarios</p>
                     <hr width="100%" />
                     <form action="/admin/users/add" method="POST">
+                    <div>    
                     <label>Nombre</label>
-                    <input type="text" name="nombre" class="form-control">
-                    <br>
+                    <input type="text" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+                    data-validation-length="min3" name="nombre">
+                    </div>
+                    <div>
                     <label>Apellido</label>
-                    <input type="text" name="apellido" class="form-control">
-                    <br>
+                    <input type="text" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}">
+                     </div>
+                    <div>
                     <label>Contraseña</label>
-                    <input type="password" name="password" class="form-control">
-                    <br>
-                    <label>Repetir Contraseña</label>
-                    <input type="password" name="password" class="form-control">
-                    <br>
+                    <input type="password" class="form-control" data-validation="length" data-validation-length="min8" name="password">
+                    </div>
+                    <div>
                     <label>Teléfono</label>
-                    <input type="text" name="telefono" class="form-control">
-                    <br>  
+                    <input type="text" class="form-control" data-validation="required number" name="telefono">                    
+                    </div>
+                    <div>
                     <label>Código Postal</label>
-                    <input type="text" name="codigoPostal" class="form-control">
-                    <br>  
+                    <input type="text" class="form-control" data-validation="number" name="codigoPostal">
+                    </div>
+                    <div>
                     <label>Fecha de Nacimiento</label>         
-                    <input type="text" name="fechaNacimiento" class="form-control">
-                    <br>
+                    <input type="text" name="fechaNacimiento" class="form-control" data-validation = "date" data-validation-format = "dd/mm/yyyy">
+                    </div>
+                    <div>
                     <label>Email</label>         
-                    <input type="text" name="email" class="form-control">
-                    <br>
+                    <input type="email" class="form-control" data-validation="required email" placeholder="Email" name="email">
+                    </div>     
+                    <br>      
                     <button type="submit" class="btn btn-primary "> Registrar</button>
                     <a href="/admin/users" class="btn btn-warning ">Volver</a>
                     </form>

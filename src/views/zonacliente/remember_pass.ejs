@@ -7,10 +7,12 @@
     <title>Alexis Navas II Consultoría de Arte</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/sweetalert2.min.css">
     <link rel="stylesheet" href="/css/bootstrap-colorpicker.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
     <link href="https://unpkg.com/ionicons@4.4.2/dist/css/ionicons.min.css" rel="stylesheet">
+    <link href = "//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css" rel = "stylesheet" type = "text / css" /> 
     <link rel="stylesheet" href="/css/ionicons.min.css">
     <link rel="stylesheet" href="/css/daterangepicker.css">
     <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
@@ -49,6 +51,7 @@
         <div class="row">
             <div class="register-box">
             <div class="register-box-body">
+                <% include ../partials/_messages %>
                 <p class="login-box-msg">Ayuda de Contraseña</p>
                 <p class="login-box-msg">Introduzca la dirección de correo electrónico para restablecer su contraseña.</p>
                 <hr width="100%" />
@@ -62,8 +65,7 @@
       </section>
      </div>
  
-
-     
+     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js "></script> 
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.dataTables.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

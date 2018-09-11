@@ -73,7 +73,7 @@ controllerUser.loginForm = (req, res) => {
 };
 // LOGIN DE USUARIO
 controllerUser.login = (req, res) => {
-  // req.session.user = { id: 39, nombre: '2', email: '2' };
+  req.session.user = { id: 39, nombre: '2', email: '2' };
   const email = req.body.email;
   req.getConnection((err, connection) => {
     connection.query(
@@ -123,8 +123,7 @@ controllerUser.logout = (req, res) => {
 //VER DATOS PERSONALES DE UN USUARIO
 controllerUser.selectUser = (req, res) => {
   // req.session.user = { id: 39, nombre: '2', email: '2' };
-  req.session.user = { id: 83, nombre: '3', email: '3' };
-
+  req.session.user = { id: 53, nombre: '5', email: '5' };
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query("SELECT *, DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us WHERE id = ?",usuario.id, (err, result) => {
@@ -132,8 +131,9 @@ controllerUser.selectUser = (req, res) => {
         res.json(err);
       }
       res.render("./zonacliente/user",{
-        data:result,
-        usuario: req.session.user
+        data:result
+        //BORRAR
+        // usuario: req.session.user 
 
       });
     });
@@ -143,11 +143,14 @@ controllerUser.selectUser = (req, res) => {
 //VISTA LOS DATOS A MODIFICAR
 controllerUser.viewsUser = (req,res) => {
   const {id} = req.params;
+  // req.session.user = { id: 39, nombre: '2', email: '2' };
+  req.session.user = { id: 53, nombre: '5', email: '5' };
   req.getConnection((err,connection) => {
     connection.query("SELECT * FROM usuario WHERE id = ?", [id], (err,rows) => {
       res.render("../views/zonacliente/user_edit", {
         data:rows[0],
-        usuario: req.session.user
+        //borrar
+        // usuario: req.session.user
       });
     });
   });
@@ -155,15 +158,17 @@ controllerUser.viewsUser = (req,res) => {
 
 //MODIFICA LOS DATOS
 controllerUser.editUser = (req, res) => {
-  req.session.user = { id: 83, nombre: '3', email: '3' };
-
   const { id } = req.params;
   const newUsuario = req.body;
-  req.getConnection((err, connection) => {
-    connection.query("UPDATE usuario set ? where id = ?",[newUsuario, id],(err, rows) => {
-      res.redirect("/zonacliente/user");
-      }
-    );
+  bcrypt.genSalt(10, function (err, salt){
+    bcrypt.hash(newUsuario.password, salt,null,function(err,hash){
+      newUsuario.password = hash;
+      req.getConnection((err, connection) => {
+        connection.query("UPDATE usuario set ? where id = ?",[newUsuario, id],(err, rows) => {
+          res.redirect("/zonacliente/user");
+        });
+      });
+      });
   });
 };
 
@@ -174,9 +179,9 @@ controllerUser.addContactForm = (req, res) => {
 // ENVIA DATOS DEL FORMULARIO DE CONTACTO
 controllerUser.addContact = (req, res) => {
   const data = req.body;
-  let usuario = req.usuario.user
+  req.session.user = { id: 53, nombre: '5', email: '5' };
   req.getConnection((err, connection) => {
-    connection.query("INSERT INTO contacto set ?", data,usuario.id,(err, contacto) => {
+    connection.query("INSERT INTO contacto set ?", data,(err, contacto) => {
       if (err) {
         res.render('../views/errores/error409');
       } else {

@@ -7,6 +7,7 @@ let nodemailer = require("nodemailer");
 
 //CONSULTA TODAS LAS VALORACIONES DE LOS CLIENTES
 adminControllerValuation.selectValuation = (req, res) => {
+    req.session.user = { id: 39, nombre: '2', email: '2' };
     let sql = 'SELECT obj.id, valor_estimativo,obj.nombre, cat.nombre as categoria, tec.nombre as tecnica,'
     sql += 'tip.nombre as tipo_objeto, tam.medida as tamanio, est.nombre as estado, con.nombre as conservacion, '
     sql += 'obj.firmado, obj.comentario, obj.imagen '
@@ -24,7 +25,8 @@ adminControllerValuation.selectValuation = (req, res) => {
             }
             res.render("admin/valuations", {
                 valuations: valuations,
-                usuario: req.session.user
+                //Borrar
+                // usuario: req.session.user
 
             })
         })
@@ -32,6 +34,7 @@ adminControllerValuation.selectValuation = (req, res) => {
 };
 // ESTIMAR VALORACION
 adminControllerValuation.estimateValuation = (req, res) => {
+    req.session.user = { id: 39, nombre: '2', email: '2' };
     const { id } = req.params;
     req.getConnection((err, connection) => {
         connection.query(`SELECT * FROM objeto WHERE id = ?`, [id], (err, result) => {

@@ -13,28 +13,31 @@
                     <form action="/zonacliente/contact" method="POST">
                         <div class="form-group has-feedback">
                             <label>Nombre</label>
-                            <input type="text" name="nombre" class="form-control">
+                            <input type="text" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+                            data-validation-length="min3" name="nombre">
                         </div>
                         <div class="form-group has-feedback">
                             <label>Apellido</label>
-                            <input type="text" name="apellido" class="form-control">
+                            <input type="text" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+                            data-validation-length="min3" name="apellido">
                         </div>
                         <div class="form-group has-feedback">
                             <label>Email</label>
-                            <input type="text" name="email" class="form-control">
+                            <input type="text" name="email" data-validation="email" class="form-control">
                         </div>
                         <div class="form-group has-feedback">
                             <label>Teléfono</label>
-                            <input type="text" name="telefono" class="form-control">
+                            <input type="text" class="form-control" data-validation="required number" data-validation="length" data-validation-length="min6" name="telefono" >
                         </div>
                         <div class="form-group has-feedback">
                             <label>Comentario</label>
-                            <textarea name="comentario" rows="4" cols="25" class="form-control"></textarea>
+                            <textarea name="comentario" rows="4" cols="25" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+                            data-validation-length="min25"></textarea>
                         </div>
                         <div class="row">
                             <div class="col-xs-8">
                                 <div>
-                                    <input type="checkbox">
+                                    <input type = "checkbox" name = "nombre" data-validation = "checkbox_group" data-validation-qty = "max3" >
                                     <span class="chelet"> He leído y acepto los<a href="/files/Términos y Condiciones de Uso.pdf" target="_blank">   términos y condiciones de uso</a></span>
                                 </div>
                             </div>
