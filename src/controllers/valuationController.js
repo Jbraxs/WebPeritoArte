@@ -18,14 +18,14 @@ controllerValuation.selectValuation = (req, res) => {
     sql += 'INNER JOIN tamanio tam ON obj.idTamanio = tam.id '
     sql += 'INNER JOIN estado_peritaje est ON obj.idEstadoPeritaje = est.id '
     sql += 'INNER JOIN conservacion con ON obj.idConservacion = con.id WHERE idUsuario = ? '
-    req.session.user = { id: 39, nombre: '2', email: '2' };
+    // req.session.user = { id: 39, nombre: '2', email: '2' };
+    let usuario = req.session.user;
     req.getConnection((err, connection) => {
-        connection.query(sql, req.session.user.id, (err, valuations) => {
+        connection.query(sql, usuario.id, (err, valuations) => {
             if (err) {
                 res.json(err);
             }
         
-            // agregar usuario con campo isSuperAdmin para que tome el menu
             res.render("zonacliente/valuations", {
                 valuations: valuations,
                 usuario: req.session.user
@@ -35,7 +35,8 @@ controllerValuation.selectValuation = (req, res) => {
 };
 //AÑADE VALORACIONES FORMULARIO
 controllerValuation.addValuationForm = (req, res) => {
-    req.session.user = { id: 39, nombre: '2', email: '2' };
+    // req.session.user = { id: 39, nombre: '2', email: '2' };
+    let usuario = req.session.user;
     req.getConnection((err, connection) => {
         connection.query('SELECT * FROM categoria', (err, categorias) => {
             connection.query('SELECT * FROM tipo_objeto', (err, tipo_objetos) => {
@@ -47,7 +48,8 @@ controllerValuation.addValuationForm = (req, res) => {
                                 tipo_objetos: tipo_objetos,
                                 tecnicas: tecnicas,
                                 tamanios: tamanios,
-                                conservacions: conservacions
+                                conservacions: conservacions,
+                                usuario: req.session.user
                             });
                         });
                     });
@@ -58,7 +60,7 @@ controllerValuation.addValuationForm = (req, res) => {
 };
 //AÑADE VALORACIONES 
 controllerValuation.addValuation = (req, res) => {
-    req.session.user = { id: 39, nombre: '2', email: '2' };
+    // req.session.user = { id: 39, nombre: '2', email: '2' };
     const usuario = req.session.user;
     let oldPath = req.files.imagen.path;
     let newPath = __dirname + '/../public/img_clientes/' + usuario.id + '-' + req.files.imagen.originalFilename;
@@ -71,10 +73,44 @@ controllerValuation.addValuation = (req, res) => {
         connection.query(sql, (err, valuations) => {
             if (err) {
              console.log(err);
-                res.render('../views/errores/error409');
+                res.render('../views/errores/error409')
             }
-            console.log(valuations);
+            
+          // //SERVIDOR EMAIL
+          let smtpTransport = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            auth: {
+              user: "pruebawebperitoarte@gmail.com",
+              pass: "pruebawebperitoarte12345"
+            }
+          });
+
+          //TEXTO Y ENVIO DE EMAIL
+          let mailOptions = {
+            from: "pruebawebperitoarte@gmail.com",
+            to:'jonatanbraxs@gmail.com',
+            subject: "Alexis Navas - Perito | alexisnavas.com",
+            html: 'Gracias por solicitar la estimación económica.<br><br>' + 
+            'En la mayor brevedad posible, el Dc. Alexis Navas realizara su estimación. <br><br>' + 
+            'Reciba un cordial saludo.'
+         };
+
+          //FUNCION PARA ENVIAR EL EMAIL
+          smtpTransport.sendMail(mailOptions, function (error, response) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("El correo se envio correctamente");
+            }
+          });
+
+          //CIERRO EL ENVIO DEL EMIAL
+          smtpTransport.close();
+
             res.redirect('/zonacliente/valuations');
+
         })
     })
 };
@@ -88,57 +124,6 @@ controllerValuation.delValuation = (req, res) => {
     });
 
 };
-// ESTIMAR VALORACION
-controllerValuation.estimateValuation = (req, res) => {
-    let usuario = req.session.user;
-    const { id } = req.params;
-    req.getConnection((err, connection) => {
-        connection.query(`SELECT * FROM objeto WHERE id = ?`, [id], (err, result) => {
-            objeto = result[0]
-            sql = `SELECT * FROM tarifa WHERE idCategoria = ${objeto.idCategoria} AND idConservacion = ${objeto.idConservacion} AND idTamanio = ${objeto.idTamanio} AND idTecnica = ${objeto.idTecnica} AND idTipoObjeto = ${objeto.idTipoObjeto}`
-            connection.query(sql, (err, result2) => {
-                tarifa = result2[0]
-                connection.query(`UPDATE objeto set valor_estimativo = '${tarifa.valor}' where id = ?`, [id], (err, result3) => {
-                    if (err) {
-                        res.render('../views/errores/error409');
-                    }
-
-                    //SERVIDOR EMAIL 
-                let smtpTransport = nodemailer.createTransport({
-                host:'smtp.gmail.com',
-                port:465,
-                secure:true,
-                auth: {
-                  user: "pruebawebperitoarte@gmail.com",
-                  pass: "pruebawebperitoarte12345"
-                }
-                });
-                //TEXTO Y ENVIO DE EMAIL
-                let mailOptions = {
-                from: "pruebawebperitoarte@gmail.com",
-                to: 'jonatanbraxs@gmail.com',
-                subject: "Alexis Navas - Perito | alexisnavas.com",
-                html: 'Hola &nbsp;' + usuario.nombre + ', <br> <br>' + 'Tu estimación económica se ha realizado correctamente, el valor estimado es de &nbsp;' + tarifa.valor + '.<br><br>' + 'Si usted desea realizar el peritaje del artículo, puede respondernos al correo y en la mayor brevedad posible, el Dc. Alexis Navas contactara con usted.<br><br>' + 'Gracias realizar su estimación económica con nosotros.' 
-                };
-                //FUNCION PARA ENVIAR EL EMAIL
-                smtpTransport.sendMail(mailOptions, function(error, response) {
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log('El correo se envio correctamente');
-                }
-                });
-                //CIERRO EL ENVIO DEL EMIAL
-                smtpTransport.close();
-                    console.log(usuario);
-                    res.redirect("/zonacliente/valuations");
-                })
-            })
-        })
-    })
-}
-
-
 
 
 

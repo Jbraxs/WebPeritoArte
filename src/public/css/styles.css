@@ -7,16 +7,16 @@ body {
   color: #b8c7ce;
 }
 .valadd select{
-  width: 25%;    
+  width: 70%;    
 }
 .inputname{
-  width: 25%;    
+  width: 70%;    
 }
 .valadd label{
   width: 25%;    
 }
 .valadd textarea{
-  width: 25%;
+  width: 70%;
 }
 .v-a {
   vertical-align: top;
@@ -26,4 +26,10 @@ body {
 }
 .btclass {
   margin-right: 0%;
+}
+.bfound {
+  background-color: gray;
+}
+.nameindex {
+  color: white;
 }

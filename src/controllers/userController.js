@@ -44,7 +44,7 @@ controllerUser.register = (req, res) => {
               from: "pruebawebperitoarte@gmail.com",
               to: dato.email,
               subject: "Alexis Navas - Perito | alexisnavas.com",
-              html: 'Hola &nbsp;' + dato.nombre + ', <br> <br>' + 'Recuerda que en tu zona cliente, puedes realizar la valoracion económica que necesites. <br><br>' 
+              html: 'Hola &nbsp;' + dato.nombre + ', <br> <br>' + 'Recuerda que en tu zona cliente, puedes realizar la valoración económica que necesites. <br><br>' 
               + 'Gracias por registrarte.' 
               };
               //FUNCION PARA ENVIAR EL EMAIL
@@ -69,31 +69,24 @@ controllerUser.register = (req, res) => {
 
 //CON ESTO ME REDIRECCIONA A LA PLANTILLA.
 controllerUser.loginForm = (req, res) => {
-  let messages2 = {
-    emailNotValid: req.session.emailNotValid,
-    emptyField: req.session.emptyField,
-    passError: req.session.passError
-  }
-  res.render("login", {messages2 : messages2});
+  res.render("login");
 };
 // LOGIN DE USUARIO
 controllerUser.login = (req, res) => {
+  // req.session.user = { id: 39, nombre: '2', email: '2' };
   const email = req.body.email;
   req.getConnection((err, connection) => {
     connection.query(
       `SELECT * FROM usuario WHERE email = ?`, email, function(err, result) {
         if (err) {
-          req.session.emailNotValid = ['El email introducido no es valido']
           res.render('../views/errores/errorlogin');
         }
         if (result == "") {
-          req.session.emptyField = ['Por favor complete el campo']
           res.render('../views/errores/errorlogin');
            
         } else {
           bcrypt.compare(req.body.password, result[0].password, function(err,iguales) {            
             if (err) {
-              req.session.passError = ['Contraseña Incorrecta']
               res.render('../views/errores/errorlogin');
      
             } else {
@@ -101,7 +94,8 @@ controllerUser.login = (req, res) => {
                 req.session.user = {
                   'id': result[0].id,
                   'nombre': result[0].nombre,
-                  'email': result[0].email
+                  'email': result[0].email,
+                  'isSuperAdmin': result[0].isSuperAdmin
                 }
                 if (result[0].isSuperAdmin == true){
                   req.session.admin = true;
@@ -126,10 +120,11 @@ controllerUser.logout = (req, res) => {
     res.redirect('/login');
    
 };
-// 'SELECT * FROM usuario WHERE id = ? '
 //VER DATOS PERSONALES DE UN USUARIO
 controllerUser.selectUser = (req, res) => {
-  req.session.user = { id: 39, nombre: '2', email: '2' };
+  // req.session.user = { id: 39, nombre: '2', email: '2' };
+  req.session.user = { id: 83, nombre: '3', email: '3' };
+
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query("SELECT *, DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us WHERE id = ?",usuario.id, (err, result) => {
@@ -137,7 +132,9 @@ controllerUser.selectUser = (req, res) => {
         res.json(err);
       }
       res.render("./zonacliente/user",{
-        data:result
+        data:result,
+        usuario: req.session.user
+
       });
     });
   });
@@ -149,7 +146,8 @@ controllerUser.viewsUser = (req,res) => {
   req.getConnection((err,connection) => {
     connection.query("SELECT * FROM usuario WHERE id = ?", [id], (err,rows) => {
       res.render("../views/zonacliente/user_edit", {
-        data:rows[0]
+        data:rows[0],
+        usuario: req.session.user
       });
     });
   });
@@ -157,6 +155,8 @@ controllerUser.viewsUser = (req,res) => {
 
 //MODIFICA LOS DATOS
 controllerUser.editUser = (req, res) => {
+  req.session.user = { id: 83, nombre: '3', email: '3' };
+
   const { id } = req.params;
   const newUsuario = req.body;
   req.getConnection((err, connection) => {
@@ -169,16 +169,18 @@ controllerUser.editUser = (req, res) => {
 
 //ACA ME REDIRECCIONA AL FORMULARIO DE CONTACTO PERO DEL USUARIO
 controllerUser.addContactForm = (req, res) => {
-  res.render("../views/zonacliente/contact");
+  res.render("../views/zonacliente/contact",{usuario: req.session.user});
 };
 // ENVIA DATOS DEL FORMULARIO DE CONTACTO
 controllerUser.addContact = (req, res) => {
   const data = req.body;
+  let usuario = req.usuario.user
   req.getConnection((err, connection) => {
-    connection.query("INSERT INTO contacto set ?", data, (err, contacto) => {
+    connection.query("INSERT INTO contacto set ?", data,usuario.id,(err, contacto) => {
       if (err) {
         res.render('../views/errores/error409');
       } else {
+       
 
         //SERVIDOR EMAIL
         let smtpTransport = nodemailer.createTransport({
@@ -234,6 +236,7 @@ controllerUser.addContact = (req, res) => {
 				smtpTransport.close();
 				
         res.redirect("/zonacliente/contact");
+       
       }
     });
   });

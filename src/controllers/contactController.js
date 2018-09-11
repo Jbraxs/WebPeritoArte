@@ -7,13 +7,14 @@ var nodemailer = require("nodemailer");
 
 //ACA ME REDIRECCIONA AL FORMULARIO DE CONTACTO PERO DEL USUARIO
 controllerContact.addContactForm = (req, res) => {
-  res.render("../views/contact");
+  res.render("../views/contact",{usuario: req.session.user});
 };
 // ENVIA DATOS DEL FORMULARIO DE CONTACTO
 controllerContact.addContact = (req, res) => {
+  let usuario = req.session.user;
   const data = req.body;
   req.getConnection((err, connection) => {
-    connection.query("INSERT INTO contacto set ?", data, (err, contacto) => {
+    connection.query("INSERT INTO contacto set ?", data, usuario.id ,(err, contacto) => {
       if (err) {
         res.render('../views/errores/error409');
       } else {

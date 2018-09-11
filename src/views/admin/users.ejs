@@ -4,9 +4,6 @@
 
 
 <div class="content-wrapper">
-  <section class="content-header">
-    <h4>Usuarios Registrados</h4>
-  </section>
   <section class="content">
     <div class="row">
       <div class="col-xs-12">
@@ -53,7 +50,7 @@
                     <%= data[i].email %>
                   </td>
                   <td>
-                    <a href="/admin/users/update/<%= data[i].id %>" class="btn btn-info btn-sm">Modificar</a>
+                    <a href="/admin/users/update/<%= data[i].id %>" class="btn btn-info btn-sm btnAlert">Modificar</a>
                     <a href="/admin/users/delete/<%= data[i].id %>" class="btn btn-danger btn-sm">Eliminar</a>
                   </td>
                 </tr>

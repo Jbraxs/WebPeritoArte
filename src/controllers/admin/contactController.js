@@ -7,13 +7,16 @@ var nodemailer = require("nodemailer");
 
 //MUESTRA LAS CONSULTAS POR FORMULARIO DE CONTACTO
 adminControllerContact.selecContact = (req, res) => {
+  let usuario = req.session.user;
   req.getConnection((err, connection) => {
-    connection.query('SELECT * FROM contacto', (err, contacto) => {
+    connection.query('SELECT * FROM contacto',  usuario.id, (err, contacto) => {
       if (err) {
         res.json(err);
       }
       res.render('admin/contacts', {
-        data: contacto
+        data: contacto,
+        usuario: req.session.user
+
       });
     });
   });
@@ -36,7 +39,9 @@ adminControllerContact.viewContact = (req, res) => {
     console.log(id);
     connection.query("SELECT * FROM contacto WHERE id = ?", [id], (err, rows) => {
       res.render("../views/admin/contacts_view", {
-        data: rows[0]
+        data: rows[0],
+        usuario: req.session.user
+
       });
     });
   });
@@ -44,6 +49,7 @@ adminControllerContact.viewContact = (req, res) => {
 //RECOGE LOS DATOS DEL FORMULARIO PARA RESPONDER
 adminControllerContact.answerContactForm = (req, res) =>{
   res.render('../views/admin/contacts_view')
+
 };
 
 //GUARDA EN BD LA RESPUESTA Y ENVIA EL EMAIL.

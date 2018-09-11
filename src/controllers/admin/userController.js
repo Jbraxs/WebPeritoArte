@@ -8,15 +8,19 @@ let nodemailer = require("nodemailer");
 
 //MUESTRA LOS USUARIOS REGISTRADOS
 adminControllerUser.selectUser = (req, res) => {
+  // req.session.user = { id: 39, nombre: '2', email: '2' };
+  let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query(
-      "SELECT *, DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us",
+      "SELECT *, DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us",usuario.id,
       (err, clientes) => {
         if (err) {
           res.json(err);
         }
         res.render("admin/users", {
-          data: clientes
+          data: clientes,
+          usuario: req.session.user
+
         });
       }
     );
@@ -25,7 +29,8 @@ adminControllerUser.selectUser = (req, res) => {
 
 //ACA ME REDIRECCIONA A LA PLANTILLA PERO DEL ADMIN.
 adminControllerUser.addUserForm = (req, res) => {
-  res.render("./admin/users_add");
+  res.render("./admin/users_add", {usuario: req.session.user});
+ 
 };
 //INSERTA DATOS PARA EL REGISTRO DESDE EL PANEL DEL ADMIN, ENCRIPTANDO LA CONTRASEÑA
 adminControllerUser.addUser = (req, res) => {
@@ -35,16 +40,15 @@ adminControllerUser.addUser = (req, res) => {
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(data.password, salt, null, function(err, hash) {
       data.password = hash;
-      console.log(hash);
       req.getConnection((err, connection) => {
         connection.query("INSERT INTO usuario set ?", data, (err, result) => {
           if (err) {
             res.render('../views/errores/error409');
           } else {
             //ASIGNO IDUSUARIO GUARDADO
-            dato.id = result.insertId;
+            data.id = result.insertId;
             //ASIGNO DATOS DE USUARIO A LA SESION
-            req.session.user = dato;
+            req.session.user = data;
             //SERVIDOR EMAIL
             let smtpTransport = nodemailer.createTransport({
               host: "smtp.gmail.com",
@@ -59,11 +63,11 @@ adminControllerUser.addUser = (req, res) => {
             //TEXTO Y ENVIO DE EMAIL
             let mailOptions = {
               from: "pruebawebperitoarte@gmail.com",
-              to: dato.email,
+              to: data.email,
               subject: "Alexis Navas - Perito | alexisnavas.com",
               html:
                 "Hola &nbsp;" +
-                dato.nombre +
+                data.nombre +
                 ", <br> <br>" +
                 "Recuerda que en tu zona cliente, puedes realizar la valoracion económica que necesites. <br><br>" +
                 "Gracias por registrarte."
@@ -92,14 +96,16 @@ adminControllerUser.addUser = (req, res) => {
 
 //VISTA LOS DATOS A MODIFICAR
 adminControllerUser.viewsUser = (req, res) => {
-  const { id } = req.params;
+  req.session.user = { id: 85, nombre: '3', email: '3' }// Borrar
+          const { id } = req.params;
   req.getConnection((err, connection) => {
     connection.query(
       "SELECT * FROM usuario WHERE id = ?",
       [id],
       (err, rows) => {
         res.render("./admin/user_edit", {
-          data: rows[0]
+          data: rows[0],
+          usuario: req.session.user
         });
       }
     );

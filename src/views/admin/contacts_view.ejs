@@ -4,37 +4,50 @@
 
 
             <div class="content-wrapper">
-                    <section class="content-header">
-                        <h4>Repuesta a contactos por formulario</h4>
-                    </section>
- 
-                    <section class="content">
+                 <section class="content">
                       <div class="row">
                         <div class="col-md-6">
-                          <div class="box box-solid">
-                            <div class="box-header with-border">
-                              <h3 class="box-title">Detalle del Contacto</h3>
-
-                              <h5>Nombre:</h5>
-                              <p><%= data.nombre%></p>
-                              <h5>Apellido:</h5>
-                              <p><%= data.apellido %></p>
-                              <h5>Email:</h5>
-                              <p><%= data.email %></p>
-                              <h5>Teléfono:</h5>
-                              <p><%= data.telefono %></p>
-                              <h5>Comentario:</h5>
-                              <p><%= data.comentario %></p>
-
+                          <div class="register-box">
+                            <div class="register-box-body">
+                                <p class="login-box-msg">Detalle del Contacto</p>
+                                <hr width="100%" />
+                                <div>
+                                <label>Nombre:</label>
+                                <%= data.nombre %>
+                                </div>
+                                <br>
+                                <div>                                
+                                <label>Apellido:</label>
+                                <%= data.apellido %>
+                                </div>
+                                <br>
+                                <div>                                
+                                <label>Email:</label>
+                                <%= data.email %>
+                                </div>
+                                <br>  
+                                <div>
+                                <label>Teléfono:</label>
+                                <%= data.telefono %>
+                                </div>
+                                <br>
+                                <div>                                
+                                <label>Comentario:</label>
+                                <%= data.comentario %>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
                             </div>
                           </div>
                         </div>
 
                         <div class="col-md-6">
-                          <div class="box box-solid">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Redacte su respuesta</h3>
-                                
+                          <div class="register-box">
+                            <div class="register-box-body">
+                                <p class="login-box-msg">Redacte su Respuesta</p>
+                                <hr width="100%" />
                                 <form action="/admin/contacts/view/<%= data.id %>" method="POST">
                                     <div>
                                         <label>Nombre:</label>

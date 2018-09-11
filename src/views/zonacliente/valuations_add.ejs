@@ -4,12 +4,13 @@
 
 
 <div class="content-wrapper">
-    <div class="content">
+    <section class="content">
         <div class="row">
                 <div class="register-box">
                     <div class="register-box-body">
-                        <h4>Seleccione los campos deseados</h4>
-                        <br>
+                            <p class="login-box-msg">Rellene el formulario</p>
+                            <hr width="100%" />
+                            <br>
                             <form action="/zonacliente/valuations/add" method="POST" enctype="multipart/form-data" class="valadd">
                             <label>Nombre</label>
                             <input type="text" name="nombre" placeholder="Nombre de la Obra" class="inputname">
@@ -62,16 +63,16 @@
                             <br>                                
                             <input type='file' name="imagen">    
                             <br>
-                            <button type="submit" class="btn btn-primary">
-                            Enviar Valoracion
-                            </button>
-                            </form>
+                            <button type="submit" class="btn btn-primary">Enviar Valoracion</button>
+                            <a href="/zonacliente" class="btn btn-primary ">Cancelar</a>
+                            
+                        </form>
                     </div>    
                 </div>    
             </div>    
-        </div>
-    </div>
-</div>
+    </section>
+ </div>
+
 
     
 <% include ../partials/_footer %>

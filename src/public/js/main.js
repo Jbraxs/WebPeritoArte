@@ -1,4 +1,11 @@
-  $(document).ready(function () {
+$(document).ready(function () {
+  //VALIDADOR
+  $.validate({
+    modules : 'date, security',
+    onModulesLoaded : function() {
+      
+    }
+  }); 
     //MENU DE NAVEGACION TABLAS ADMIN
     $('.sidebar-menu').tree()
     $('#usuarios').DataTable({
@@ -27,4 +34,33 @@
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' // optional
     });
+    //SWEETALERT2
+    $('.btnAlert').on('click', function (e) {
+      e.preventDefault(); // Detiene los prximos eventos
+      swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        timer: 2000,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          swal(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+        });
+
+      
   });
+
+
+
+
+

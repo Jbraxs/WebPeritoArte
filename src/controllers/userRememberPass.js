@@ -12,10 +12,6 @@ controllerUserPass.rememberPassForm = (req, res) => {
     notices: req.session.notices,
     errors: req.session.errors
   };
-
-//  req.session.notices = {}
-//  req.session.errors = {}
-
   res.render("zonacliente/remember_pass", { messages: messages });
 };
 
@@ -79,7 +75,9 @@ controllerUserPass.viewsUserPass = (req, res) => {
   req.getConnection((err, connection) => {
     connection.query("SELECT * FROM usuario WHERE id = ?", [id], (err, rows) => {
       res.render("../views/zonacliente/remember_pass_edit", {
-        data: rows[0]
+        data: rows[0],
+        usuario: req.session.user
+
       });
     });
   });

@@ -5,30 +5,31 @@
   <div class="content-wrapper">
       <section class="content">
         <div class="row">
-          <div class="col-md-4">
-            <div class="box box-solid">
-              <div class="box-header with-border">
-                  <% if (data) { %>
+            <div class="register-box">
+                <div class="register-box-body">
+                    <p class="login-box-msg">Mis Datos Personales</p>
+                    <hr width="100%" />
+                    <% if (data) { %>
                     <% for(var i = 0; i < data.length; i++) { %>
-                <h5>Nombre:</h5>
-                <p><%= data[i].nombre %></p>
-                <h5>Apellido:</h5>
-                <p><%= data[i].apellido %></p>
-                <h5>Teléfono:</h5>
-                <p><%= data[i].telefono %></p>
-                <h5>Codigo Postal:</h5>
-                <p><%= data[i].codigoPostal %></p>
-                <h5>Fecha De Nacimiento:</h5>
-                <p><%= data[i].fechaNac %></p>
-                <h5>Email:</h5>
-                <p><%= data[i].email %></p>
-                <a href="/zonacliente/data/update/<%= data[i].id %>" class="btn btn-info">Modificar</a>
-                <% } %>
-                <% } %>
+                    <h4>Nombre:</h4>
+                    <%= data[i].nombre %>
+                    <h4>Apellido:</h4>
+                    <p><%= data[i].apellido %></p>
+                    <h4>Teléfono:</h4>
+                    <p><%= data[i].telefono %></p>
+                    <h4>Codigo Postal:</h4>
+                    <p><%= data[i].codigoPostal %></p>
+                    <h4>Fecha De Nacimiento:</h4>
+                    <p><%= data[i].fechaNac %></p>
+                    <h4>Email:</h4>
+                    <p><%= data[i].email %></p>
+                    <a href="/zonacliente/data/update/<%= data[i].id %>" class="btn btn-info">Modificar</a>
+                    <a href="/zonacliente" class="btn btn-primary ">Cancelar</a>
+                    <% } %>
+                    <% } %>
               </div>
             </div>
           </div>
-        </div>
       </section>
 </div>
 

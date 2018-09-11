@@ -17,7 +17,7 @@ const adminControllerUser = require('../controllers/admin/userController');
 const adminControllerContact = require('../controllers/admin/contactController');
 const adminControllerValuation = require('../controllers/admin/valuationController');
 // USUARIOS 
-router.get('/admin/users',auth, adminControllerUser.selectUser);
+router.get('/admin/users', adminControllerUser.selectUser);
 router.get('/admin/users/add', adminControllerUser.addUserForm);
 router.post('/admin/users/add', adminControllerUser.addUser);
 router.get('/admin/users/update/:id', adminControllerUser.viewsUser);
@@ -31,6 +31,8 @@ router.get('/admin/contacts/view/:id',adminControllerContact.answerContactForm);
 router.post('/admin/contacts/view/:id',adminControllerContact.answerContact);
 //VALORACIONES
 router.get('/admin/valuations', adminControllerValuation.selectValuation);
+router.get('/admin/valuations/delete/:id', adminControllerValuation.delValuation);
+router.get('/admin/valuations/estimate/:id', adminControllerValuation.estimateValuation);
 router.get('/admin/valuations/rates/add_auto', adminControllerValuation.addAutoRates);
 
 
@@ -60,7 +62,6 @@ router.get('/zonacliente/valuations', controllerValuation.selectValuation);
 router.get('/zonacliente/valuations/add',multipartMiddleware, controllerValuation.addValuationForm);
 router.post('/zonacliente/valuations/add',multipartMiddleware, controllerValuation.addValuation);
 router.get('/zonacliente/valuations/delete/:id', controllerValuation.delValuation);
-router.get('/zonacliente/valuations/estimate/:id', controllerValuation.estimateValuation);
 
 
 //CONTROLADORES DEL CONTACTO 
@@ -71,17 +72,12 @@ router.post('/contact', controllerContact.addContact);
 
 
 
-
-
 // RUTAS COMUNES
 router.get('/admin', function (req, res) {
-    res.render('admin/admin');
-});
-router.get('/prueba', function (req, res) {
-    res.render('zonacliente/prueba');
+        res.render('admin/admin', {usuario: req.session.user});
 });
 router.get('/zonacliente', function (req, res) {
-    res.render('zonacliente/zonacliente');
+    res.render('zonacliente/zonacliente', {usuario: req.session.user});
 });
 router.get('/index', function (req, res) {
     res.render('../views/index');
@@ -89,7 +85,8 @@ router.get('/index', function (req, res) {
 
 router.get('/index_signin', function (req, res) {
     res.render('../views/index_login', {
-        data: req.session.user
+        data: req.session.user,
+        usuario: req.session.user
     });
 });
 

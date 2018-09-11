@@ -4,9 +4,6 @@
 
 
 <div class="content-wrapper">
-    <section class="content-header">
-        <h4>Valoraciones realizadas y estimadas</h4>
-    </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -29,6 +26,8 @@
                                     <th>Imagen</th>
                                     <th>Conservación</th>
                                     <th>Valor estimado</th>
+                                    <th>Acción</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,9 +64,14 @@
                                         <%= valuations[i].conservacion %>
                                     </td>
                                     <td>
-                                        <%= valuations[i].valor_estimativo %>                                    
-                                    <% if (valuations[i].valor_estimativo == null) { %><% } %>
+                                        <%= valuations[i].valor_estimativo %>  
                                     </td>
+                                    <td>                                  
+                                        <% if (valuations[i].valor_estimativo == null) { %>
+                                            <a href="/admin/valuations/estimate/<%= valuations[i].id %>" class="btn btn-success">Estimar</a>
+                                            <% } %>                                  
+                                            <a href="/admin/valuations/delete/<%= valuations[i].id %>" class="btn btn-danger">Eliminar</a>                                    </td>
+                                     </td>  
                                 </tr>
                                 <% } %>
                             </tbody>
