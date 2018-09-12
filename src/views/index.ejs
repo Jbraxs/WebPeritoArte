@@ -7,36 +7,268 @@
     <title>Alexis Navas II Consultoría de Arte</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css"
+        type="text / css" />
 
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/main.js"></script>
+
+
 </head>
 
 <body>
-
+    <!-- PONER LAS ANCLAS -->
     <header>
-        <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="row">
-                <div class="col-sm-12">
-                        <a href="#" class="leftimg"><img src="img/logo.png" width="15%"/></a>
+                <div class="col-sm-6">
+                    <a href="#" class="leftimg"><img src="img/logo.png" width="15%" />
+                        <span class="title logo-mini">Alexis Navas I Consultoría de Arte</span>
+                    </a>
+                </div>
+                <div class="col-sm-6">
                     <ul class="nav navbar-nav">
-                        <!-- PONER LAS ANCLAS -->
-                        <li><a href="#">Servicios</a></li>
-                        <li><a href="#">Quiéns Somos</a></li>
+                        <li><a href="# servicios">Servicios</li></a>
                         <li><a href="#">Contacto</a></li>
                         <li><a href="#">Registro</a></li>
                         <li><a href="#">Login</a></li>
                     </ul>
                 </div>
-                
             </div>
-        </div>
-
-
+        </nav>
     </header>
 
+    <div class="container-fluid">
+        <br>
+        <div class="col-md-12">
+            <div id="carousel-1" class="carousel slide" data-ride="carousel">
+                <!-- Indicadores -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-1" data-slide-to="1"></li>
+                </ol>
+                <!-- contenedor de los slide -->
 
+                <div class="carousel-inner" role="listbox">
+
+                    <div class="item  active">
+                        <img src="img/cuadro.jpg" class="img-responsive" alt="">
+                        <!-- style="width:822px;height:322px;" -->
+                        <!-- YA ME QUEDO CLARO POR QUE TODAS LAS IMAGENES MISMO TAMAÑO -->
+                        <div class="carousel-caption">
+                            <h3>Ultimas Valoraciones realizadas</h3>
+                            <p>xxxxxxxxxxxxxxxxxxx</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="img/escultura.jpg" class="img-responsive" alt="">
+                        <div class="carousel-caption">
+                            <h3>Ultimas Valoraciones realizadas</h3>
+                            <p>xxxxxxxxxxxxxxxxxxx</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Controles -->
+                <a href="#carousel-1" class="left carousel-control" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a href="#carousel-1" class="right carousel-control" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="srv">
+
+        <h2><a name="servicios"></a>Como profesionales independientes de los canales de venta, y con la visión global
+            del mercado del arte podemos ofrecer estudios hechos a medida para conocer las rentabilidades
+            de los artistas, movimientos, obras, estilos......</h2>
+        <p>Estudio de rentabilidad realizado por el DC. Alexis Navas.</p>
+        <ul>
+            <li>Autor: Joel Peter Witkin. </li>
+            <li>Disciplina: Fotografía.</li>
+            <li>Medidas: 37.1 x 37.3 cm.</li>
+            <li>Tasa Interna de Rendimiento: 7.21% anual durante el periodo 2017/2019</li>
+        </ul>
+        <p>Le ofrecemos análisis económicos de las tendencias actuales al servicio de una mayor
+            transparencia del mercado del arte.</p>
+        <h3>Conocemos las mejores técnicas y tenemos los conocimientos necesarios para poder realizar cualquier
+            estimación económica.
+            con solo <a href="/register">registrarse</a> puede optar por realizar estimaciónes online, sin coste para
+            usted y tener un precio estimado no vinculante de su obra.
+        </h3>
+    </div>
+    <div class="container ">
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <i class="fas fa-male fa-10x"></i>
+                <br>
+                <br>
+                <h3>Analista neuroescritural</h3>
+                <p>Experto en selección de personal, desarrollamos las
+                    técnicas más modernas y certeras para determinar los mejores
+                    candidatos para las vacantes a cubrir.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-microscope fa-10x"></i>
+                <br>
+                <br>
+                <h3>Experto en documentoscopia</h3>
+                <p>Establecemos la autenticidad o falsedad de distintos tipos
+                    de documentos tanto públicos como privados (documentos acreditativos de identidad,
+                    cheques y talones de banca, pasaportes…) mediante el estudio científico de los
+                    mismos y su contenido.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-pen-nib fa-10x"></i>
+                <br>
+                <br>
+                <h3>Perito caligráfico y grafólogo</h3>
+                <p>Perito caligráfico, implementamos la técnica científica que analiza las distintas variables de la
+                    escritura y/o firma para determinar su autenticidad o falsedad.
+                    Perito grafólogo, por medio del análisis de la escritura estudiamos la personalidad del individuo,
+                    conociendo aspectos de una persona, que muchas veces, ni ella sabe.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <i class="fas fa-registered fa-10x"></i>
+                <br>
+                <br>
+                <h3>Perito marcas y patentes</h3>
+                <p> Expertos en todas las áreas de la propiedad industrial e intelectual
+                    proporcionamos una opinión profesional para salvaguardar tus derechos y dictaminamos sobre la
+                    existencia de actividad inventiva y novedad en activos intangibles.</p>
+            </div>
+            <div class="col-md-6">
+                <i class="fas fa-wallet fa-10x"></i>
+                <br>
+                <br>
+                <h3>Perito Obras de arte</h3>
+                <p> Determinamos el precio de mercado de la obra, se trata de un proceso especialmente complejo que
+                    atiende a una multiplicidad de factores como la técnica, calidad, autor, estado de conservación,…
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Si deseas contactar con el Dc. Alexis Navas</h3>
+                    <div class="card-body">
+                        <form action="/contact" method="POST">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+                                    data-validation-length="min3" name="nombre">
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido</label>
+                                <input type="text" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+                                    data-validation-length="min3" name="apellido">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" name="email" data-validation="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Teléfono</label>
+                                <input type="text" class="form-control" data-validation="required number"
+                                    data-validation="length" data-validation-length="min6" name="telefono">
+                            </div>
+                            <div class="form-group">
+                                <label>Comentario</label>
+                                <textarea name="comentario" rows="4" cols="25" class="form-control" data-validation="custom"
+                                    data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+                                    data-validation-length="min25"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Enviar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <br>
+                <h3>Identifícate</h3>
+                <div class="card-body">
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label>Email</label>
+                             <input type="text" name="email" placeholder="Email" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="text" name="password" placeholder="Contraseña" class="form-control" >
+                        </div>
+                        <div>
+                            <a href="../zonacliente/rememberpass">¿Has olvidado la contraseña?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>REGISTRO DE CLIENTE DESDE CLIENTES </h1>
+<div class="col-md-5">
+    <div class="card-body">
+      <form action="/register" method="POST">
+        <div class="form-group">
+          <input type="text" name="nombre" placeholder="Nombre" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="apellido" placeholder="Apellido" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="password" placeholder="Contraseña" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="telefono" placeholder="Teléfono" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="codigoPostal" placeholder="Código Postal" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento" class="form-control" >
+        </div>
+        <div class="form-group">
+          <input type="text" name="email" placeholder="Email" class="form-control" >
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+          Registrarme
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    
+    <% include partials/_cookies %>
 
 </body>
-
 </html>

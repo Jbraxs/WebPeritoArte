@@ -44,15 +44,26 @@ $(document).ready(function() {
       cancelButtonColor: "#d33",
       confirmButtonText: "Si, deseo eliminar!"
     }).then(result => {
-      
-      connection.query( "DELETE FROM usuario WHERE id = ?", [id], (err, rows) => {
-          if (result.value) {
-            swal("La fila se ha eliminado con exito.");
-          }
-        }
-      );
+      url = $(this).attr('href');
+      $(location).attr('href', url);
+  
     });
   });
+  $(".btnUpd").on("click", function(e) {
+    e.preventDefault(); // Detiene los prximos eventos
+    swal({
+      title: "Esta usted seguro de modificar sus datos?",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, modificarlos!"
+    }).then(result => {
+      url = $(this).attr('href');
+      $(location).attr('href', url);
+  
+    });
+  });
+
   //COOKIES
   function getCookie(c_name){
     var c_value = document.cookie;

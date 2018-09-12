@@ -34,7 +34,7 @@ adminControllerValuation.selectValuation = (req, res) => {
 };
 // ESTIMAR VALORACION
 adminControllerValuation.estimateValuation = (req, res) => {
-    req.session.user = { id: 39, nombre: '2', email: '2' };
+    req.session.user = { id: 39, nombre: '2', email: 'jonatanbraxs@gmail.com' };
     const { id } = req.params;
     req.getConnection((err, connection) => {
         connection.query(`SELECT * FROM objeto WHERE id = ?`, [id], (err, result) => {
@@ -60,9 +60,9 @@ adminControllerValuation.estimateValuation = (req, res) => {
                 //TEXTO Y ENVIO DE EMAIL
                 let mailOptions = {
                 from: "pruebawebperitoarte@gmail.com",
-                to: '',
+                to: usuario.email,
                 subject: "Alexis Navas - Perito | alexisnavas.com",
-                html: 'Hola &nbsp;' + 'usuario.nombre' + ', <br> <br>' + 'Tu estimación económica se ha realizado correctamente, el valor estimado es de &nbsp;' + tarifa.valor + '.<br><br>' + 'Si usted desea realizar el peritaje del artículo, puede respondernos al correo y en la mayor brevedad posible, el Dc. Alexis Navas contactara con usted.<br><br>' + 'Gracias realizar su estimación económica con nosotros.' 
+                html: 'Hola &nbsp;' + usuario.nombre + ', <br> <br>' + 'Tu estimación económica se ha realizado correctamente, el valor estimado es de &nbsp;' + tarifa.valor + '.<br><br>' + 'Si usted desea realizar el peritaje del artículo, puede respondernos al correo y en la mayor brevedad posible, el Dc. Alexis Navas contactara con usted.<br><br>' + 'Gracias realizar su estimación económica con nosotros.' 
                 };
                 //FUNCION PARA ENVIAR EL EMAIL
                 smtpTransport.sendMail(mailOptions, function(error, response) {

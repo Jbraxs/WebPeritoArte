@@ -23,6 +23,7 @@ router.post('/admin/users/add', adminControllerUser.addUser);
 router.get('/admin/users/update/:id', adminControllerUser.viewsUser);
 router.post('/admin/users/update/:id', adminControllerUser.editUser);
 router.get('/admin/users/delete/:id', adminControllerUser.delUser);
+router.get('/admin/users', adminControllerUser.selectUserRegister);
 //CONTACTOS
 router.get('/admin/contacts', adminControllerContact.selecContact);
 router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);

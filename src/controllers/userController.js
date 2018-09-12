@@ -100,7 +100,7 @@ controllerUser.login = (req, res) => {
                 if (result[0].isSuperAdmin == true){
                   req.session.admin = true;
                 }
-                res.redirect("/index_signin");
+                res.redirect("/zonacliente/zonacliente");
               } else {
                 res.render('../views/errores/error409');
               }
