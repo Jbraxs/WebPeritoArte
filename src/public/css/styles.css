@@ -82,9 +82,72 @@ body {
   float: right;
  }
  .srv {
-   width: 80%;
-   margin:  0% auto;
+   margin:  -1% auto;
    color: #3261b7;
+   background-color: #DCDCDC;
+   padding: 2% 3%;
+   clear: both;
  }
+ .slide {
+   width: 100%;
+   margin: 0% auto;
+   clear: both;
+ }
+ .silder2{
+   margin: inherit;
+ }
+.header {
+  margin: 2% 4%;
+}
 
- 
+.title2{
+  font-size: 150%; 
+  margin: 2% 0%;
+}
+.title2 a{
+ color: white
+}
+.iconos {
+  margin: 5% auto;
+}
+.iconos2{
+  display: block;
+  margin: 0% auto;
+  width: 50%;
+  text-align: center;
+}
+.iconos h3, .iconos p {
+  text-align:center;
+}
+.prueba {
+  border: 1px solid;
+}
+.registro {
+  background-color: #E9EBEE;
+ width: 100%;
+}
+.registro2 {
+  margin: 0% auto;
+  width: 30%;
+  background-color: white;
+  padding: 2%;
+}
+.header3 {
+  background-color: #00A0C0;
+  padding: 1%;
+}
+.footer {
+  
+  background-color: #F8F9FA;
+  padding: 0% 0%;
+}
+.footer li {
+  list-style: none;
+}
+.lico a{
+  text-decoration: none; 
+  color: #333333;
+}
+.navadminindex {
+  margin: -10% 0%;
+}

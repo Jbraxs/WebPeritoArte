@@ -7,14 +7,13 @@ var nodemailer = require("nodemailer");
 
 //ACA ME REDIRECCIONA AL FORMULARIO DE CONTACTO PERO DEL USUARIO
 controllerContact.addContactForm = (req, res) => {
-  res.render("../views/contact",{usuario: req.session.user});
+  res.render("../views/contact");
 };
 // ENVIA DATOS DEL FORMULARIO DE CONTACTO
 controllerContact.addContact = (req, res) => {
-  let usuario = req.session.user;
   const data = req.body;
   req.getConnection((err, connection) => {
-    connection.query("INSERT INTO contacto set ?", data, usuario.id ,(err, contacto) => {
+    connection.query("INSERT INTO contacto set ?", data, (err, contacto) => {
       if (err) {
         res.render('../views/errores/error409');
       } else {
@@ -50,7 +49,7 @@ controllerContact.addContact = (req, res) => {
           from: "pruebawebperitoarte@gmail.com",
           to: "pruebawebperitoarte@gmail.com",
           subject: "Alexis Navas - Perito | alexisnavas.com",
-          html:"Hola &nbsp;" + "Alexis" + ",<br>" + 'tienes una consulta de &nbsp;' + data.nombre + '&nbsp; en el formulario de contacto. <br>' + 'http://localhost:100/admin/contacts'
+          html:"Hola &nbsp;" + "Alexis" + ",<br>" + 'tienes una consulta de &nbsp;' + data.nombre + '&nbsp; en el formulario de contacto. <br>' + 'http://localhost:100/login'
 				};
 				
         //FUNCION PARA ENVIAR EL EMAIL
@@ -72,7 +71,7 @@ controllerContact.addContact = (req, res) => {
         //CIERRO EL ENVIO DEL EMIAL
 				smtpTransport.close();
 				
-        res.redirect("/contact");
+        res.redirect("/index");
       }
     });
   });

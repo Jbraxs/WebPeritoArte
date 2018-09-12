@@ -16,8 +16,8 @@ adminControllerContact.selecContact = (req, res) => {
       }
       res.render('admin/contacts', {
         data: contacto,
-        //Borrar
-        // usuario: req.session.user
+        
+        usuario: req.session.user
 
       });
     });

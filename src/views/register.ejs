@@ -1,38 +1,165 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Alexis Navas II Consultoría de Arte</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/theme-default.min.css"
+    type="text / css" />
 
 
-<h1>REGISTRO DE CLIENTE DESDE CLIENTES </h1>
-<div class="col-md-5">
-    <div class="card-body">
-      <form action="/register" method="POST">
-        <div class="form-group">
-          <input type="text" name="nombre" placeholder="Nombre" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="apellido" placeholder="Apellido" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="password" placeholder="Contraseña" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="telefono" placeholder="Teléfono" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="codigoPostal" placeholder="Código Postal" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="email" placeholder="Email" class="form-control" >
-        </div>
 
-        <button type="submit" class="btn btn-primary">
-          Registrarme
-        </button>
-      </form>
+</head>
+
+<body>
+  <div class="header3">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="./index" class="leftimg"><img src="img/logo2.png" width="15%" />
+              <span class="title logo-mini" style="color:white">Alexis Navas I Consultoría de Arte</span>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <ul class="nav navbar-nav title2">
+              <li><a href="./index">Servicios</li></a>
+              <li><a href="./index">Contacto</a></li>
+              <li><a href="/register">Registro</a></li>
+              <li><a href="./login">login</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </div>
+  <div class="container  registro">
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <form action="/register" method="POST" class="registro2">
+          <h3>Registro</h3>
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}"
+              data-validation-length="min3" name="nombre">
+          </div>
+          <div class="form-group">
+            <label>Apellido</label>
+            <input type="text" name="Apellido" class="form-control" data-validation="custom" data-validation-regexp="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}">
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" class="form-control" data-validation="length" data-validation-length="min6" name="password">
+          </div>
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="text" class="form-control" data-validation="required number" name="telefono">  
+          </div>
+          <div class="form-group">
+            <label>Código Postal</label>
+            <input type="text" class="form-control" data-validation="number" name="codigoPostal">
+          </div>
+          <div class="form-group">
+            <label>Fecha de Nacimiento</label>
+            <input type="text" name="fechaNacimiento" class="form-control" data-validation = "date" data-validation-format = "dd/mm/yyyy">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" data-validation="required email" placeholder="Email" name="email">
+          </div>
+          <input type="checkbox">
+          <span> He leído y acepto los<a href="/files/Términos y Condiciones de Uso.pdf" target="_blank"> términos y
+              condiciones de uso</a></span>
+          <button type="submit" class="btn btn-primary">
+            Registrarme
+          </button>
+        </form>
+
+
+      </div>
     </div>
   </div>
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row lico">
+        <div class="col-md-4">
+          <ul>
+            <li>
+              <h5>Servicios</h5>
+            </li>
+            <li>
+              Analista Neuro Escritural
+            </li>
+            <li>
+              Perito Caligrafico y Grafologo
+            </li>
+            <li>
+              Perito Marcas y Patente
+            </li>
+            <li>
+              Experto en Documentos del copiray
+            </li>
+            <li>
+              Perito Obras de Arte
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul>
+            <li>
+              <h5>Información</h5>
+            </li>
+            <li>
+              <a href="./index">Incicio</a>
+            </li>
+            <li>
+              <a href="#">Servicios</a>
+            </li>
+            <li>
+              <a href="#">contacto</a>
+            </li>
+            <li>
+              <a href="/registro">Registro</a>
+            </li>
+            <li>
+              <a href="/login">Login</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul>
+            <li>
+              <img src="../img/logo.png" width="50px"> Alexis Navas I Consultoría de Arte</li>
+            <li>Oficinas: Cl Gregorio Diego 13</li>
+            <li>exposiciones@alexisnavas.com</li>
+            <li>Miembro 29-165 de la Asociación de Peritos Tasadores Judiciales de Andalucía</li>
+          </ul>
+        </div>
+      </div>
 
-  
+  </footer>
 
 
+
+
+
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+</body>
+
+</html>

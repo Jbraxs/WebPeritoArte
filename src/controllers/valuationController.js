@@ -18,7 +18,6 @@ controllerValuation.selectValuation = (req, res) => {
     sql += 'INNER JOIN tamanio tam ON obj.idTamanio = tam.id '
     sql += 'INNER JOIN estado_peritaje est ON obj.idEstadoPeritaje = est.id '
     sql += 'INNER JOIN conservacion con ON obj.idConservacion = con.id WHERE idUsuario = ? '
-    // req.session.user = { id: 39, nombre: '2', email: '2' };
     let usuario = req.session.user;
     req.getConnection((err, connection) => {
         connection.query(sql, usuario.id, (err, valuations) => {
@@ -35,7 +34,6 @@ controllerValuation.selectValuation = (req, res) => {
 };
 //AÑADE VALORACIONES FORMULARIO
 controllerValuation.addValuationForm = (req, res) => {
-    // req.session.user = { id: 39, nombre: '2', email: '2' };
     let usuario = req.session.user;
     req.getConnection((err, connection) => {
         connection.query('SELECT * FROM categoria', (err, categorias) => {
@@ -60,7 +58,6 @@ controllerValuation.addValuationForm = (req, res) => {
 };
 //AÑADE VALORACIONES 
 controllerValuation.addValuation = (req, res) => {
-    // req.session.user = { id: 39, nombre: '2', email: '2' };
     const usuario = req.session.user;
     let oldPath = req.files.imagen.path;
     let newPath = __dirname + '/../public/img_clientes/' + usuario.id + '-' + req.files.imagen.originalFilename;

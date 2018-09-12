@@ -33,36 +33,7 @@ $(document).ready(function() {
     radioClass: "iradio_square-blue",
     increaseArea: "20%" // optional
   });
-  //SWEETALERT2
-  $(".btnDel").on("click", function(e) {
-    e.preventDefault(); // Detiene los prximos eventos
-    swal({
-      title: "Esta usted seguro?",
-      text: "Una vez eliminado no se puede recuperar!",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, deseo eliminar!"
-    }).then(result => {
-      url = $(this).attr('href');
-      $(location).attr('href', url);
   
-    });
-  });
-  $(".btnUpd").on("click", function(e) {
-    e.preventDefault(); // Detiene los prximos eventos
-    swal({
-      title: "Esta usted seguro de modificar sus datos?",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, modificarlos!"
-    }).then(result => {
-      url = $(this).attr('href');
-      $(location).attr('href', url);
-  
-    });
-  });
 
   //COOKIES
   function getCookie(c_name){

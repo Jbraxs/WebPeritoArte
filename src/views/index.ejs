@@ -19,29 +19,30 @@
 
 <body>
     <!-- PONER LAS ANCLAS -->
-    <header>
+    <header class="header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="row">
                 <div class="col-sm-6">
-                    <a href="#" class="leftimg"><img src="img/logo.png" width="15%" />
+                    <a href="./index" class="leftimg"><img src="img/logo.png" width="15%" />
                         <span class="title logo-mini">Alexis Navas I Consultoría de Arte</span>
                     </a>
                 </div>
                 <div class="col-sm-6">
-                    <ul class="nav navbar-nav">
-                        <li><a href="# servicios">Servicios</li></a>
+                    <ul class="nav navbar-nav title">
+                        <li><a href="/index">Servicios</li></a>
                         <li><a href="#">Contacto</a></li>
-                        <li><a href="#">Registro</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li><a href="/register">Registro</a></li>
+                        <li><a href="/login">login</a></li>
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="container-fluid">
+    <div class="">
         <br>
-        <div class="col-md-12">
+        <div class="row">
             <div id="carousel-1" class="carousel slide" data-ride="carousel">
                 <!-- Indicadores -->
                 <ol class="carousel-indicators">
@@ -54,18 +55,16 @@
 
                     <div class="item  active">
                         <img src="img/cuadro.jpg" class="img-responsive" alt="">
-                        <!-- style="width:822px;height:322px;" -->
-                        <!-- YA ME QUEDO CLARO POR QUE TODAS LAS IMAGENES MISMO TAMAÑO -->
                         <div class="carousel-caption">
                             <h3>Ultimas Valoraciones realizadas</h3>
-                            <p>xxxxxxxxxxxxxxxxxxx</p>
+                            
                         </div>
                     </div>
                     <div class="item">
                         <img src="img/escultura.jpg" class="img-responsive" alt="">
                         <div class="carousel-caption">
                             <h3>Ultimas Valoraciones realizadas</h3>
-                            <p>xxxxxxxxxxxxxxxxxxx</p>
+                      
                         </div>
                     </div>
                 </div>
@@ -102,11 +101,13 @@
             usted y tener un precio estimado no vinculante de su obra.
         </h3>
     </div>
-    <div class="container ">
+    <div class="container iconos">
         <br>
         <div class="row">
             <div class="col-md-4">
+                <div class="iconos2">
                 <i class="fas fa-male fa-10x"></i>
+                </div>
                 <br>
                 <br>
                 <h3>Analista neuroescritural</h3>
@@ -115,7 +116,9 @@
                     candidatos para las vacantes a cubrir.</p>
             </div>
             <div class="col-md-4">
+                    <div class="iconos2">
                 <i class="fas fa-microscope fa-10x"></i>
+                </div>
                 <br>
                 <br>
                 <h3>Experto en documentoscopia</h3>
@@ -125,7 +128,9 @@
                     mismos y su contenido.</p>
             </div>
             <div class="col-md-4">
+                <div class="iconos2">
                 <i class="fas fa-pen-nib fa-10x"></i>
+            </div>
                 <br>
                 <br>
                 <h3>Perito caligráfico y grafólogo</h3>
@@ -138,10 +143,12 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container iconos">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4 col-md-offset-2">
+                <div class="iconos2">
                 <i class="fas fa-registered fa-10x"></i>
+                </div>
                 <br>
                 <br>
                 <h3>Perito marcas y patentes</h3>
@@ -149,8 +156,10 @@
                     proporcionamos una opinión profesional para salvaguardar tus derechos y dictaminamos sobre la
                     existencia de actividad inventiva y novedad en activos intangibles.</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="iconos2">
                 <i class="fas fa-wallet fa-10x"></i>
+                </div>
                 <br>
                 <br>
                 <h3>Perito Obras de arte</h3>
@@ -162,9 +171,9 @@
     </div>
 
 
-    <div class="container">
+    <div class="container form">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h3>Si deseas contactar con el Dc. Alexis Navas</h3>
                     <div class="card-body">
                         <form action="/contact" method="POST">
@@ -201,74 +210,78 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <br>
-                <h3>Identifícate</h3>
-                <div class="card-body">
-                    <form action="/login" method="POST">
-                        <div class="form-group">
-                            <label>Email</label>
-                             <input type="text" name="email" placeholder="Email" class="form-control" >
+        </div>
+       
+            <footer class="footer">
+                <div class="container-fluid">   
+                <div class="row lico">
+                        <div class="col-md-4">
+                            <ul>
+                                <li>
+                                    <h5>Servicios</h5>
+                                </li>
+                                <li>
+                                    Analista Neuro Escritural
+                                </li>
+                                <li>
+                                    Perito Caligrafico y Grafologo
+                                </li>
+                                <li>
+                                    Perito Marcas y Patente
+                                </li>
+                                <li>
+                                    Experto en Documentos del copiray
+                                </li>
+                                <li>
+                                    Perito Obras de Arte
+                                </li>
+                            </ul>
                         </div>
-                        <div class="form-group">
-                            <label>Contraseña</label>
-                            <input type="text" name="password" placeholder="Contraseña" class="form-control" >
+                        <div class="col-md-4">
+                            <ul>
+                                <li>
+                                    <h5>Información</h5>
+                                </li>
+                                <li>
+                                    <a href="./index">Incicio</a>
+                                </li>
+                                <li>
+                                    <a href="#">Servicios</a>
+                                </li>
+                                <li>
+                                    <a href="#">contacto</a>
+                                </li>
+                                <li>
+                                    <a href="/registro">Registro</a>
+                                </li>
+                                <li>
+                                    <a href="/login">Login</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div>
-                            <a href="../zonacliente/rememberpass">¿Has olvidado la contraseña?</a>
+                        <div class="col-md-4">
+                            <ul>
+                                <li>
+                                    <img src="../img/logo.png" width="50px"> Alexis Navas I Consultoría de Arte</li>
+                                <li>Oficinas: Cl Gregorio Diego 13</li>
+                                <li>exposiciones@alexisnavas.com</li>
+                                <li>Miembro 29-165 de la Asociación de Peritos Tasadores Judiciales de Andalucía</li>
+                            </ul>
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            login
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <h1>REGISTRO DE CLIENTE DESDE CLIENTES </h1>
-<div class="col-md-5">
-    <div class="card-body">
-      <form action="/register" method="POST">
-        <div class="form-group">
-          <input type="text" name="nombre" placeholder="Nombre" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="apellido" placeholder="Apellido" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="password" placeholder="Contraseña" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="telefono" placeholder="Teléfono" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="codigoPostal" placeholder="Código Postal" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="fechaNacimiento" placeholder="Fecha de Nacimiento" class="form-control" >
-        </div>
-        <div class="form-group">
-          <input type="text" name="email" placeholder="Email" class="form-control" >
-        </div>
-
-        <button type="submit" class="btn btn-primary">
-          Registrarme
-        </button>
-      </form>
-    </div>
-  </div>
-
+                    </div>
+                   
+                    </div>
+                </footer>
 
     
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+   <script src="/js/jquery.min.js"></script>
+   <script src="/js/bootstrap.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     
-    <% include partials/_cookies %>
 
 </body>
 </html>

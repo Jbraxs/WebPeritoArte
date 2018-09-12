@@ -85,7 +85,6 @@ controllerUserPass.viewsUserPass = (req, res) => {
 
 //CON ESTO MODIFICO LA CONTRASEÑA ANTERIOR POR UNA NUEVA.
 controllerUserPass.editPass = (req, res) => {
-  // let dato = req.body;
   const { id } = req.params;
   const newUsuario = req.body;
   bcrypt.genSalt(10, function (err, salt) {

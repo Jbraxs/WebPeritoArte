@@ -73,7 +73,6 @@ controllerUser.loginForm = (req, res) => {
 };
 // LOGIN DE USUARIO
 controllerUser.login = (req, res) => {
-  req.session.user = { id: 39, nombre: '2', email: '2' };
   const email = req.body.email;
   req.getConnection((err, connection) => {
     connection.query(
@@ -100,7 +99,7 @@ controllerUser.login = (req, res) => {
                 if (result[0].isSuperAdmin == true){
                   req.session.admin = true;
                 }
-                res.redirect("/zonacliente/zonacliente");
+                res.redirect("/index_signin");
               } else {
                 res.render('../views/errores/error409');
               }
@@ -122,8 +121,6 @@ controllerUser.logout = (req, res) => {
 };
 //VER DATOS PERSONALES DE UN USUARIO
 controllerUser.selectUser = (req, res) => {
-  // req.session.user = { id: 39, nombre: '2', email: '2' };
-  req.session.user = { id: 53, nombre: '5', email: '5' };
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query("SELECT *, DATE_FORMAT(us.fechaNacimiento, '%d/%m/%Y') as fechaNac FROM usuario us WHERE id = ?",usuario.id, (err, result) => {
@@ -131,9 +128,8 @@ controllerUser.selectUser = (req, res) => {
         res.json(err);
       }
       res.render("./zonacliente/user",{
-        data:result
-        //BORRAR
-        // usuario: req.session.user 
+        data:result,
+        usuario: req.session.user 
 
       });
     });
@@ -143,14 +139,12 @@ controllerUser.selectUser = (req, res) => {
 //VISTA LOS DATOS A MODIFICAR
 controllerUser.viewsUser = (req,res) => {
   const {id} = req.params;
-  // req.session.user = { id: 39, nombre: '2', email: '2' };
-  req.session.user = { id: 53, nombre: '5', email: '5' };
+  let usuario = req.session.user;
   req.getConnection((err,connection) => {
     connection.query("SELECT * FROM usuario WHERE id = ?", [id], (err,rows) => {
       res.render("../views/zonacliente/user_edit", {
         data:rows[0],
-        //borrar
-        // usuario: req.session.user
+        usuario: req.session.user
       });
     });
   });
@@ -179,7 +173,7 @@ controllerUser.addContactForm = (req, res) => {
 // ENVIA DATOS DEL FORMULARIO DE CONTACTO
 controllerUser.addContact = (req, res) => {
   const data = req.body;
-  req.session.user = { id: 53, nombre: '5', email: '5' };
+  let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query("INSERT INTO contacto set ?", data,(err, contacto) => {
       if (err) {

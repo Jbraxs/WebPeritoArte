@@ -12,20 +12,20 @@
                     <form action="/admin/users/update/<%= data.id %>" method="POST">
                     <div>
                     <label>Teléfono</label>
-                    <input type="text" class="form-control" data-validation="required number" data-validation="length" data-validation-length="min6" name="telefono" >
+                    <input type="text" class="form-control" value="<%= data.telefono %>" data-validation="required number" data-validation="length" data-validation-length="min6" name="telefono" >
                     </div>
                     <br>
                     <div>
                     <label>Código Postal</label>
-                    <input type="text" name="codigoPostal" class="form-control" data-validation="required number" data-validation="length"  data-validation-length="min5"> 
+                    <input type="text" name="codigoPostal" class="form-control" value="<%= data.codigoPostal %>" data-validation="required number" data-validation="length"  data-validation-length="min5"> 
                     </div>
                     <br>
                     <div>
                     <label>Email</label>
-                    <input type="text" name="email" data-validation="email" class="form-control">
+                    <input type="text" name="email" data-validation="email" value="<%= data.email %>" class="form-control">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-success btnUpd">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
                     <a href="/admin/users" class="btn btn-primary">Cancelar</a>
                     </form>
                 </div>

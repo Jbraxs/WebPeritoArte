@@ -8,7 +8,6 @@ let nodemailer = require("nodemailer");
 
 //MUESTRA LOS USUARIOS REGISTRADOS
 adminControllerUser.selectUser = (req, res) => {
-  req.session.user = { id: 39, nombre: '2', email: '2' };
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query(
@@ -19,8 +18,7 @@ adminControllerUser.selectUser = (req, res) => {
         }
         res.render("admin/users", {
           data: clientes,
-          //borrar
-          // usuario: req.session.user
+          usuario: req.session.user
 
         });
       }
@@ -53,7 +51,7 @@ adminControllerUser.addUser = (req, res) => {
             data.id = result.insertId;
             //ASIGNO DATOS DE USUARIO A LA SESION
             req.session.user = data;
-
+            console.log(data);
             // //SERVIDOR EMAIL
             let smtpTransport = nodemailer.createTransport({
               host: "smtp.gmail.com",
@@ -89,7 +87,7 @@ adminControllerUser.addUser = (req, res) => {
             // CIERRO EL ENVIO DEL EMIAL
             smtpTransport.close();
             //REDIRECCIONO A LA RUTA
-            res.redirect("/zonacliente");
+            res.redirect("/index_signin");
           }
         });
       });
@@ -99,7 +97,6 @@ adminControllerUser.addUser = (req, res) => {
 
 //VISTA LOS DATOS A MODIFICAR
 adminControllerUser.viewsUser = (req, res) => {
-  req.session.user = { id: 85, nombre: '3', email: '3' }// Borrar
   const { id } = req.params;
   req.getConnection((err, connection) => {
     connection.query(
@@ -108,8 +105,7 @@ adminControllerUser.viewsUser = (req, res) => {
       (err, rows) => {
         res.render("./admin/user_edit", {
           data: rows[0],
-          //borrar
-          // usuario: req.session.user
+          usuario: req.session.user
         });
       }
     );
@@ -138,7 +134,6 @@ adminControllerUser.delUser = (req, res) => {
 
 //VER USUARIOS REGISTADOS
 adminControllerUser.selectUserRegister = (req, res) => {
-  req.session.user = { id: 39, nombre: '2', email: '2' };
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query("select COUNT(*) FROM usuario;", usuario, (err, clientes) => {
@@ -147,8 +142,7 @@ adminControllerUser.selectUserRegister = (req, res) => {
         }
         res.render("admin/users", {
           data: clientes,
-          //borrar
-          // usuario: req.session.user
+          usuario: req.session.user
 
         });
       }

@@ -17,24 +17,24 @@ const adminControllerUser = require('../controllers/admin/userController');
 const adminControllerContact = require('../controllers/admin/contactController');
 const adminControllerValuation = require('../controllers/admin/valuationController');
 // USUARIOS 
-router.get('/admin/users', adminControllerUser.selectUser);
-router.get('/admin/users/add', adminControllerUser.addUserForm);
-router.post('/admin/users/add', adminControllerUser.addUser);
-router.get('/admin/users/update/:id', adminControllerUser.viewsUser);
-router.post('/admin/users/update/:id', adminControllerUser.editUser);
-router.get('/admin/users/delete/:id', adminControllerUser.delUser);
-router.get('/admin/users', adminControllerUser.selectUserRegister);
+router.get('/admin/users',auth, adminControllerUser.selectUser);
+router.get('/admin/users/add',auth, adminControllerUser.addUserForm);
+router.post('/admin/users/add',auth, adminControllerUser.addUser);
+router.get('/admin/users/update/:id',auth, adminControllerUser.viewsUser);
+router.post('/admin/users/update/:id',auth, adminControllerUser.editUser);
+router.get('/admin/users/delete/:id',auth, adminControllerUser.delUser);
+router.get('/admin/users',auth, adminControllerUser.selectUserRegister);
 //CONTACTOS
-router.get('/admin/contacts', adminControllerContact.selecContact);
-router.get('/admin/contacts/delete/:id', adminControllerContact.delContact);
-router.get('/admin/contacts/view/:id', adminControllerContact.viewContact);
-router.get('/admin/contacts/view/:id',adminControllerContact.answerContactForm);
-router.post('/admin/contacts/view/:id',adminControllerContact.answerContact);
+router.get('/admin/contacts',auth, adminControllerContact.selecContact);
+router.get('/admin/contacts/delete/:id',auth, adminControllerContact.delContact);
+router.get('/admin/contacts/view/:id',auth, adminControllerContact.viewContact);
+router.get('/admin/contacts/view/:id',auth, adminControllerContact.answerContactForm);
+router.post('/admin/contacts/view/:id',auth, adminControllerContact.answerContact);
 //VALORACIONES
-router.get('/admin/valuations', adminControllerValuation.selectValuation);
-router.get('/admin/valuations/delete/:id', adminControllerValuation.delValuation);
-router.get('/admin/valuations/estimate/:id', adminControllerValuation.estimateValuation);
-router.get('/admin/valuations/rates/add_auto', adminControllerValuation.addAutoRates);
+router.get('/admin/valuations',auth, adminControllerValuation.selectValuation);
+router.get('/admin/valuations/delete/:id',auth, adminControllerValuation.delValuation);
+router.get('/admin/valuations/estimate/:id',auth, adminControllerValuation.estimateValuation);
+router.get('/admin/valuations/rates/add_auto',auth, adminControllerValuation.addAutoRates);
 
 
 
