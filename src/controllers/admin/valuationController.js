@@ -45,6 +45,9 @@ adminControllerValuation.estimateValuation = (req, res) => {
                     if (err) {
                         res.render('../views/errores/error409');
                     }
+                    console.log(usuario.email);
+                    console.log(usuario.nombre);
+                    console.log(tarifa.valor);
 
                     //SERVIDOR EMAIL 
                 let smtpTransport = nodemailer.createTransport({
@@ -56,12 +59,19 @@ adminControllerValuation.estimateValuation = (req, res) => {
                   pass: "pruebawebperitoarte12345"
                 }
                 });
-                //TEXTO Y ENVIO DE EMAIL
+                // //TEXTO Y ENVIO DE EMAIL
+                // let mailOptions = {
+                // from: "pruebawebperitoarte@gmail.com",
+                // to: usuario.email,
+                // subject: "Alexis Navas - Perito | alexisnavas.com",
+                // html: 'Hola &nbsp;' + usuario.nombre + ', <br> <br>' + 'Tu estimación económica se ha realizado correctamente, el valor estimado es de &nbsp;' + tarifa.valor + '.<br><br>' + 'Si usted desea realizar el peritaje del artículo, puede respondernos al correo y en la mayor brevedad posible, el Dc. Alexis Navas contactara con usted.<br><br>' + 'Gracias realizar su estimación económica con nosotros.' 
+                // };
+                      //TEXTO Y ENVIO DE EMAIL
                 let mailOptions = {
                 from: "pruebawebperitoarte@gmail.com",
-                to: usuario.email,
+                to: 'pruebaclientewebperito@gmail.com',
                 subject: "Alexis Navas - Perito | alexisnavas.com",
-                html: 'Hola &nbsp;' + usuario.nombre + ', <br> <br>' + 'Tu estimación económica se ha realizado correctamente, el valor estimado es de &nbsp;' + tarifa.valor + '.<br><br>' + 'Si usted desea realizar el peritaje del artículo, puede respondernos al correo y en la mayor brevedad posible, el Dc. Alexis Navas contactara con usted.<br><br>' + 'Gracias realizar su estimación económica con nosotros.' 
+                html: 'Hola &nbsp;' + 'Jonatan' + ', <br> <br>' + 'Tu estimación económica se ha realizado correctamente, el valor estimado es de &nbsp;' + tarifa.valor + '.<br><br>' + 'Si usted desea realizar el peritaje del artículo, puede respondernos al correo y en la mayor brevedad posible, el Dc. Alexis Navas contactara con usted.<br><br>' + 'Gracias realizar su estimación económica con nosotros.' 
                 };
                 //FUNCION PARA ENVIAR EL EMAIL
                 smtpTransport.sendMail(mailOptions, function(error, response) {

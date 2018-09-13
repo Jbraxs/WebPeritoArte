@@ -74,7 +74,7 @@ router.post('/contact', controllerContact.addContact);
 
 
 // RUTAS COMUNES
-router.get('/admin', function (req, res) {
+router.get('/admin', auth, function (req, res) {
         res.render('admin/admin', {usuario: req.session.user});
 });
 router.get('/zonacliente', function (req, res) {
