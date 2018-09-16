@@ -48,6 +48,7 @@ adminControllerValuation.estimateValuation = (req, res) => {
                     console.log(usuario.email);
                     console.log(usuario.nombre);
                     console.log(tarifa.valor);
+                    
 
                     //SERVIDOR EMAIL 
                 let smtpTransport = nodemailer.createTransport({

@@ -89,7 +89,7 @@ body {
    clear: both;
  }
  .slide {
-   width: 100%;
+   width: 98%;
    margin: 0% auto;
    clear: both;
  }
@@ -99,7 +99,6 @@ body {
 .header {
   margin: 2% 4%;
 }
-
 .title2{
   font-size: 150%; 
   margin: 2% 0%;
@@ -137,7 +136,6 @@ body {
   padding: 1%;
 }
 .footer {
-  
   background-color: #F8F9FA;
   padding: 0% 0%;
 }
@@ -149,5 +147,11 @@ body {
   color: #333333;
 }
 .navadminindex {
-  margin: -10% 0%;
+  margin: 4% 0%;
+}
+.slidersize{
+  max-width: 1350px;
+  width: 100%;
+  height: 80%;
+  margin: 0% auto;
 }

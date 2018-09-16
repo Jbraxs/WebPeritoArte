@@ -87,7 +87,7 @@ controllerValuation.addValuation = (req, res) => {
           //TEXTO Y ENVIO DE EMAIL
           let mailOptions = {
             from: "pruebawebperitoarte@gmail.com",
-            to:'jonatanbraxs@gmail.com',
+            to: usuario.email,
             subject: "Alexis Navas - Perito | alexisnavas.com",
             html: 'Gracias por solicitar la estimación económica.<br><br>' + 
             'En la mayor brevedad posible, el Dc. Alexis Navas realizara su estimación. <br><br>' + 

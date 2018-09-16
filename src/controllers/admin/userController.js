@@ -132,7 +132,7 @@ adminControllerUser.delUser = (req, res) => {
   });
 };
 
-//VER USUARIOS REGISTADOS
+//VER USUARIOS REGISTADOS CONTADOR
 adminControllerUser.selectUserRegister = (req, res) => {
   let usuario = req.session.user;
   req.getConnection((err, connection) => {

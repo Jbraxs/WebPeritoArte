@@ -7,7 +7,6 @@ var nodemailer = require("nodemailer");
 
 //MUESTRA LAS CONSULTAS POR FORMULARIO DE CONTACTO
 adminControllerContact.selecContact = (req, res) => {
-  req.session.user = { id: 39, nombre: '2', email: '2' };
   let usuario = req.session.user;
   req.getConnection((err, connection) => {
     connection.query('SELECT * FROM contacto',  usuario.id, (err, contacto) => {
@@ -16,7 +15,6 @@ adminControllerContact.selecContact = (req, res) => {
       }
       res.render('admin/contacts', {
         data: contacto,
-        
         usuario: req.session.user
 
       });
